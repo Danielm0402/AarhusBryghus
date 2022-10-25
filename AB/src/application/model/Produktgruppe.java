@@ -7,6 +7,11 @@ public class Produktgruppe {
 
 
     private final ArrayList<Produkt> produkter = new ArrayList<>();
+    private String navn;
+
+    public Produktgruppe(String navn) {
+        this.navn = navn;
+    }
 
     public ArrayList<Produkt> getProdukter(){
         return new ArrayList<>(produkter);
@@ -30,6 +35,10 @@ public class Produktgruppe {
         }
     }
 
+    @Override
+    public String toString() {
+        return navn;
+    }
 
 
 }

@@ -27,6 +27,10 @@ public class Arrangement {
         }
     }
 
+    @Override
+    public String toString() {
+        return arrangementsNavn;
+    }
 
 
 }
