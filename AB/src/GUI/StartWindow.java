@@ -44,7 +44,7 @@ public class StartWindow extends Application {
         SalgsPane salgsPane = new SalgsPane();
         tabSalg.setContent(salgsPane);
         tabSalg.setOnSelectionChanged(event -> salgsPane.updateControls());
-
+        // --------------------------------------------------------------------------
 
         Tab tabProdukt = new Tab("Opret Produkt");
         tabPane.getTabs().add(tabProdukt);
@@ -53,26 +53,25 @@ public class StartWindow extends Application {
         tabProdukt.setContent(opretProduktPane);
         tabProdukt.setOnSelectionChanged(event -> opretProduktPane.updateControls());
 
+        // --------------------------------------------------------------------------
+
+        Tab tabProduktgruppe = new Tab("Opret Produktgruppe");
+        tabPane.getTabs().add(tabProduktgruppe);
+
+        OpretProduktgruppePane opretProduktgruppePane = new OpretProduktgruppePane();
+        tabProduktgruppe.setContent(opretProduktgruppePane);
+        tabProduktgruppe.setOnSelectionChanged(event -> opretProduktgruppePane.updateControls());
+
+        // --------------------------------------------------------------------------
+
+
         Tab tabArrangement = new Tab("Opret Arrangement");
         tabPane.getTabs().add(tabArrangement);
 
         OpretArrangementPane opretArrangementPane = new OpretArrangementPane();
         tabArrangement.setContent(opretArrangementPane);
         tabArrangement.setOnSelectionChanged(event -> opretArrangementPane.updateControls());
-//
-//        Tab tabUdflugter = new Tab("Opret Udflugter");
-//        tabPane.getTabs().add(tabUdflugter);
-//
-//        UdflugtPane udflugtPane = new UdflugtPane();
-//        tabUdflugter.setContent(udflugtPane);
-//        tabUdflugter.setOnSelectionChanged(event -> udflugtPane.updateControls());
-//
-//        Tab tabTilmeldinger = new Tab("Opret tilmeldinger");
-//        tabPane.getTabs().add(tabTilmeldinger);
-//
-//        TilmeldingPane tilmeldingPane = new TilmeldingPane();
-//        tabTilmeldinger.setContent(tilmeldingPane);
-//        tabTilmeldinger.setOnSelectionChanged(event -> tilmeldingPane.updateControls());
+
     }
 
 }

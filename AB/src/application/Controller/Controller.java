@@ -2,7 +2,9 @@ package application.Controller;
 
 import Storage.Storage;
 import application.model.Arrangement;
+import application.model.Produkt;
 import application.model.Produktgruppe;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
@@ -16,16 +18,24 @@ public class Controller {
         return Storage.getProduktgrupper();
     }
 
+    public static ArrayList<Produkt> getProdukter() {return Storage.getProdukter();}
+
 
     public static Arrangement createArrangement(String navn){
         Arrangement arrangement = new Arrangement(navn);
         Storage.addArrangement(arrangement);
         return arrangement;}
 
-    private static Produktgruppe createProduktgruppe(String navn) {
+    public static Produktgruppe createProduktgruppe(String navn) {
         Produktgruppe produktgruppe = new Produktgruppe(navn);
         Storage.addProduktgruppe(produktgruppe);
         return produktgruppe;
+    }
+
+    public static Produkt createProdukt(String produktnavn, Produktgruppe produktgruppe) {
+        Produkt produkt = produktgruppe.createProdukt(produktnavn);
+        Storage.addProdukt(produkt);
+        return produkt;
     }
 
 
@@ -53,6 +63,26 @@ public class Controller {
     Produktgruppe pg10 = createProduktgruppe("Sampakninger");
     Produktgruppe pg11 = createProduktgruppe("Rundvisning");
 
+    Produkt p1 = createProdukt("Klosterbryg",pg1);
+    Produkt p2 = createProdukt("Sweet Georgia Brown",pg1);
+    Produkt p3 = createProdukt("Extra Pilsner",pg1);
+    Produkt p4 = createProdukt("Celebration",pg1);
+    Produkt p5 = createProdukt("Blondie",pg1);
+    Produkt p6 = createProdukt("Forårsbryg",pg1);
+    Produkt p7 = createProdukt("India Pale Ale",pg1);
+    Produkt p8 = createProdukt("Julebryg",pg1);
+    Produkt p9 = createProdukt("Juletønden",pg1);
+    Produkt p10 = createProdukt("Old Strong Ale",pg1);
+    Produkt p11 = createProdukt("Fregatten Jylland",pg1);
+    Produkt p12 = createProdukt("Imperial Stout",pg1);
+    Produkt p13 = createProdukt("Tribute",pg1);
+    Produkt p14 = createProdukt("Black Monster",pg1);
+
+// vi burde nok fortsætte med alle produkter her...
+
 
     }
+
+
+
 }

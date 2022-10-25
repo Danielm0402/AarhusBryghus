@@ -3,7 +3,11 @@ package application.model;
 import java.util.ArrayList;
 
 public class Produkt {
-    public Produkt(String produktNavn) {
+
+    private String navn;
+
+    Produkt(String navn) {
+        this.navn = navn;
     }
 
     private final ArrayList<Pris> priser = new ArrayList<>();
@@ -22,6 +26,11 @@ public class Produkt {
         if (priser.contains(pris)) {
             priser.remove(pris);
         }
+    }
+
+    @Override
+    public String toString() {
+        return navn;
     }
 
 

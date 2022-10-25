@@ -1,6 +1,7 @@
 package Storage;
 
 import application.model.Arrangement;
+import application.model.Produkt;
 import application.model.Produktgruppe;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ public class Storage {
 
     private static final ArrayList<Arrangement> arrangementer = new ArrayList<>();
     private static final ArrayList<Produktgruppe> produktgrupper = new ArrayList<>();
-
+    private static final ArrayList<Produkt> produkter = new ArrayList<>();
 
 
     public static ArrayList<Arrangement> getArrangementer() {
@@ -31,6 +32,12 @@ public class Storage {
     }
 
 
+    public static ArrayList<Produkt> getProdukter() {
+        return new ArrayList<Produkt>(produkter);
+    }
 
 
+    public static void addProdukt(Produkt produkt) {
+        produkter.add(produkt);
+    }
 }
