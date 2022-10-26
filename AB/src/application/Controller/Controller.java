@@ -23,6 +23,17 @@ public class Controller {
 
     public static ArrayList<Pris> getPriser() {return Storage.getPriser();}
 
+    public static void removePris(Pris pris){Storage.removePris(pris);}
+
+    public static ArrayList<Pris> getPriserFromArrangement(Arrangement arrangement){
+        ArrayList<Pris> priserFraArrangement = new ArrayList<>();
+        for (int i = 0; i < Storage.getPriser().size(); i++) {
+            if (Storage.getPriser().get(i).getArrangement().equals(arrangement)){
+                priserFraArrangement.add(Storage.getPriser().get(i));
+            }
+        }
+        return priserFraArrangement;
+    }
 
     public static Arrangement createArrangement(String navn){
         Arrangement arrangement = new Arrangement(navn);

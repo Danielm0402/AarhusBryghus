@@ -4,6 +4,7 @@ import application.Controller.Controller;
 import application.model.Arrangement;
 import application.model.Pris;
 import application.model.Produkt;
+import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -48,6 +49,8 @@ public class OpretArrangementPane extends GridPane {
         cbbArrangementer = new ComboBox<>();
         this.add(cbbArrangementer, 2, 6);
         cbbArrangementer.getItems().addAll(Controller.getArrangementer());
+        ChangeListener<Arrangement> listener = (ov, oldValue, newValue) -> selectedArrangementChanged(newValue);
+        cbbArrangementer.getSelectionModel().selectedItemProperty().addListener(listener);
 
         Label lblArrangement3 = new Label("Produkt:");
         this.add(lblArrangement3, 1, 7);
@@ -57,9 +60,14 @@ public class OpretArrangementPane extends GridPane {
         cbbAlleProdukter.getItems().addAll(Controller.getProdukter());
 
 
+
         Button btnOpretPris = new Button("Opret Pris");
         this.add(btnOpretPris,2,9);
         btnOpretPris.setOnAction(event -> this.opretPrisAction());
+
+        Button btnSletPris = new Button("Slet valgte");
+        this.add(btnSletPris,2,11);
+        btnSletPris.setOnAction(event -> this.sletPrisAction());
 
         Label lblPris = new Label("Pris:");
         this.add(lblPris, 1, 8);
@@ -72,7 +80,8 @@ public class OpretArrangementPane extends GridPane {
 // ---------- list view over alle produkter der har priser ---------
         lvwProdukterMedPriser = new ListView<>();
         this.add(lvwProdukterMedPriser,2,10);
-        lvwProdukterMedPriser.getItems().setAll(Controller.getPriser());
+        Arrangement arrangement = cbbArrangementer.getSelectionModel().getSelectedItem();
+        lvwProdukterMedPriser.getItems().setAll(Controller.getPriserFromArrangement(arrangement));
         lvwProdukterMedPriser.setMaxHeight(200);
 
 
@@ -84,6 +93,16 @@ public class OpretArrangementPane extends GridPane {
         this.add(lblError, 2, 4);
         lblError.setStyle("-fx-text-fill: red");
 
+    }
+
+    private void selectedArrangementChanged(Arrangement newValue) {
+        updateControls();
+    }
+
+    private void sletPrisAction() {
+        Pris selectedPris = lvwProdukterMedPriser.getSelectionModel().getSelectedItem();
+        Controller.removePris(selectedPris);
+        updateControls();
     }
 
 
@@ -106,23 +125,34 @@ public class OpretArrangementPane extends GridPane {
     }
 
     private void opretPrisAction() {
-        int pris = Integer.parseInt((txfPris.getText().trim()));
         Produkt produkt = cbbAlleProdukter.getSelectionModel().getSelectedItem();
         Arrangement arrangement = cbbArrangementer.getSelectionModel().getSelectedItem();
-        Controller.createPris(pris, produkt, arrangement);
+        boolean e = true;
 
-//        opdaterer lige listview:
-        lvwProdukterMedPriser.getItems().clear();
-        //        Nedenstående skal udfyldes med getpriser(arrangement) i parentesen
-        lvwProdukterMedPriser.getItems().setAll(Controller.getPriser());
+        for (Pris pris : arrangement.getPriser()){
+            if (pris.getProdukt() == produkt){
+                lblError.setStyle("-fx-text-fill: red");
+                lblError.setText("Dette produkt findes allerede");
+                e=false;
+            }
+        }
+        if (e) {
+            int pris1 = Integer.parseInt((txfPris.getText().trim()));
+            Controller.createPris(pris1, produkt, arrangement);
+            updateControls();
+        }
+        }
 
-    }
 
 
     public void updateControls() {  // updateControls kaldes hver gange der klikkes til og fra fanen
         lblError.setText(""); // fjerner den grønne eller røde besked
         txfArrangementNavn.clear(); //fjerner det man har skrevet i tekstfeltet
 
+        //        opdaterer lige listview:
+        lvwProdukterMedPriser.getItems().clear();
+        Arrangement arrangement = cbbArrangementer.getSelectionModel().getSelectedItem(); // finder arrangement
+        lvwProdukterMedPriser.getItems().setAll(Controller.getPriserFromArrangement(arrangement));
 
     }
 }
