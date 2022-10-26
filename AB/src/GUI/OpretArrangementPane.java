@@ -7,7 +7,13 @@ import application.model.Produkt;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+
+
+import java.awt.*;
 
 public class OpretArrangementPane extends GridPane {
 
