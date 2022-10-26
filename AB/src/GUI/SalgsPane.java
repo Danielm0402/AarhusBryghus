@@ -46,6 +46,8 @@ public class SalgsPane extends GridPane {
     public void updateControls() {
         cbbArrangementer.getItems().clear(); //fjerner lige alle elementer i comboboxen, for at refreshe
         cbbArrangementer.getItems().addAll(Controller.getArrangementer()); //tilføjer dem igen, for at refreshe
+        lvwProdukter.getItems().clear();
+        lvwProdukter.getItems().setAll(Controller.getProdukter());
 
     }
 }
