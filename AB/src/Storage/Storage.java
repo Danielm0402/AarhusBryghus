@@ -1,9 +1,6 @@
 package Storage;
 
-import application.model.Arrangement;
-import application.model.Pris;
-import application.model.Produkt;
-import application.model.Produktgruppe;
+import application.model.*;
 
 import java.util.ArrayList;
 
