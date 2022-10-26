@@ -15,8 +15,8 @@ public class Arrangement {
         return new ArrayList<>(priser);
     }
 
-    public Pris createPris(int enhedspris){
-        Pris pris = new Pris(enhedspris,this);
+    public Pris createPris(int enhedspris, Produkt produkt){
+        Pris pris = new Pris(enhedspris, produkt,this);
         priser.add(pris);
         return pris;
     }

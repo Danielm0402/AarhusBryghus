@@ -5,7 +5,7 @@ public class Pris {
     private int enhedspris;
     private Arrangement arrangement;
 
-    public Pris(int enhedspris,Arrangement arrangement) {
+    public Pris(int enhedspris,Produkt produkt, Arrangement arrangement) {
         this.enhedspris = enhedspris;
         this.arrangement = arrangement;
     }
