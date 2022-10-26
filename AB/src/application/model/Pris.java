@@ -16,6 +16,10 @@ public class Pris {
         return arrangement;
     }
 
+    public Produkt getProdukt(){
+        return produkt;
+    }
+
     @Override
     public String toString() {
         return  produkt +

@@ -49,4 +49,6 @@ public class Storage {
     public static void addPris(Pris pris) {
         priser.add(pris);
     }
+    public static void removePris(Pris pris) {priser.remove(pris);
+    }
 }
