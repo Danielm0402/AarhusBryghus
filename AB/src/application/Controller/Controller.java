@@ -35,6 +35,21 @@ public class Controller {
         return priserFraArrangement;
     }
 
+    public static ArrayList<Pris> getPriserFromArrangementWithinProduktgruppe(Arrangement arrangement, Produktgruppe produktgruppe){
+        ArrayList<Pris> priserFraArrangementMedDenneProduktgruppe = new ArrayList<>();
+        ArrayList<Produkt> produkterIDenneProduktgruppe = produktgruppe.getProdukter();
+
+        ArrayList<Pris> liste = getPriserFromArrangement(arrangement);
+
+        for (Pris pris : liste){
+            if(produkterIDenneProduktgruppe.contains(pris.getProdukt())){
+                priserFraArrangementMedDenneProduktgruppe.add(pris);
+            }
+        }
+        return priserFraArrangementMedDenneProduktgruppe;
+
+    }
+
     public static Arrangement createArrangement(String navn){
         Arrangement arrangement = new Arrangement(navn);
         Storage.addArrangement(arrangement);
@@ -65,6 +80,8 @@ public class Controller {
 
 
     public static void initStorage() {
+
+
 
     //    Arrangementer
     Arrangement a1 = createArrangement("Fredagsbar");
@@ -166,6 +183,18 @@ public class Controller {
     Produkt p72 = createProdukt("papkasse 12 øl",pg10);
 
     Produkt p73 = createProdukt("pr person dag",pg11);
+
+        //        priser
+        Pris pris1 = createPris(70,p1,a1);
+        Pris pris2 = createPris(30,p1,a2);
+        Pris pris3 = createPris(30,p2,a2);
+        Pris pris4 = createPris(30,p3,a2);
+        Pris pris5 = createPris(30,p4,a2);
+        Pris pris6 = createPris(30,p5,a2);
+
+
+
+
     }
 
 
