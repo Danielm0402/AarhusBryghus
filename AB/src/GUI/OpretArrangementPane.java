@@ -1,8 +1,11 @@
 package GUI;
 
 import application.Controller.Controller;
+import application.model.Arrangement;
+import application.model.Produkt;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -13,6 +16,9 @@ public class OpretArrangementPane extends GridPane {
 
     private TextField txfArrangementNavn;
     private Label lblError;
+    private ComboBox<Produkt> cbbAlleProdukter;
+    private ComboBox<Arrangement> cbbArrangementer;
+    private TextField txfPris;
 
     public OpretArrangementPane() {
         this.setPadding(new Insets(20));
@@ -31,12 +37,50 @@ public class OpretArrangementPane extends GridPane {
         this.add(btnOpretArrangement, 2, 2);
         btnOpretArrangement.setOnAction(event -> this.opretArrangementPaneAction());
 
+//       ---------------- tildel pris til arrangement ------------------
+
+        Label lblArrangement = new Label("-------- Tildel pris til arrangement --------");
+        this.add(lblArrangement, 2, 5);
+
+        Label lblArrangement2 = new Label("Arrangement:");
+        this.add(lblArrangement2, 1, 6);
+
+
+        cbbArrangementer = new ComboBox<>();
+        this.add(cbbArrangementer, 2, 6);
+        cbbArrangementer.getItems().addAll(Controller.getArrangementer());
+
+        Label lblArrangement3 = new Label("Produkt:");
+        this.add(lblArrangement3, 1, 7);
+
+        cbbAlleProdukter = new ComboBox<>();
+        this.add(cbbAlleProdukter, 2, 7);
+        cbbAlleProdukter.getItems().addAll(Controller.getProdukter());
+
+
+        Button btnOpretPris = new Button("Opret Pris");
+        this.add(btnOpretPris,2,9);
+        btnOpretPris.setOnAction(event -> this.opretPrisAction());
+
+        Label lblPris = new Label("Pris:");
+        this.add(lblPris, 1, 8);
+
+        txfPris = new TextField();
+        this.add(txfPris, 2, 8);
+        txfPris.setEditable(true);
+        txfPris.setMaxWidth(100);
+
+
+
+
+//  -------------- error message -------
 
         lblError = new Label();
-        this.add(lblError, 2, 6);
+        this.add(lblError, 2, 4);
         lblError.setStyle("-fx-text-fill: red");
 
     }
+
 
     private void opretArrangementPaneAction() {
         String ArrangementNavn = txfArrangementNavn.getText().trim();
@@ -44,10 +88,18 @@ public class OpretArrangementPane extends GridPane {
             lblError.setText("Nogle felter mangle at blive udfyldt");
         }
         else {
-            Controller.createArrangement(ArrangementNavn);
+            Arrangement arrangement = Controller.createArrangement(ArrangementNavn);
             lblError.setStyle("-fx-text-fill: green");
             lblError.setText("Arrangement oprettet");
+            cbbArrangementer.getItems().clear();
+            cbbArrangementer.getItems().addAll(Controller.getArrangementer());
+            // sørger for at det oprettede arrangement sættes i comboboxen:
+            cbbArrangementer.getSelectionModel().select(arrangement);
+
         }
+    }
+
+    private void opretPrisAction() {
 
 
     }
