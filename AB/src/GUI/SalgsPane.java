@@ -35,8 +35,7 @@ public class SalgsPane extends GridPane {
         lvwProdukter = new ListView<>();
         this.add(lvwProdukter,2,2);
         lvwProdukter.getItems().setAll(Controller.getProdukter());
-//        ChangeListener<Hotel> listener = (ov, oldHotel, newHotel) -> this.selectedHotelChanged();
-//        lvwHotels.getSelectionModel().selectedItemProperty().addListener(listener);
+
 
 
 

@@ -2,12 +2,10 @@ package GUI;
 
 import application.Controller.Controller;
 import application.model.Arrangement;
+import application.model.Pris;
 import application.model.Produkt;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 
 public class OpretArrangementPane extends GridPane {
@@ -19,6 +17,7 @@ public class OpretArrangementPane extends GridPane {
     private ComboBox<Produkt> cbbAlleProdukter;
     private ComboBox<Arrangement> cbbArrangementer;
     private TextField txfPris;
+    private ListView<Pris> lvwProdukterMedPriser;
 
     public OpretArrangementPane() {
         this.setPadding(new Insets(20));
@@ -70,6 +69,12 @@ public class OpretArrangementPane extends GridPane {
         txfPris.setEditable(true);
         txfPris.setMaxWidth(100);
 
+// ---------- list view over alle produkter der har priser ---------
+        lvwProdukterMedPriser = new ListView<>();
+        this.add(lvwProdukterMedPriser,2,10);
+        lvwProdukterMedPriser.getItems().setAll(Controller.getPriser());
+        lvwProdukterMedPriser.setMaxHeight(200);
+
 
 
 
@@ -91,6 +96,7 @@ public class OpretArrangementPane extends GridPane {
             Arrangement arrangement = Controller.createArrangement(ArrangementNavn);
             lblError.setStyle("-fx-text-fill: green");
             lblError.setText("Arrangement oprettet");
+//            opdaterer lige comboboxen når der oprettes et nyt arrangement:
             cbbArrangementer.getItems().clear();
             cbbArrangementer.getItems().addAll(Controller.getArrangementer());
             // sørger for at det oprettede arrangement sættes i comboboxen:
@@ -100,7 +106,15 @@ public class OpretArrangementPane extends GridPane {
     }
 
     private void opretPrisAction() {
+        int pris = Integer.parseInt((txfPris.getText().trim()));
+        Produkt produkt = cbbAlleProdukter.getSelectionModel().getSelectedItem();
+        Arrangement arrangement = cbbArrangementer.getSelectionModel().getSelectedItem();
+        Controller.createPris(pris, produkt, arrangement);
 
+//        opdaterer lige listview:
+        lvwProdukterMedPriser.getItems().clear();
+        //        Nedenstående skal udfyldes med getpriser(arrangement) i parentesen
+        lvwProdukterMedPriser.getItems().setAll(Controller.getPriser());
 
     }
 
