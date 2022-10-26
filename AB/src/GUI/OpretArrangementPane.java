@@ -72,8 +72,7 @@ public class OpretArrangementPane extends GridPane {
 // ---------- list view over alle produkter der har priser ---------
         lvwProdukterMedPriser = new ListView<>();
         this.add(lvwProdukterMedPriser,2,10);
-//        Nedenstående skal udfyldes med getpriser(arrangement) i parentesen
-        lvwProdukterMedPriser.getItems().setAll();
+        lvwProdukterMedPriser.getItems().setAll(Controller.getPriser());
         lvwProdukterMedPriser.setMaxHeight(200);
 
 
@@ -107,12 +106,15 @@ public class OpretArrangementPane extends GridPane {
     }
 
     private void opretPrisAction() {
-//  mangler vist en funktion til at create pris?? Daniel laver
+        int pris = Integer.parseInt((txfPris.getText().trim()));
+        Produkt produkt = cbbAlleProdukter.getSelectionModel().getSelectedItem();
+        Arrangement arrangement = cbbArrangementer.getSelectionModel().getSelectedItem();
+        Controller.createPris(pris, produkt, arrangement);
 
 //        opdaterer lige listview:
         lvwProdukterMedPriser.getItems().clear();
         //        Nedenstående skal udfyldes med getpriser(arrangement) i parentesen
-        lvwProdukterMedPriser.getItems().setAll();
+        lvwProdukterMedPriser.getItems().setAll(Controller.getPriser());
 
     }
 

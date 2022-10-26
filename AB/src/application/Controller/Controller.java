@@ -21,6 +21,8 @@ public class Controller {
 
     public static ArrayList<Produkt> getProdukter() {return Storage.getProdukter();}
 
+    public static ArrayList<Pris> getPriser() {return Storage.getPriser();}
+
 
     public static Arrangement createArrangement(String navn){
         Arrangement arrangement = new Arrangement(navn);
