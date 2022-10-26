@@ -40,6 +40,7 @@ public class SalgsPane extends GridPane {
 
 
 
+
     }
 
     public void updateControls() {

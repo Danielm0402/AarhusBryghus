@@ -1,9 +1,6 @@
 package Storage;
 
-import application.model.Arrangement;
-import application.model.Pris;
-import application.model.Produkt;
-import application.model.Produktgruppe;
+import application.model.*;
 
 import java.util.ArrayList;
 
@@ -13,6 +10,8 @@ public class Storage {
     private static final ArrayList<Produktgruppe> produktgrupper = new ArrayList<>();
     private static final ArrayList<Produkt> produkter = new ArrayList<>();
     private static final ArrayList<Pris> priser = new ArrayList<>();
+    private static final ArrayList<Salgslinje> salgslinjer = new ArrayList<>();
+    private static final ArrayList<Salg> salgs = new ArrayList<>();
 
 
     public static ArrayList<Arrangement> getArrangementer() {
@@ -48,5 +47,23 @@ public class Storage {
     }
     public static void addPris(Pris pris) {
         priser.add(pris);
+    }
+
+
+    public static ArrayList<Salgslinje> getSalgslinjer() {
+        return new ArrayList<Salgslinje>(salgslinjer);
+    }
+
+    public static void addSalgslinje(Salgslinje salgslinje) {
+        salgslinjer.add(salgslinje);
+    }
+
+
+    public static ArrayList<Salg> getSalg() {
+        return new ArrayList<Salg>(salgs);
+    }
+
+    public static void addSalg(Salg salg) {
+        salgs.add(salg);
     }
 }

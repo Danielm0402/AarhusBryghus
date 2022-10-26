@@ -12,9 +12,17 @@ public class Pris {
         this.arrangement = arrangement;
     }
 
+    public int getEnhedspris() {
+        return enhedspris;
+    }
+
     public Arrangement getArrangement(){
         return arrangement;
     }
+
+
+
+
 
     @Override
     public String toString() {
