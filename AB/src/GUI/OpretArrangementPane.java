@@ -155,6 +155,10 @@ public class OpretArrangementPane extends GridPane {
         lblError.setText(""); // fjerner den grønne eller røde besked
         txfArrangementNavn.clear(); //fjerner det man har skrevet i tekstfeltet
 
+//        Opdaterer produkt Combobox:
+        cbbAlleProdukter.getItems().clear();
+        cbbAlleProdukter.getItems().addAll(Controller.getProdukter());
+
         //        opdaterer lige listview:
         lvwProdukterMedPriser.getItems().clear();
         Arrangement arrangement = cbbArrangementer.getSelectionModel().getSelectedItem(); // finder arrangement

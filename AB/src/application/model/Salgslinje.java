@@ -34,4 +34,10 @@ public class Salgslinje {
     public void setPris(Pris pris) {
         this.pris = pris;
     }
+
+
+    @Override
+    public String toString() {
+        return pris.getProdukt().toString() + ", Antal: 1 ,"+ pris.getEnhedspris();
+    }
 }

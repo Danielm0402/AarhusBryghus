@@ -2,7 +2,7 @@ package application.Controller;
 
 import Storage.Storage;
 import application.model.*;
-import javafx.collections.ObservableList;
+
 
 import java.util.ArrayList;
 
@@ -38,7 +38,12 @@ public class Controller {
 
     public static ArrayList<Pris> getPriserFromArrangementWithinProduktgruppe(Arrangement arrangement, Produktgruppe produktgruppe){
         ArrayList<Pris> priserFraArrangementMedDenneProduktgruppe = new ArrayList<>();
-        ArrayList<Produkt> produkterIDenneProduktgruppe = produktgruppe.getProdukter();
+        ArrayList<Produkt> produkterIDenneProduktgruppe = new ArrayList<>();
+        if (produktgruppe != null){
+            produkterIDenneProduktgruppe = produktgruppe.getProdukter();
+        }
+
+//        ArrayList<Produkt> produkterIDenneProduktgruppe = produktgruppe.getProdukter();
 
         ArrayList<Pris> liste = getPriserFromArrangement(arrangement);
 
@@ -48,7 +53,6 @@ public class Controller {
             }
         }
         return priserFraArrangementMedDenneProduktgruppe;
-
     }
 
     public static Arrangement createArrangement(String navn){
@@ -68,8 +72,8 @@ public class Controller {
         return salg;
     }
 
-    public static Salgslinje createSalgslinje(Salg salg, int antal, double aftaltPris, Pris pris){
-        Salgslinje salgslinje = salg.createSalgslinje(antal,aftaltPris,pris);
+    public static Salgslinje createSalgsLinje(Salg salg, int antal, double aftaltpris, Pris pris){
+        Salgslinje salgslinje = salg.createSalgslinje(antal, aftaltpris, pris);
         Storage.addSalgslinje(salgslinje);
         return salgslinje;
     }
@@ -136,7 +140,7 @@ public class Controller {
     Produkt p13 = createProdukt("Tribute",pg1);
     Produkt p14 = createProdukt("Black Monster",pg1);
 
-    Produkt p15 = createProdukt("Klosterbryg",pg2);
+    Produkt p15 = createProdukt("Klosterbryg 40 cl",pg2);
     Produkt p16 = createProdukt("Jazz Classic",pg2);
     Produkt p17 = createProdukt("Extra Pilsner",pg2);
     Produkt p18 = createProdukt("Celebration",pg2);
@@ -207,11 +211,18 @@ public class Controller {
 
         //        priser
         Pris pris1 = createPris(70,p1,a1);
-        Pris pris2 = createPris(30,p1,a2);
-        Pris pris3 = createPris(30,p2,a2);
-        Pris pris4 = createPris(30,p3,a2);
-        Pris pris5 = createPris(30,p4,a2);
-        Pris pris6 = createPris(30,p5,a2);
+        Pris pris2 = createPris(65,p2,a1);
+        Pris pris8= createPris(75,p15,a1);
+        Pris pris9= createPris(75,p16,a1);
+
+
+        Pris pris3 = createPris(30,p1,a2);
+        Pris pris4 = createPris(30,p2,a2);
+        Pris pris5 = createPris(30,p3,a2);
+        Pris pris6 = createPris(30,p4,a2);
+        Pris pris7 = createPris(30,p5,a2);
+
+
 
 
 
