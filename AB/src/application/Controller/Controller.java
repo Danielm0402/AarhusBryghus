@@ -22,6 +22,8 @@ public class Controller {
 
     public static ArrayList<Salg> getSalg() {return Storage.getSalg();}
 
+    public static ArrayList<Salgslinje> getSalgslinje() {return Storage.getSalgslinjer();}
+
     public static void removePris(Pris pris){Storage.removePris(pris);}
 
     public static ArrayList<Pris> getPriserFromArrangement(Arrangement arrangement){
@@ -60,10 +62,24 @@ public class Controller {
         return produktgruppe;
     }
 
-    public static Salg createSalg(Betalingsmetode betalingsmetode, double rabatkode){
-        Salg salg = new Salg(betalingsmetode,rabatkode);
+    public static Salg createSalg(){
+        Salg salg = new Salg();
         Storage.addSalg(salg);
         return salg;
+    }
+
+    public static Salgslinje createSalgslinje(int antal, double aftaltPris, Pris pris){
+        Salgslinje salgslinje = new Salgslinje(antal,aftaltPris,pris);
+        Storage.addSalgslinje(salgslinje);
+        return salgslinje;
+    }
+
+    public static void setBetalingsmetode(Salg salg, Betalingsmetode betalingsmetode){
+        salg.setBetalingsmetode(betalingsmetode);
+    }
+
+    public static void setRabatprocent(Salg salg, double rabatprocent){
+        salg.setRabatprocent(rabatprocent);
     }
 
     public static Produkt createProdukt(String produktnavn, Produktgruppe produktgruppe) {

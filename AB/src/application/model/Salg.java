@@ -8,9 +8,7 @@ public class Salg {
 
     private double rabatprocent;
 
-    public Salg(Betalingsmetode betalingsmetode, double rabatprocent){
-        this.betalingsmetode=betalingsmetode;
-        this.rabatprocent=rabatprocent;
+    public Salg(){
     }
 
 
@@ -26,6 +24,10 @@ public class Salg {
 
     public void setBetalingsmetode(Betalingsmetode betalingsmetode) {
         this.betalingsmetode = betalingsmetode;
+    }
+
+    public void setRabatprocent(double rabatprocent) {
+        this.rabatprocent = rabatprocent;
     }
 
     public double SamletPris() {
