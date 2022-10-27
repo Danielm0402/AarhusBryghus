@@ -10,6 +10,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
+import java.text.DecimalFormat;
+
 public class SalgsPane extends GridPane {
 
     private ComboBox<Arrangement> cbbArrangementer;
@@ -18,7 +20,9 @@ public class SalgsPane extends GridPane {
     private ListView<Salgslinje> lvwSalgslinjer;
     private TextField txfRabat;
     private TextField txfTotal;
-    double total = 0;
+    private double total = 0;
+    private Salg salg;
+
 
     public SalgsPane() {
 
@@ -30,6 +34,7 @@ public class SalgsPane extends GridPane {
         Label lblArrangement = new Label("Vælg arrangement");
         this.add(lblArrangement, 1, 0);
 
+//        combobox over arrangementer
         cbbArrangementer = new ComboBox<>();
         this.add(cbbArrangementer, 1, 1);
         cbbArrangementer.getItems().addAll(Controller.getArrangementer());
@@ -54,35 +59,35 @@ public class SalgsPane extends GridPane {
             public void handle(MouseEvent mouseEvent) {
                 Pris produktpris = lvwProduktPriser.getSelectionModel().getSelectedItem();
 
-                Salg salg = null;
                 if (salg ==null){
                     salg = Controller.createSalg();
                 }
-                Controller.createSalgsLinje(salg, 1, 200,produktpris);
+                Controller.createSalgsLinje(salg, 1, produktpris.getEnhedspris(),produktpris);
                 total += produktpris.getEnhedspris();
                 txfTotal.setText(String.valueOf(total));
-                lvwSalgslinjer.getItems().setAll(Controller.getSalgslinje());
-                System.out.println("ja");
-
+//                lvwSalgslinjer.getItems().setAll(Controller.getSalgslinje());
+                lvwSalgslinjer.getItems().setAll(salg.getSalgsLinjer());
             }
         });
-//        ----------------------------------------------
+//        ---------------- salgslinjer ------------------------------
 
 
         //listview over salgslinjer
         lvwSalgslinjer = new ListView<>();
         this.add(lvwSalgslinjer,3,2);
 
-        Label lblRabat = new Label("Rabat");
+//------------------- rabat ----------------------------------------------
+        Label lblRabat = new Label("Rabat i %");
 
         //textfield for rabat
         txfRabat = new TextField();
-        txfRabat.textProperty().addListener((observable, oldValue, newValue) -> discount());
+        Button btnrabat = new Button("Udregn rabat");
+        btnrabat.setOnAction(event -> discount());
 
-//        ChangeListener<Produktgruppe> listener2 = (ov, oldValue, newValue) -> selectedProduktgruppeChanged(newValue);
-//        lvwProduktgrupper.getSelectionModel().selectedItemProperty().addListener(listener2);
+        //        txfRabat.textProperty().addListener((observable, oldValue, newValue) -> discount());
 
-        HBox hboxRabat = new HBox(10,lblRabat,txfRabat);
+
+        HBox hboxRabat = new HBox(10,lblRabat,txfRabat,btnrabat);
         this.add(hboxRabat,3,3);
 
         Label lblTotal = new Label("Total");
@@ -135,15 +140,18 @@ public class SalgsPane extends GridPane {
     public void updateControls() {
         cbbArrangementer.getItems().clear(); //fjerner lige alle elementer i comboboxen, for at refreshe
         cbbArrangementer.getItems().addAll(Controller.getArrangementer()); //tilføjer dem igen, for at refreshe
+        cbbArrangementer.getSelectionModel().selectFirst(); // siger lige, at den skal vælge den første, så boksen ikke er tom
+
         lvwProduktPriser.getItems().clear();
 
 //        opdater produktgruppe:
         lvwProduktgrupper.getItems().clear();
         lvwProduktgrupper.getItems().setAll(Controller.getProduktgrupper());
-
     }
 
     public void Payment(){
+//        TODO lav en kopi af salget ind til salgshistorikken. Noget med arrayliste.add(salg)
+        salg = null; // sætter salg til null så den sletter salget
         lvwSalgslinjer.getItems().clear();
         total = 0;
         txfTotal.setText(String.valueOf(total));
@@ -154,14 +162,5 @@ public class SalgsPane extends GridPane {
         double rabat = Double.parseDouble(txfRabat.getText());
         total = total * (1-(rabat/100));
         txfTotal.setText(String.valueOf(total));
-
-
-
-//        double samletPris = 0;
-//        double procent = 1 - (rabat / 100);
-//        for (Salgslinje s : salgslinjer) {
-//            samletPris += s.getPris();
-//        }
-//        return samletPris * procent;
     }
 }
