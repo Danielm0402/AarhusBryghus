@@ -5,11 +5,10 @@ import application.model.*;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 public class SalgsPane extends GridPane {
 
@@ -17,6 +16,9 @@ public class SalgsPane extends GridPane {
     private ListView<Pris> lvwProduktPriser;
     private ListView<Produktgruppe> lvwProduktgrupper;
     private ListView<Salgslinje> lvwSalgslinjer;
+    private TextField txfRabat;
+    private TextField txfTotal;
+    double total = 0;
 
     public SalgsPane() {
 
@@ -57,6 +59,8 @@ public class SalgsPane extends GridPane {
                     salg = Controller.createSalg();
                 }
                 Controller.createSalgsLinje(salg, 1, 200,produktpris);
+                total += produktpris.getEnhedspris();
+                txfTotal.setText(String.valueOf(total));
                 lvwSalgslinjer.getItems().setAll(Controller.getSalgslinje());
                 System.out.println("ja");
 
@@ -68,6 +72,48 @@ public class SalgsPane extends GridPane {
         //listview over salgslinjer
         lvwSalgslinjer = new ListView<>();
         this.add(lvwSalgslinjer,3,2);
+
+        Label lblRabat = new Label("Rabat");
+
+        //textfield for rabat
+        txfRabat = new TextField();
+        txfRabat.textProperty().addListener((observable, oldValue, newValue) -> discount());
+
+//        ChangeListener<Produktgruppe> listener2 = (ov, oldValue, newValue) -> selectedProduktgruppeChanged(newValue);
+//        lvwProduktgrupper.getSelectionModel().selectedItemProperty().addListener(listener2);
+
+        HBox hboxRabat = new HBox(10,lblRabat,txfRabat);
+        this.add(hboxRabat,3,3);
+
+        Label lblTotal = new Label("Total");
+
+        //textArea for total
+        txfTotal = new TextField();
+        txfTotal.setEditable(false);
+
+
+        HBox hboxTotal = new HBox(10, lblTotal,txfTotal);
+        this.add(hboxTotal,3,4);
+
+        //Dankort kontant, klippekort, mobilpay, regnning
+
+        Button btnDankort = new Button("Dankort");
+        btnDankort.setOnAction(event -> Payment());
+
+        Button btnKontant = new Button("Kontant");
+        btnKontant.setOnAction(event -> Payment());
+
+        Button btnKlippekort = new Button("Klippekort");
+        btnKlippekort.setOnAction(event -> Payment());
+
+        Button btnMobilpay = new Button("Mobilpay");
+        btnMobilpay.setOnAction(event -> Payment());
+
+        Button btnRegning = new Button("Regning");
+        btnRegning.setOnAction(event -> Payment());
+
+        HBox hboxBetaling = new HBox(btnDankort,btnKontant,btnKlippekort,btnMobilpay,btnRegning);
+        this.add(hboxBetaling,3,5);
     }
 
     //    opdaterer hver gang der er lavet en ændring på "Vælg arrangement" bomboboksen.
@@ -95,5 +141,27 @@ public class SalgsPane extends GridPane {
         lvwProduktgrupper.getItems().clear();
         lvwProduktgrupper.getItems().setAll(Controller.getProduktgrupper());
 
+    }
+
+    public void Payment(){
+        lvwSalgslinjer.getItems().clear();
+        total = 0;
+        txfTotal.setText(String.valueOf(total));
+        txfRabat.clear();
+    }
+
+    public void discount(){
+        double rabat = Double.parseDouble(txfRabat.getText());
+        total = total * (1-(rabat/100));
+        txfTotal.setText(String.valueOf(total));
+
+
+
+//        double samletPris = 0;
+//        double procent = 1 - (rabat / 100);
+//        for (Salgslinje s : salgslinjer) {
+//            samletPris += s.getPris();
+//        }
+//        return samletPris * procent;
     }
 }

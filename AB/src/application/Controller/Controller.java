@@ -38,7 +38,12 @@ public class Controller {
 
     public static ArrayList<Pris> getPriserFromArrangementWithinProduktgruppe(Arrangement arrangement, Produktgruppe produktgruppe){
         ArrayList<Pris> priserFraArrangementMedDenneProduktgruppe = new ArrayList<>();
-        ArrayList<Produkt> produkterIDenneProduktgruppe = produktgruppe.getProdukter();
+        ArrayList<Produkt> produkterIDenneProduktgruppe = new ArrayList<>();
+        if (produktgruppe != null){
+            produkterIDenneProduktgruppe = produktgruppe.getProdukter();
+        }
+
+//        ArrayList<Produkt> produkterIDenneProduktgruppe = produktgruppe.getProdukter();
 
         ArrayList<Pris> liste = getPriserFromArrangement(arrangement);
 
