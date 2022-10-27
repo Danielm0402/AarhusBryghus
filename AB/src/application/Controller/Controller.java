@@ -78,6 +78,12 @@ public class Controller {
         return salgslinje;
     }
 
+    public static void removeSalgsLinje(Salg salg,Salgslinje salgslinje) {
+        salg.removeSalgslinje(salgslinje);
+    }
+//               if (priser.contains(pris)) {
+//        priser.remove(pris);
+
     public static void setBetalingsmetode(Salg salg, Betalingsmetode betalingsmetode){
         salg.setBetalingsmetode(betalingsmetode);
     }

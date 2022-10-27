@@ -38,6 +38,6 @@ public class Salgslinje {
 
     @Override
     public String toString() {
-        return pris.getProdukt().toString() + ", Antal: 1 ,"+ pris.getEnhedspris();
+        return pris.getProdukt().toString() + ", Antal: 1, "+ pris.getEnhedspris()+",-";
     }
 }
