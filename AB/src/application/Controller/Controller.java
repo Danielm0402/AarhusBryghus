@@ -1,10 +1,7 @@
 package application.Controller;
 
 import Storage.Storage;
-import application.model.Arrangement;
-import application.model.Pris;
-import application.model.Produkt;
-import application.model.Produktgruppe;
+import application.model.*;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
@@ -22,6 +19,8 @@ public class Controller {
     public static ArrayList<Produkt> getProdukter() {return Storage.getProdukter();}
 
     public static ArrayList<Pris> getPriser() {return Storage.getPriser();}
+
+    public static ArrayList<Salg> getSalg() {return Storage.getSalg();}
 
     public static void removePris(Pris pris){Storage.removePris(pris);}
 
@@ -59,6 +58,12 @@ public class Controller {
         Produktgruppe produktgruppe = new Produktgruppe(navn);
         Storage.addProduktgruppe(produktgruppe);
         return produktgruppe;
+    }
+
+    public static Salg createSalg(Betalingsmetode betalingsmetode, double rabatkode){
+        Salg salg = new Salg(betalingsmetode,rabatkode);
+        Storage.addSalg(salg);
+        return salg;
     }
 
     public static Produkt createProdukt(String produktnavn, Produktgruppe produktgruppe) {

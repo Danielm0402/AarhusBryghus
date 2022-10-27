@@ -8,6 +8,11 @@ public class Salg {
 
     private double rabatprocent;
 
+    public Salg(Betalingsmetode betalingsmetode, double rabatprocent){
+        this.betalingsmetode=betalingsmetode;
+        this.rabatprocent=rabatprocent;
+    }
+
 
     public ArrayList<Salgslinje> getSalgsLinjer(){
         return new ArrayList<>(salgslinjer);
@@ -23,22 +28,23 @@ public class Salg {
         this.betalingsmetode = betalingsmetode;
     }
 
-    public double givRabatSamletPris(double rabatprocent){
+    public double SamletPris() {
         double samletPris = 0;
-        double procent=1-(rabatprocent/100);
-        for(Salgslinje s : salgslinjer){
-            samletPris += s.getPris();
+        if (rabatprocent > 0) {
+            double procent = 1 - (rabatprocent / 100);
+            for (Salgslinje s : salgslinjer) {
+                samletPris += s.getPris();
+            }
+            return samletPris * procent;
+        }else {
+                for (Salgslinje s : salgslinjer) {
+                    samletPris += s.getPris();
+                }
+                return samletPris;
+            }
         }
-        return samletPris*procent;
-    }
 
-    public double samletPris(){
-        double samletPris = 0;
-        for(Salgslinje s : salgslinjer){
-            samletPris += s.getPris();
-        }
-        return samletPris;
-    }
+
 
     public void addSalgslinje(Salgslinje salgslinje){
         if(!salgslinjer.contains(salgslinje)){
