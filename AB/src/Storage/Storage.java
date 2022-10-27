@@ -45,9 +45,11 @@ public class Storage {
     public static ArrayList<Pris> getPriser(){
         return new ArrayList<Pris>(priser);
     }
+
     public static void addPris(Pris pris) {
         priser.add(pris);
     }
+
     public static void removePris(Pris pris) {priser.remove(pris);
     }
 
