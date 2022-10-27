@@ -68,8 +68,8 @@ public class Controller {
         return salg;
     }
 
-    public static Salgslinje createSalgslinje(int antal, double aftaltPris, Pris pris){
-        Salgslinje salgslinje = new Salgslinje(antal,aftaltPris,pris);
+    public static Salgslinje createSalgslinje(Salg salg, int antal, double aftaltPris, Pris pris){
+        Salgslinje salgslinje = salg.createSalgslinje(antal,aftaltPris,pris);
         Storage.addSalgslinje(salgslinje);
         return salgslinje;
     }
