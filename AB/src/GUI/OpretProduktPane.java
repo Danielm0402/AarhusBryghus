@@ -53,7 +53,7 @@ public class OpretProduktPane extends GridPane {
     private void opretProduktAction() {
         String produktnavn = txfProduktnavn.getText().trim();
         Produktgruppe produktgruppe = cbbProduktgruppe.getSelectionModel().getSelectedItem();
-        if (produktnavn.length() < 1){
+        if (produktnavn.length() < 1 || produktgruppe ==null){
             lblError.setText("Nogle felter mangle at blive udfyldt");
         }
         else {

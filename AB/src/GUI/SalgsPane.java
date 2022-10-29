@@ -50,7 +50,7 @@ public class SalgsPane extends GridPane {
         lvwProduktgrupper.getSelectionModel().selectedItemProperty().addListener(listener2);
 
 
-        //listview over produkter
+        //listview over produkt priser
         lvwProduktPriser = new ListView<>();
         this.add(lvwProduktPriser,2,2);
 //        ----nedenstående er så der kan klikkes på en ProduktPris og så kommer den ind i salgslinje---
@@ -65,7 +65,6 @@ public class SalgsPane extends GridPane {
                 Controller.createSalgsLinje(salg, 1, produktpris.getEnhedspris(),produktpris);
                 total += produktpris.getEnhedspris();
                 txfTotal.setText(String.valueOf(total));
-//                lvwSalgslinjer.getItems().setAll(Controller.getSalgslinje());
                 lvwSalgslinjer.getItems().setAll(salg.getSalgsLinjer());
             }
         });

@@ -71,6 +71,15 @@ public class StartWindow extends Application {
         OpretArrangementPane opretArrangementPane = new OpretArrangementPane();
         tabArrangement.setContent(opretArrangementPane);
         tabArrangement.setOnSelectionChanged(event -> opretArrangementPane.updateControls());
+        // --------------------------------------------------------------------------
+
+//        Tab tabOversigt = new Tab("Opret Oversigt");
+//        tabPane.getTabs().add(tabOversigt);
+//
+//        OversigtPane OversigtPane = new OversigtPane();
+//        tabOversigt.setContent(OversigtPane);
+//        tabOversigt.setOnSelectionChanged(event -> opretArrangementPane.updateControls());
+
 
     }
 
