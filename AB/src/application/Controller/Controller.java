@@ -78,6 +78,12 @@ public class Controller {
         return salgslinje;
     }
 
+    public static void updateSalgsLinje(Salg salg, Salgslinje salgslinje){
+        if (salg.getSalgsLinjer().contains(salgslinje)){
+            salgslinje.updateSalgslinje();
+        }
+    }
+
     public static void removeSalgsLinje(Salg salg,Salgslinje salgslinje) {
         salg.removeSalgslinje(salgslinje);
     }
