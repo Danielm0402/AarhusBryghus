@@ -90,6 +90,12 @@ public class Controller {
         return udlejning;
     }
 
+    public static Kunde createKunde(String navn, String telefon, String email, String adresse){
+        Kunde kunde = new Kunde(navn, telefon, email, adresse);
+        Storage.addKunde(kunde);
+        return kunde;
+    }
+
     public static Salgslinje createSalgsLinje(Salg salg, int antal, double aftaltpris, Pris pris){
         Salgslinje salgslinje = salg.createSalgslinje(antal, aftaltpris, pris);
         Storage.addSalgslinje(salgslinje);
@@ -142,6 +148,7 @@ public class Controller {
     //    Arrangementer
     Arrangement a1 = createArrangement("Fredagsbar");
     Arrangement a2 = createArrangement("Daglig butikssalg");
+    Arrangement a3 = createArrangement("Rundvisning");
 
 
     Produktgruppe pg1 = createProduktgruppe("Flaske");
@@ -240,6 +247,8 @@ public class Controller {
 
     Produkt p73 = createProdukt("pr person dag",pg11);
 
+    Produkt p74 = createProdukt("Rundvisning", pg11);
+
         //        priser
         Pris pris1 = createPris(70,p1,a1);
         Pris pris2 = createPris(65,p2,a1);
@@ -252,6 +261,12 @@ public class Controller {
         Pris pris5 = createPris(30,p3,a2);
         Pris pris6 = createPris(30,p4,a2);
         Pris pris7 = createPris(30,p5,a2);
+
+        Pris pris10 = createPris(200,p74,a3);
+
+
+        //Kunder
+        Kunde k1 = createKunde("Hans","12345678", "hans112@gmail.com","Vejen 1");
 
 
 

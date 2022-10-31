@@ -8,6 +8,7 @@ public class Rundvisning extends Salg{
 
     private boolean erBetalt;
     private LocalDateTime modetidspunkt;
+    private int antalDeltagere;
 
 
     public Rundvisning() {
