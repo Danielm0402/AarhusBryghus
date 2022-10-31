@@ -2,6 +2,7 @@ package GUI;
 
 import application.Controller.Controller;
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -73,12 +74,12 @@ public class StartWindow extends Application {
         tabArrangement.setOnSelectionChanged(event -> opretArrangementPane.updateControls());
         // --------------------------------------------------------------------------
 
-//        Tab tabOversigt = new Tab("Opret Oversigt");
-//        tabPane.getTabs().add(tabOversigt);
-//
-//        OversigtPane OversigtPane = new OversigtPane();
-//        tabOversigt.setContent(OversigtPane);
-//        tabOversigt.setOnSelectionChanged(event -> opretArrangementPane.updateControls());
+        Tab tabUdlejning = new Tab("Opret Udlejning");
+        tabPane.getTabs().add(tabUdlejning);
+
+        OpretUdlejningPane opretUdlejningPane = new OpretUdlejningPane();
+        tabUdlejning.setContent(opretUdlejningPane);
+        tabUdlejning.setOnSelectionChanged(event -> opretUdlejningPane.updateControls());
 
 
     }
