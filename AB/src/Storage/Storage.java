@@ -12,6 +12,9 @@ public class Storage {
     private static final ArrayList<Pris> priser = new ArrayList<>();
     private static final ArrayList<Salgslinje> salgslinjer = new ArrayList<>();
     private static final ArrayList<Salg> salgs = new ArrayList<>();
+    private static final ArrayList<Rundvisning> rundvisninger = new ArrayList<>();
+    private static final ArrayList<Udlejning> udlejninger = new ArrayList<>();
+    private static final ArrayList<Kunde> kunder = new ArrayList<>();
 
 
     public static ArrayList<Arrangement> getArrangementer() {
@@ -20,6 +23,9 @@ public class Storage {
 
     public static void addArrangement(Arrangement arrangement) {
         arrangementer.add(arrangement);
+    }
+
+    public static void removeArrangement(Arrangement arrangement) {arrangementer.remove(arrangement);
     }
 
 
@@ -32,15 +38,21 @@ public class Storage {
         produktgrupper.add(produktgruppe);
     }
 
+    public static void removeProduktgruppe(Produktgruppe produktgruppe) {produktgrupper.remove(produktgruppe);
+    }
+
 
     public static ArrayList<Produkt> getProdukter() {
         return new ArrayList<Produkt>(produkter);
     }
 
-
     public static void addProdukt(Produkt produkt) {
         produkter.add(produkt);
     }
+
+    public static void removeProdukt(Produkt produkt) {produkter.remove(produkt);
+    }
+
 
     public static ArrayList<Pris> getPriser(){
         return new ArrayList<Pris>(priser);
@@ -62,6 +74,9 @@ public class Storage {
         salgslinjer.add(salgslinje);
     }
 
+    public static void removeSalgslinje(Salgslinje salgslinje) {salgslinjer.remove(salgslinje);
+    }
+
 
     public static ArrayList<Salg> getSalg() {
         return new ArrayList<Salg>(salgs);
@@ -69,5 +84,40 @@ public class Storage {
 
     public static void addSalg(Salg salg) {
         salgs.add(salg);
+    }
+    public static void removeSalg(Salg salg) {salgs.remove(salgs);
+    }
+
+
+    public static ArrayList<Rundvisning> getRundvisninger() {
+        return new ArrayList<Rundvisning>(rundvisninger);
+    }
+
+    public static void addRundvisning(Rundvisning rundvisning) {rundvisninger.add(rundvisning);}
+
+    public static void removeRundvisning(Rundvisning rundvisning) {rundvisninger.remove(rundvisning);
+    }
+
+
+    public static ArrayList<Udlejning> getUdlejninger() {
+        return new ArrayList<Udlejning>(udlejninger);
+    }
+
+    public static void addUdlejning(Udlejning udlejning) {
+        udlejninger.add(udlejning);
+    }
+
+    public static void removeUdlejning(Udlejning udlejning) {udlejninger.remove(udlejning);
+    }
+
+    public static ArrayList<Kunde> getKunder() {
+        return new ArrayList<Kunde>(kunder);
+    }
+
+    public static void addKunde(Kunde kunde) {
+        kunder.add(kunde);
+    }
+
+    public static void removeKunde(Kunde kunde) {kunder.remove(kunde);
     }
 }

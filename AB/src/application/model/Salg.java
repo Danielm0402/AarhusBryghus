@@ -1,12 +1,14 @@
 package application.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Salg {
     private final ArrayList<Salgslinje> salgslinjer = new ArrayList<>();
     private Betalingsmetode betalingsmetode;
 
     private double rabatprocent;
+    private Date dato;
 
     public Salg(){
     }
@@ -22,12 +24,28 @@ public class Salg {
         return salgslinje;
     }
 
+    public void addSalgslinje(Salgslinje salgslinje){
+        if(!salgslinjer.contains(salgslinje)){
+            salgslinjer.add(salgslinje);
+        }
+    }
+
+    public void removeSalgslinje(Salgslinje salgslinje){
+        if(salgslinjer.contains(salgslinje)){
+            salgslinjer.remove(salgslinje);
+        }
+    }
+
     public void setBetalingsmetode(Betalingsmetode betalingsmetode) {
         this.betalingsmetode = betalingsmetode;
     }
 
     public void setRabatprocent(double rabatprocent) {
         this.rabatprocent = rabatprocent;
+    }
+
+    public void setDato(Date dato) {
+        this.dato = dato;
     }
 
     public double SamletPris() {
@@ -48,16 +66,6 @@ public class Salg {
 
 
 
-    public void addSalgslinje(Salgslinje salgslinje){
-        if(!salgslinjer.contains(salgslinje)){
-            salgslinjer.add(salgslinje);
-        }
-    }
 
-    public void removeSalgslinje(Salgslinje salgslinje){
-        if(salgslinjer.contains(salgslinje)){
-            salgslinjer.remove(salgslinje);
-        }
-    }
 
 }

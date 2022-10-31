@@ -24,6 +24,12 @@ public class Controller {
 
     public static ArrayList<Salgslinje> getSalgslinje() {return Storage.getSalgslinjer();}
 
+    public static ArrayList<Rundvisning> getRundvisning() {return Storage.getRundvisninger();}
+
+    public static ArrayList<Udlejning> getUdlejning() {return Storage.getUdlejninger();}
+
+    public static ArrayList<Kunde> getKunde() {return Storage.getKunder();}
+
     public static void removePris(Pris pris){Storage.removePris(pris);}
 
     public static ArrayList<Pris> getPriserFromArrangement(Arrangement arrangement){
@@ -72,6 +78,18 @@ public class Controller {
         return salg;
     }
 
+    public static Rundvisning createRundvisning(){
+        Rundvisning rundvisning = new Rundvisning();
+        Storage.addRundvisning(rundvisning);
+        return rundvisning;
+    }
+
+    public static Udlejning createUdlejning(){
+        Udlejning udlejning = new Udlejning();
+        Storage.addUdlejning(udlejning);
+        return udlejning;
+    }
+
     public static Salgslinje createSalgsLinje(Salg salg, int antal, double aftaltpris, Pris pris){
         Salgslinje salgslinje = salg.createSalgslinje(antal, aftaltpris, pris);
         Storage.addSalgslinje(salgslinje);
@@ -93,6 +111,7 @@ public class Controller {
     public static void setBetalingsmetode(Salg salg, Betalingsmetode betalingsmetode){
         salg.setBetalingsmetode(betalingsmetode);
     }
+
 
     public static void setRabatprocent(Salg salg, double rabatprocent){
         salg.setRabatprocent(rabatprocent);
@@ -233,6 +252,7 @@ public class Controller {
         Pris pris5 = createPris(30,p3,a2);
         Pris pris6 = createPris(30,p4,a2);
         Pris pris7 = createPris(30,p5,a2);
+
 
 
 
