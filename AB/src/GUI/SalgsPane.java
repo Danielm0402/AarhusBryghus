@@ -58,11 +58,24 @@ public class SalgsPane extends GridPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 Pris produktpris = lvwProduktPriser.getSelectionModel().getSelectedItem();
+                boolean existsAlready = false;
 
                 if (salg ==null){
                     salg = Controller.createSalg();
                 }
-                Controller.createSalgsLinje(salg, 1, produktpris.getEnhedspris(),produktpris);
+
+                //For at kunne opdatere antallet på den enkelte salgslinje
+                for (int i = 0; i < Controller.getSalgslinje().size(); i++) {
+                    if (Controller.getSalgslinje().get(i).getProdukt() == produktpris.getProdukt()){
+                        Controller.updateSalgsLinje(salg, Controller.getSalgslinje().get(i));
+
+                        existsAlready = true;
+                    }
+                }
+                //Hvis produktet ikke allerede findes tilføjes en ny salgslinje
+                if (!existsAlready){
+                    Controller.createSalgsLinje(salg, 1, produktpris.getEnhedspris(),produktpris);
+                }
                 total += produktpris.getEnhedspris();
                 txfTotal.setText(String.valueOf(total));
                 lvwSalgslinjer.getItems().setAll(salg.getSalgsLinjer());
@@ -149,7 +162,6 @@ public class SalgsPane extends GridPane {
     }
 
     public void Payment(){
-//        TODO lav en kopi af salget ind til salgshistorikken. Noget med arrayliste.add(salg)
         salg = null; // sætter salg til null så den sletter salget
         lvwSalgslinjer.getItems().clear();
         total = 0;

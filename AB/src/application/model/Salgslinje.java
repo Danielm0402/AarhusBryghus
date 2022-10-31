@@ -23,6 +23,10 @@ public class Salgslinje {
         return pris.getEnhedspris();
     }
 
+    public Produkt getProdukt(){
+        return pris.getProdukt();
+    }
+
     public void setAntal(int antal) {
         this.antal = antal;
     }
@@ -35,9 +39,12 @@ public class Salgslinje {
         this.pris = pris;
     }
 
+    public void updateSalgslinje(){
+        this.antal++;
+    }
 
     @Override
     public String toString() {
-        return pris.getProdukt().toString() + ", Antal: 1, "+ pris.getEnhedspris()+",-";
+        return pris.getProdukt().toString() + " " + antal + " stk af " + pris.getEnhedspris()+",-";
     }
 }
