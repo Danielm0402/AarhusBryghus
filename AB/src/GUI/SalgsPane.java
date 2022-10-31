@@ -10,8 +10,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
-import java.text.DecimalFormat;
-
 public class SalgsPane extends GridPane {
 
     private ComboBox<Arrangement> cbbArrangementer;
@@ -65,13 +63,13 @@ public class SalgsPane extends GridPane {
                 }
 
                 //For at kunne opdatere antallet på den enkelte salgslinje
-                for (int i = 0; i < Controller.getSalgslinje().size(); i++) {
-                    if (Controller.getSalgslinje().get(i).getProdukt() == produktpris.getProdukt()){
-                        Controller.updateSalgsLinje(salg, Controller.getSalgslinje().get(i));
 
+                for (Salgslinje s : salg.getSalgsLinjer())
+                    if (s.getPris() == produktpris){
+                        Controller.incrementSalgslinje(salg,s);
                         existsAlready = true;
                     }
-                }
+
                 //Hvis produktet ikke allerede findes tilføjes en ny salgslinje
                 if (!existsAlready){
                     Controller.createSalgsLinje(salg, 1, produktpris.getEnhedspris(),produktpris);

@@ -19,7 +19,7 @@ public class Salgslinje {
         return aftaltPris;
     }
 
-    public int getPris() {
+    public int getEnhedspris() {
         return pris.getEnhedspris();
     }
 
@@ -39,12 +39,16 @@ public class Salgslinje {
         this.pris = pris;
     }
 
-    public void updateSalgslinje(){
+    public void incrementSalgslinje(){
         this.antal++;
     }
 
     @Override
     public String toString() {
         return pris.getProdukt().toString() + " " + antal + " stk af " + pris.getEnhedspris()+",-";
+    }
+
+    public Pris getPris() {
+        return pris;
     }
 }

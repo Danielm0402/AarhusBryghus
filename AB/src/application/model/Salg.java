@@ -53,12 +53,12 @@ public class Salg {
         if (rabatprocent > 0) {
             double procent = 1 - (rabatprocent / 100);
             for (Salgslinje s : salgslinjer) {
-                samletPris += s.getPris();
+                samletPris += s.getEnhedspris();
             }
             return samletPris * procent;
         }else {
                 for (Salgslinje s : salgslinjer) {
-                    samletPris += s.getPris();
+                    samletPris += s.getEnhedspris();
                 }
                 return samletPris;
             }

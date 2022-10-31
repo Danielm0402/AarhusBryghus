@@ -22,7 +22,7 @@ public class Controller {
 
     public static ArrayList<Salg> getSalg() {return Storage.getSalg();}
 
-    public static ArrayList<Salgslinje> getSalgslinje() {return Storage.getSalgslinjer();}
+    public static ArrayList<Salgslinje> getSalgslinjer() {return Storage.getSalgslinjer();}
 
     public static ArrayList<Rundvisning> getRundvisning() {return Storage.getRundvisninger();}
 
@@ -96,9 +96,9 @@ public class Controller {
         return salgslinje;
     }
 
-    public static void updateSalgsLinje(Salg salg, Salgslinje salgslinje){
+    public static void incrementSalgslinje(Salg salg, Salgslinje salgslinje){
         if (salg.getSalgsLinjer().contains(salgslinje)){
-            salgslinje.updateSalgslinje();
+            salgslinje.incrementSalgslinje();
         }
     }
 
