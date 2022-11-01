@@ -63,7 +63,7 @@ public class Kunde {
     @Override
     public String toString() {
         return navn +
-                ", Telefon: " + telefon +
+                ", Tlf: " + telefon +
                 ", Email: " + email;
     }
 }
