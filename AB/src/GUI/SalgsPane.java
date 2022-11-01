@@ -63,7 +63,6 @@ public class SalgsPane extends GridPane {
                 }
 
                 //For at kunne opdatere antallet på den enkelte salgslinje
-
                 for (Salgslinje s : salg.getSalgsLinjer())
                     if (s.getPris() == produktpris){
                         Controller.incrementSalgslinje(salg,s);

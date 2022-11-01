@@ -59,4 +59,11 @@ public class Kunde {
     public void setAdresse(String adresse) {
         this.adresse = adresse;
     }
+
+    @Override
+    public String toString() {
+        return navn +
+                ", Telefon: " + telefon +
+                ", Email: " + email;
+    }
 }

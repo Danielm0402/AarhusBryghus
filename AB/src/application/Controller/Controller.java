@@ -28,7 +28,7 @@ public class Controller {
 
     public static ArrayList<Udlejning> getUdlejning() {return Storage.getUdlejninger();}
 
-    public static ArrayList<Kunde> getKunde() {return Storage.getKunder();}
+    public static ArrayList<Kunde> getKunder() {return Storage.getKunder();}
 
     public static void removePris(Pris pris){Storage.removePris(pris);}
 
