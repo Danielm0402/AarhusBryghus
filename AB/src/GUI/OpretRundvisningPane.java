@@ -68,8 +68,6 @@ public class OpretRundvisningPane extends GridPane{
         add(btnOpretRundvisning,1,7);
 
         cbbKunde.setOnAction(event -> createRundvisning());
-
-
     }
 
 
@@ -81,15 +79,15 @@ public class OpretRundvisningPane extends GridPane{
 
     public void createRundvisning(){
         if(rundvisning == null){
-            Rundvisning(); gfd = Controller.createRundvisning();
-            Controller.seterb(gfd);
+//            Rundvisning(); gfd = Controller.createRundvisning();
+//            Controller.seterb(gfd);
             //rundvisning.setErBetalt(false);
         }
     }
 
-    public void RundvisningSalgslinje(){
-        Date rundvisningDato = dpDato.getValue();
-    }
+//    public void RundvisningSalgslinje(){
+//        Date rundvisningDato = dpDato.getValue();
+//    }
 
     public void updateControls() {
         cbbKunde.getItems().clear();

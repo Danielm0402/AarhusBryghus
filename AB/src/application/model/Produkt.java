@@ -36,5 +36,7 @@ public class Produkt {
     }
 
 
-
+    public void setPant(int pant) {
+        this.pant=pant;
+    }
 }

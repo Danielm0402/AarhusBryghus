@@ -1,9 +1,11 @@
 package GUI;
 
 import application.Controller.Controller;
+import application.model.Arrangement;
 import application.model.Kunde;
 import application.model.Produkt;
 import application.model.Produktgruppe;
+import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -45,25 +47,33 @@ public class OpretUdlejningPane extends GridPane {
         cbbProduktgruppe = new ComboBox<>();
         this.add(cbbProduktgruppe,1,3);
         cbbProduktgruppe.getItems().addAll(Controller.getProduktgrupperWithUdlejningsattribut());
+        ChangeListener<Produktgruppe> listener = (ov, oldValue, newValue) -> produktgruppeChanged(newValue);
+        cbbProduktgruppe.getSelectionModel().selectedItemProperty().addListener(listener);
 
         Label lblProdukt = new Label("Vælg produkt");
         add(lblProdukt,0,4);
         cbbProdukt = new ComboBox<>();
         this.add(cbbProdukt,1,4);
+    }
 
-
+    private void produktgruppeChanged(Produktgruppe newValue) {
+        Produktgruppe selectedproduktgruppe = cbbProduktgruppe.getSelectionModel().getSelectedItem();
+        cbbProdukt.getItems().addAll(Controller.getProdukter(selectedproduktgruppe));
     }
 
 
     public void popUpOpretKunde(){
         OpretKundeWindow opretKunde = new OpretKundeWindow("Opret kunde");
         opretKunde.showAndWait();
-
-//        TODO: kald opdatecontrols() og kopier det lukas har skrevet
+        updateControls();
     }
 
 
     public void updateControls() {
-
+        cbbKunder.getItems().clear();
+        cbbKunder.getItems().addAll(Controller.getKunder());
+        cbbProduktgruppe.getItems().clear();
+        cbbProduktgruppe.getItems().addAll(Controller.getProduktgrupperWithUdlejningsattribut());
+        cbbProdukt.getItems().clear();
     }
 }

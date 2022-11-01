@@ -14,6 +14,7 @@ public class OpretProduktgruppePane extends GridPane {
 
     private TextField txfProduktgruppenavn;
     private Label lblError;
+    private CheckBox checkBoxBrugesTilUdlejning;
 
     public OpretProduktgruppePane() {
         this.setPadding(new Insets(20));
@@ -30,7 +31,7 @@ public class OpretProduktgruppePane extends GridPane {
         Label lblProduktgruppeBrugesTilUdlejning = new Label("Produktgruppe bruges til udlejning:");
         this.add(lblProduktgruppeBrugesTilUdlejning, 1, 2);
 
-        CheckBox checkBoxBrugesTilUdlejning = new CheckBox();
+        checkBoxBrugesTilUdlejning = new CheckBox();
         this.add(checkBoxBrugesTilUdlejning,2,2);
 
 
@@ -54,7 +55,9 @@ public class OpretProduktgruppePane extends GridPane {
         }
         else {
             Produktgruppe produktgruppe = Controller.createProduktgruppe(produktgruppenavn);
-            Controller.setProduktgruppeSomUdlejning(produktgruppe);
+            if(checkBoxBrugesTilUdlejning.isSelected()) {
+                Controller.setProduktgruppeSomUdlejning(produktgruppe);
+            }
             lblError.setStyle("-fx-text-fill: green");
             lblError.setText("Produktgruppe oprettet");
         }

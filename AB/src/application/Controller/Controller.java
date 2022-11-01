@@ -22,6 +22,12 @@ public class Controller {
 
     public static ArrayList<Produkt> getProdukter() {return Storage.getProdukter();}
 
+    public static ArrayList<Produkt> getProdukter(Produktgruppe produktgruppe)
+    {
+        return produktgruppe.getProdukter();
+    }
+
+
     public static ArrayList<Pris> getPriser() {return Storage.getPriser();}
 
     public static ArrayList<Salg> getSalg() {return Storage.getSalg();}
@@ -158,6 +164,9 @@ public class Controller {
         return produktgrupperWithUdlejningsattribut;
     }
 
+    public static void setPant(Produkt produkt, int pant) {
+        produkt.setPant(pant);
+    }
 
 
 
