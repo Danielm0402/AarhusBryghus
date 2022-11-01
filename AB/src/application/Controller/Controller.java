@@ -12,6 +12,10 @@ public class Controller {
         return Storage.getArrangementer();
     }
 
+    public static ArrayList<Betalingsmetode> getBetalingsmetoder(){
+        return Storage.getBetalingsmetoder();
+    }
+
     public static ArrayList<Produktgruppe> getProduktgrupper(){
         return Storage.getProduktgrupper();
     }
@@ -100,10 +104,10 @@ public class Controller {
         return salgslinje;
     }
 
-    public static void incrementSalgslinje(Salg salg, Salgslinje salgslinje){
-        if (salg.getSalgsLinjer().contains(salgslinje)){
-            salgslinje.incrementSalgslinje();
-        }
+    public static boolean incrementSalgslinje(Salg salg, Pris pris){
+        boolean existsAlready = salg.incrementSalgslinje(pris);
+
+        return  existsAlready;
     }
 
     public static void removeSalgsLinje(Salg salg,Salgslinje salgslinje) {
@@ -111,6 +115,11 @@ public class Controller {
     }
 //               if (priser.contains(pris)) {
 //        priser.remove(pris);
+    public static Betalingsmetode createBetalingsmetode(String metode){
+        Betalingsmetode betalingsmetode = new Betalingsmetode(metode);
+        Storage.addBetalingsmetode(betalingsmetode);
+        return betalingsmetode;
+    }
 
     public static void setBetalingsmetode(Salg salg, Betalingsmetode betalingsmetode){
         salg.setBetalingsmetode(betalingsmetode);
@@ -178,6 +187,13 @@ public class Controller {
     Produktgruppe pg9 = createProduktgruppe("Glas");
     Produktgruppe pg10 = createProduktgruppe("Sampakninger");
     Produktgruppe pg11 = createProduktgruppe("Rundvisning");
+
+    // Betalingsmetoder
+    Betalingsmetode b1 = createBetalingsmetode("Dankort");
+    Betalingsmetode b2 = createBetalingsmetode("Kontant");
+    Betalingsmetode b3 = createBetalingsmetode("Klippekort");
+    Betalingsmetode b4 = createBetalingsmetode("Mobilpay");
+    Betalingsmetode b5 = createBetalingsmetode("Regning");
 
 //    sætter lige Fustager og Kulsyre og Anlæg til at kunne udlejes
     pg4.setProduktgruppeSomUdlejning();

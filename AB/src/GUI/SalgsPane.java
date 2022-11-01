@@ -56,18 +56,12 @@ public class SalgsPane extends GridPane {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 Pris produktpris = lvwProduktPriser.getSelectionModel().getSelectedItem();
-                boolean existsAlready = false;
 
-                if (salg ==null){
+                if (salg == null){
                     salg = Controller.createSalg();
                 }
 
-                //For at kunne opdatere antallet på den enkelte salgslinje
-                for (Salgslinje s : salg.getSalgsLinjer())
-                    if (s.getPris() == produktpris){
-                        Controller.incrementSalgslinje(salg,s);
-                        existsAlready = true;
-                    }
+                boolean existsAlready = Controller.incrementSalgslinje(salg, produktpris);
 
                 //Hvis produktet ikke allerede findes tilføjes en ny salgslinje
                 if (!existsAlready){
@@ -112,19 +106,19 @@ public class SalgsPane extends GridPane {
         //Dankort kontant, klippekort, mobilpay, regnning
 
         Button btnDankort = new Button("Dankort");
-        btnDankort.setOnAction(event -> Payment());
+        btnDankort.setOnAction(event -> Payment(Controller.getBetalingsmetoder().get(0)));
 
         Button btnKontant = new Button("Kontant");
-        btnKontant.setOnAction(event -> Payment());
+        btnKontant.setOnAction(event -> Payment(Controller.getBetalingsmetoder().get(1)));
 
         Button btnKlippekort = new Button("Klippekort");
-        btnKlippekort.setOnAction(event -> Payment());
+        btnKlippekort.setOnAction(event -> Payment(Controller.getBetalingsmetoder().get(2)));
 
         Button btnMobilpay = new Button("Mobilpay");
-        btnMobilpay.setOnAction(event -> Payment());
+        btnMobilpay.setOnAction(event -> Payment(Controller.getBetalingsmetoder().get(3)));
 
         Button btnRegning = new Button("Regning");
-        btnRegning.setOnAction(event -> Payment());
+        btnRegning.setOnAction(event -> Payment(Controller.getBetalingsmetoder().get(4)));
 
         HBox hboxBetaling = new HBox(btnDankort,btnKontant,btnKlippekort,btnMobilpay,btnRegning);
         this.add(hboxBetaling,3,5);
@@ -158,7 +152,8 @@ public class SalgsPane extends GridPane {
         lvwProduktgrupper.getItems().setAll(Controller.getProduktgrupper());
     }
 
-    public void Payment(){
+    public void Payment(Betalingsmetode betalingsmetode){
+        Controller.setBetalingsmetode(salg, betalingsmetode);
         salg = null; // sætter salg til null så den sletter salget
         lvwSalgslinjer.getItems().clear();
         total = 0;

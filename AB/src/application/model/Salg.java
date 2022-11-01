@@ -1,5 +1,7 @@
 package application.model;
 
+import application.Controller.Controller;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -62,6 +64,23 @@ public class Salg {
                 }
                 return samletPris;
             }
+        }
+
+        public boolean incrementSalgslinje(Pris pris){
+            boolean existsAlready = false;
+//            for (int i = 0; i < salgslinjer.size(); i++) {
+//                if (salgslinjer.get(i).getPris() == pris) {
+//                    salgslinjer.get(i).incrementSalgslinje();
+//                    existsAlready = true;
+//                }
+//            }
+            for (Salgslinje s : getSalgsLinjer()) {
+                if (s.getPris() == pris) {
+                    s.incrementSalgslinje();
+                    existsAlready = true;
+                }
+            }
+            return existsAlready;
         }
 
 

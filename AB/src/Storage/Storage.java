@@ -15,6 +15,7 @@ public class Storage {
     private static final ArrayList<Rundvisning> rundvisninger = new ArrayList<>();
     private static final ArrayList<Udlejning> udlejninger = new ArrayList<>();
     private static final ArrayList<Kunde> kunder = new ArrayList<>();
+    private static final ArrayList<Betalingsmetode> betalingsmetoder = new ArrayList<>();
 
 
     public static ArrayList<Arrangement> getArrangementer() {
@@ -28,6 +29,17 @@ public class Storage {
     public static void removeArrangement(Arrangement arrangement) {arrangementer.remove(arrangement);
     }
 
+    public static ArrayList<Betalingsmetode> getBetalingsmetoder(){
+        return new ArrayList<>(betalingsmetoder);
+    }
+
+    public static void addBetalingsmetode(Betalingsmetode betalingsmetode){
+        betalingsmetoder.add(betalingsmetode);
+    }
+
+    public static void removeBetalingsmetode(Betalingsmetode betalingsmetode){
+        betalingsmetoder.remove(betalingsmetode);
+    }
 
 
     public static ArrayList<Produktgruppe> getProduktgrupper() {
