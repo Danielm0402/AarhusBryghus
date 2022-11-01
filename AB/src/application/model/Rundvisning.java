@@ -2,6 +2,7 @@ package application.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Rundvisning extends Salg{
     private Kunde kunde;
@@ -11,9 +12,8 @@ public class Rundvisning extends Salg{
     private int antalDeltagere;
 
 
-    public Rundvisning() {
+    public Rundvisning(){
     }
-
 
     public void setKunde(Kunde kunde) {
         this.kunde = kunde;
