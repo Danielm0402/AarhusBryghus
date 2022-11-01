@@ -1,8 +1,10 @@
 package GUI;
 
 import application.Controller.Controller;
+import application.model.Produktgruppe;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -25,9 +27,15 @@ public class OpretProduktgruppePane extends GridPane {
         this.add(txfProduktgruppenavn, 2, 1);
         txfProduktgruppenavn.setEditable(true);
 
+        Label lblProduktgruppeBrugesTilUdlejning = new Label("Produktgruppe bruges til udlejning:");
+        this.add(lblProduktgruppeBrugesTilUdlejning, 1, 2);
+
+        CheckBox checkBoxBrugesTilUdlejning = new CheckBox();
+        this.add(checkBoxBrugesTilUdlejning,2,2);
+
 
         Button btnOpretProduktgruppe = new Button("Opret produktgruppe");
-        this.add(btnOpretProduktgruppe,2,2);
+        this.add(btnOpretProduktgruppe,2,3);
         btnOpretProduktgruppe.setOnAction(event -> this.opretProduktgruppeAction());
 
 
@@ -45,7 +53,8 @@ public class OpretProduktgruppePane extends GridPane {
             lblError.setText("Nogle felter mangle at blive udfyldt");
         }
         else {
-            Controller.createProduktgruppe(produktgruppenavn);
+            Produktgruppe produktgruppe = Controller.createProduktgruppe(produktgruppenavn);
+            Controller.setProduktgruppeSomUdlejning(produktgruppe);
             lblError.setStyle("-fx-text-fill: green");
             lblError.setText("Produktgruppe oprettet");
         }

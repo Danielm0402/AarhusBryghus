@@ -7,6 +7,7 @@ public class Produktgruppe {
 
 
     private final ArrayList<Produkt> produkter = new ArrayList<>();
+    private boolean isBrugtTilUdlejning = false;
     private String navn;
 
     public Produktgruppe(String navn) {
@@ -40,5 +41,13 @@ public class Produktgruppe {
         return navn;
     }
 
+
+    public void setProduktgruppeSomUdlejning() {
+        isBrugtTilUdlejning = true;
+    }
+
+    public boolean isBrugtTilUdlejning(){
+        return isBrugtTilUdlejning;
+    }
 
 }

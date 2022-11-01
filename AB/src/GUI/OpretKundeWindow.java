@@ -22,7 +22,7 @@ public class OpretKundeWindow extends Stage {
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
-
+        
         this.setTitle("Opret kunde");
         GridPane pane = new GridPane();
         this.initContent(pane);

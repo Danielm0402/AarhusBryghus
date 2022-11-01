@@ -6,6 +6,8 @@ public class Produkt {
 
     private String navn;
 
+    private int pant;
+
     Produkt(String navn) {
         this.navn = navn;
     }

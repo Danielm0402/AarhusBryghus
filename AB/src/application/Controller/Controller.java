@@ -49,8 +49,6 @@ public class Controller {
             produkterIDenneProduktgruppe = produktgruppe.getProdukter();
         }
 
-//        ArrayList<Produkt> produkterIDenneProduktgruppe = produktgruppe.getProdukter();
-
         ArrayList<Pris> liste = getPriserFromArrangement(arrangement);
 
         for (Pris pris : liste){
@@ -135,6 +133,24 @@ public class Controller {
         return pris;
     }
 
+    public static void setProduktgruppeSomUdlejning(Produktgruppe produktgruppe) {
+        produktgruppe.setProduktgruppeSomUdlejning();
+    }
+
+    public static ArrayList<Produktgruppe> getProduktgrupperWithUdlejningsattribut() {
+        ArrayList<Produktgruppe> produktgrupperWithUdlejningsattribut = new ArrayList<>();
+        ArrayList<Produktgruppe> alleproduktgrupper = getProduktgrupper();
+//        løber gennem alle produktgrupper og ser om de bruges til udlejning
+        for (Produktgruppe pg : alleproduktgrupper){
+            if (pg.isBrugtTilUdlejning()){
+                produktgrupperWithUdlejningsattribut.add((pg));
+            }
+        }
+        return produktgrupperWithUdlejningsattribut;
+    }
+
+
+
 
     public static void init() {
         initStorage();
@@ -162,6 +178,11 @@ public class Controller {
     Produktgruppe pg9 = createProduktgruppe("Glas");
     Produktgruppe pg10 = createProduktgruppe("Sampakninger");
     Produktgruppe pg11 = createProduktgruppe("Rundvisning");
+
+//    sætter lige Fustager og Kulsyre og Anlæg til at kunne udlejes
+    pg4.setProduktgruppeSomUdlejning();
+    pg5.setProduktgruppeSomUdlejning();
+    pg8.setProduktgruppeSomUdlejning();
 
     Produkt p1 = createProdukt("Klosterbryg",pg1);
     Produkt p2 = createProdukt("Sweet Georgia Brown",pg1);

@@ -11,7 +11,7 @@ import javafx.scene.layout.GridPane;
 public class OpretProduktPane extends GridPane {
 
     private ComboBox<Produktgruppe> cbbProduktgruppe;
-    private TextField txfProduktnavn;
+    private TextField txfProduktnavn, txfPant;
     private Label lblError;
 
 
@@ -38,9 +38,20 @@ public class OpretProduktPane extends GridPane {
         this.add(txfProduktnavn, 2, 2);
         txfProduktnavn.setEditable(true);
 
+        Label lblHarPant = new Label("Produktet har pant ved udlejning:");
+        this.add(lblHarPant, 1, 3);
+
+        CheckBox chbHarPant = new CheckBox();
+        this.add(chbHarPant,2,3);
+
+        Label lblPant = new Label("Pant i kroner:");
+        this.add(lblPant, 1, 4);
+        txfPant = new TextField();
+        this.add(txfPant, 2, 4);
+        txfPant.setEditable(true);
 
         Button btnOpretProdukt = new Button("Opret produkt");
-        this.add(btnOpretProdukt,2,3);
+        this.add(btnOpretProdukt,2,5);
         btnOpretProdukt.setOnAction(event -> this.opretProduktAction());
 
 
