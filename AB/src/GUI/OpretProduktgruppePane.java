@@ -1,6 +1,7 @@
 package GUI;
 
 import application.Controller.Controller;
+import application.model.EnumArrangementVisning;
 import application.model.Produktgruppe;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -56,7 +57,11 @@ public class OpretProduktgruppePane extends GridPane {
         else {
             Produktgruppe produktgruppe = Controller.createProduktgruppe(produktgruppenavn);
             if(checkBoxBrugesTilUdlejning.isSelected()) {
-                Controller.setProduktgruppeSomUdlejning(produktgruppe);
+//                Controller.setProduktgruppeSomUdlejning(produktgruppe);
+                Controller.setVisning(produktgruppe,EnumArrangementVisning.UDLEJNING);
+            }
+            else{
+                Controller.setVisning(produktgruppe, EnumArrangementVisning.SALG);
             }
             lblError.setStyle("-fx-text-fill: green");
             lblError.setText("Produktgruppe oprettet");

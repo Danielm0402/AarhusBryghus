@@ -9,6 +9,7 @@ public class Produktgruppe {
     private final ArrayList<Produkt> produkter = new ArrayList<>();
     private boolean isBrugtTilUdlejning = false;
     private String navn;
+    private EnumArrangementVisning visning;
 
     public Produktgruppe(String navn) {
         this.navn = navn;
@@ -34,6 +35,14 @@ public class Produktgruppe {
         if (produkter.contains(produkt)){
             produkter.remove(produkt);
         }
+    }
+
+    public EnumArrangementVisning getVisning() {
+        return visning;
+    }
+
+    public void setVisning(EnumArrangementVisning visning) {
+        this.visning = visning;
     }
 
     @Override
