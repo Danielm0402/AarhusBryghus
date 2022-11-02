@@ -81,14 +81,6 @@ public class StartWindow extends Application {
         OpretRundvisningPane opretRundvisningPane = new OpretRundvisningPane();
         tabRundsvisning.setContent(opretRundvisningPane);
         tabRundsvisning.setOnSelectionChanged(event -> opretRundvisningPane.updateControls());
-        // --------------------------------------------------------------------------
-
-//        Tab tabOversigt = new Tab("Opret Oversigt");
-//        tabPane.getTabs().add(tabOversigt);
-//
-//        OversigtPane OversigtPane = new OversigtPane();
-//        tabOversigt.setContent(OversigtPane);
-//        tabOversigt.setOnSelectionChanged(event -> opretArrangementPane.updateControls());
 
         // --------------------------------------------------------------------------
         Tab tabUdlejning = new Tab("Opret Udlejning");
@@ -97,6 +89,14 @@ public class StartWindow extends Application {
         OpretUdlejningPane opretUdlejningPane = new OpretUdlejningPane();
         tabUdlejning.setContent(opretUdlejningPane);
         tabUdlejning.setOnSelectionChanged(event -> opretUdlejningPane.updateControls());
+
+        // --------------------------------------------------------------------------
+        Tab tabOversigt = new Tab("Oversigt");
+        tabPane.getTabs().add(tabOversigt);
+
+        OversigtsPane oversigtsPane = new OversigtsPane();
+        tabOversigt.setContent(oversigtsPane);
+        tabOversigt.setOnSelectionChanged(event -> oversigtsPane.updateControls());
 
 
     }

@@ -108,10 +108,14 @@ public class OpretUdlejningPane extends GridPane {
 
     private void AfleverUdlejning() {
         Udlejning valgteUdlejning = lvwIgangværendeUdlejninger.getSelectionModel().getSelectedItem();
-        controller.setUdlejningAfleveret(valgteUdlejning);
-        lvwIgangværendeUdlejninger.getItems().clear();
-        lvwIgangværendeUdlejninger.getItems().setAll(controller.getUdlejningerIkkeAfleveret());
-
+        if(valgteUdlejning != null ) {
+            controller.setUdlejningAfleveret(valgteUdlejning);
+            lvwIgangværendeUdlejninger.getItems().clear();
+            lvwIgangværendeUdlejninger.getItems().setAll(controller.getUdlejningerIkkeAfleveret());
+        }
+        else {
+            lblError.setText("Vælg en udlejning at aflevere");
+        }
     }
 
     private void Payment(Betalingsmetode betalingsmetode) {
