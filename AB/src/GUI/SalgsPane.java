@@ -43,7 +43,7 @@ public class SalgsPane extends GridPane {
         //listview over produktgrupper
         lvwProduktgrupper = new ListView<>();
         this.add(lvwProduktgrupper,1,2);
-        lvwProduktgrupper.getItems().setAll(Controller.getProduktgrupper());
+        lvwProduktgrupper.getItems().setAll(Controller.getProduktgrupper(EnumArrangementVisning.SALG));
         ChangeListener<Produktgruppe> listener2 = (ov, oldValue, newValue) -> selectedProduktgruppeChanged(newValue);
         lvwProduktgrupper.getSelectionModel().selectedItemProperty().addListener(listener2);
 
@@ -149,7 +149,7 @@ public class SalgsPane extends GridPane {
 
 //        opdater produktgruppe:
         lvwProduktgrupper.getItems().clear();
-        lvwProduktgrupper.getItems().setAll(Controller.getProduktgrupper());
+        lvwProduktgrupper.getItems().setAll(Controller.getProduktgrupper(EnumArrangementVisning.SALG));
     }
 
     public void Payment(Betalingsmetode betalingsmetode){

@@ -20,6 +20,20 @@ public class Controller {
         return Storage.getProduktgrupper();
     }
 
+    public static ArrayList<Produktgruppe> getProduktgrupper(EnumArrangementVisning enumArrangementVisning){
+        ArrayList<Produktgruppe> alleproduktgrupper = Storage.getProduktgrupper();
+        ArrayList<Produktgruppe> produktgrupperDerSkalVises = new ArrayList<>();
+        EnumArrangementVisning visning = enumArrangementVisning;
+
+        for (Produktgruppe pg : alleproduktgrupper){
+            if(pg.getVisning() == enumArrangementVisning){
+                produktgrupperDerSkalVises.add(pg);
+            }
+        }
+        return  produktgrupperDerSkalVises;
+    }
+
+
     public static ArrayList<Produkt> getProdukter() {return Storage.getProdukter();}
 
     public static ArrayList<Produkt> getProdukter(Produktgruppe produktgruppe)
@@ -148,27 +162,13 @@ public class Controller {
         return pris;
     }
 
-    public static void setProduktgruppeSomUdlejning(Produktgruppe produktgruppe) {
-        produktgruppe.setProduktgruppeSomUdlejning();
-    }
-
-    public static ArrayList<Produktgruppe> getProduktgrupperWithUdlejningsattribut() {
-        ArrayList<Produktgruppe> produktgrupperWithUdlejningsattribut = new ArrayList<>();
-        ArrayList<Produktgruppe> alleproduktgrupper = getProduktgrupper();
-//        løber gennem alle produktgrupper og ser om de bruges til udlejning
-        for (Produktgruppe pg : alleproduktgrupper){
-            if (pg.isBrugtTilUdlejning()){
-                produktgrupperWithUdlejningsattribut.add((pg));
-            }
-        }
-        return produktgrupperWithUdlejningsattribut;
-    }
-
     public static void setPant(Produkt produkt, int pant) {
         produkt.setPant(pant);
     }
 
-
+    public static void setVisning(Produktgruppe produktgruppe, EnumArrangementVisning salg) {
+        produktgruppe.setVisning(salg);
+    }
 
     public static void init() {
         initStorage();
@@ -208,6 +208,26 @@ public class Controller {
     pg4.setProduktgruppeSomUdlejning();
     pg5.setProduktgruppeSomUdlejning();
     pg8.setProduktgruppeSomUdlejning();
+
+    pg4.setVisning(EnumArrangementVisning.UDLEJNING);
+    pg5.setVisning(EnumArrangementVisning.UDLEJNING);
+    pg8.setVisning(EnumArrangementVisning.UDLEJNING);
+
+    pg1.setVisning(EnumArrangementVisning.SALG);
+    pg2.setVisning(EnumArrangementVisning.SALG);
+    pg3.setVisning(EnumArrangementVisning.SALG);
+    pg6.setVisning(EnumArrangementVisning.SALG);
+    pg7.setVisning(EnumArrangementVisning.SALG);
+    pg9.setVisning(EnumArrangementVisning.SALG);
+    pg10.setVisning(EnumArrangementVisning.SALG);
+
+
+
+
+
+
+
+//
 
     Produkt p1 = createProdukt("Klosterbryg",pg1);
     Produkt p2 = createProdukt("Sweet Georgia Brown",pg1);
@@ -296,17 +316,90 @@ public class Controller {
     Produkt p74 = createProdukt("Rundvisning", pg11);
 
         //        priser
+
         Pris pris1 = createPris(70,p1,a1);
         Pris pris2 = createPris(65,p2,a1);
-        Pris pris8= createPris(75,p15,a1);
-        Pris pris9= createPris(75,p16,a1);
+        Pris pris3 = createPris(70,p15,a1);
+        Pris pris4 = createPris(65,p16,a1);
+
+        Pris pr1 = createPris(70,p1,a2);
+        Pris pr2 = createPris(65,p2,a2);
+        Pris pr3 = createPris(70,p3,a2);
+        Pris pr4 = createPris(65,p4,a2);
+        Pris pr5 = createPris(70,p5,a2);
+        Pris pr6 = createPris(65,p6,a2);
+        Pris pr7 = createPris(70,p7,a2);
+        Pris pr8 = createPris(65,p8,a2);
+        Pris pr9 = createPris(70,p9,a2);
+        Pris pr10 = createPris(65,p10,a2);
+        Pris pr11 = createPris(70,p11,a2);
+        Pris pr12 = createPris(65,p12,a2);
+        Pris pr13 = createPris(70,p13,a2);
+        Pris pr14 = createPris(65,p14,a2);
+        Pris pr15= createPris(75,p15,a2);
+        Pris pr16= createPris(75,p16,a2);
+        Pris pr17 = createPris(70,p17,a2);
+        Pris pr18 = createPris(65,p18,a2);
+        Pris pr19 = createPris(75,p19,a2);
+        Pris pr20 = createPris(75,p20,a2);
+        Pris pr21 = createPris(75,p21,a2);
+        Pris pr22 = createPris(75,p22,a2);
+        Pris pr23 = createPris(75,p23,a2);
+        Pris pr24 = createPris(75,p24,a2);
+        Pris pr25 = createPris(75,p25,a2);
+        Pris pr26 = createPris(75,p26,a2);
+        Pris pr27 = createPris(75,p27,a2);
+        Pris pr28 = createPris(75,p28,a2);
+        Pris pr29 = createPris(75,p29,a2);
+        Pris pr30 = createPris(75,p30,a2);
+        Pris pr31 = createPris(75,p31,a2);
+        Pris pr32 = createPris(75,p32,a2);
+        Pris pr33 = createPris(75,p33,a2);
+        Pris pr34 = createPris(75,p34,a2);
+        Pris pr35 = createPris(75,p35,a2);
+        Pris pr36 = createPris(75,p36,a2);
+        Pris pr37 = createPris(75,p37,a2);
+        Pris pr38 = createPris(75,p38,a2);
+        Pris pr39 = createPris(75,p39,a2);
+        Pris pr40 = createPris(75,p40,a2);
+        Pris pr41 = createPris(75,p41,a2);
+        Pris pr42 = createPris(75,p42,a2);
+        Pris pr43 = createPris(75,p43,a2);
+        Pris pr44 = createPris(75,p44,a2);
+        Pris pr45 = createPris(75,p45,a2);
+        Pris pr46 = createPris(75,p46,a2);
+        Pris pr47 = createPris(75,p47,a2);
+        Pris pr48 = createPris(75,p48,a2);
+        Pris pr49 = createPris(75,p49,a2);
+        Pris pr50 = createPris(75,p50,a2);
+        Pris pr51 = createPris(75,p51,a2);
+        Pris pr52 = createPris(75,p52,a2);
+        Pris pr53 = createPris(75,p53,a2);
+        Pris pr54 = createPris(75,p54,a2);
+        Pris pr55 = createPris(75,p55,a2);
+        Pris pr56 = createPris(75,p56,a2);
+        Pris pr57 = createPris(75,p57,a2);
+        Pris pr58= createPris(75,p58,a2);
+        Pris pr59 = createPris(75,p59,a2);
+        Pris pr60 = createPris(75,p60,a2);
+        Pris pr61 = createPris(75,p61,a2);
+        Pris pr62 = createPris(75,p62,a2);
+        Pris pr63 = createPris(75,p63,a2);
+        Pris pr64 = createPris(75,p64,a2);
+        Pris pr65 = createPris(75,p65,a2);
+        Pris pr66 = createPris(75,p66,a2);
+        Pris pr67 = createPris(75,p67,a2);
+        Pris pr68 = createPris(75,p68,a2);
+        Pris pr69 = createPris(75,p69,a2);
+        Pris pr70 = createPris(75,p70,a2);
+        Pris pr71 = createPris(75,p71,a2);
+        Pris pr72 = createPris(75,p72,a2);
+        Pris pr73 = createPris(75,p73,a2);
+        Pris pr74 = createPris(75,p74,a2);
 
 
-        Pris pris3 = createPris(30,p1,a2);
-        Pris pris4 = createPris(30,p2,a2);
-        Pris pris5 = createPris(30,p3,a2);
-        Pris pris6 = createPris(30,p4,a2);
-        Pris pris7 = createPris(30,p5,a2);
+
+
 
         Pris pris10 = createPris(200,p74,a3);
 

@@ -19,7 +19,7 @@ public class OpretUdlejningPane extends GridPane {
 
     private ComboBox<Kunde> cbbKunder;
     private ComboBox<Produktgruppe> cbbProduktgruppe;
-    private ComboBox<Produkt> cbbProdukt;
+    private ComboBox<Pris> cbbProdukt;
 
 
     public OpretUdlejningPane(){
@@ -47,23 +47,17 @@ public class OpretUdlejningPane extends GridPane {
 
 
         Label lblProduktgruppe = new Label("Vælg produktgruppe");
-//        add(lblProduktgruppe,0,3);
         cbbProduktgruppe = new ComboBox<>();
-//        this.add(cbbProduktgruppe,1,3);
-        cbbProduktgruppe.getItems().addAll(Controller.getProduktgrupperWithUdlejningsattribut());
+        cbbProduktgruppe.getItems().addAll(Controller.getProduktgrupper(EnumArrangementVisning.UDLEJNING));
         ChangeListener<Produktgruppe> listener = (ov, oldValue, newValue) -> produktgruppeChanged(newValue);
         cbbProduktgruppe.getSelectionModel().selectedItemProperty().addListener(listener);
 
         HBox hbox2 = new HBox(10,lblProduktgruppe,cbbProduktgruppe);
-//        this.add(hbox2,0,3);
 
         Label lblProdukt = new Label("Vælg produktPRIS?!??!");
-//        add(lblProdukt,0,4);
         cbbProdukt = new ComboBox<>();
-//        this.add(cbbProdukt,1,4);
 
         HBox hbox3 = new HBox(10,lblProdukt,cbbProdukt);
-//        this.add(hbox3,0,4);
 
         Button btnTilføjProduktPris = new Button("Tilføj Produkt");
         btnTilføjProduktPris.setOnAction(event -> tilføjProduktPris());
@@ -77,14 +71,19 @@ public class OpretUdlejningPane extends GridPane {
     }
 
     private void tilføjProduktPris() {
-        System.out.println("Loooooooools");
+
+
+        ;
     }
 
     private void produktgruppeChanged(Produktgruppe newValue) {
         Produktgruppe selectedproduktgruppe = cbbProduktgruppe.getSelectionModel().getSelectedItem();
         cbbProdukt.getItems().clear();
         if (selectedproduktgruppe!=null){
-            cbbProdukt.getItems().addAll(Controller.getProdukter(selectedproduktgruppe)); //todo skal nok gette Daglig Butiks Priser indenfor denne produktgruppe -.-
+
+//            Magic number "1" nedenfor betyder, at udlejning altid bare skal bruge arrangementet "daglig butikssalg".
+//            Der er ikke andre salgssituationer, hvor der skal udlejes.
+            cbbProdukt.getItems().addAll(Controller.getPriserFromArrangementWithinProduktgruppe(Controller.getArrangementer().get(1),selectedproduktgruppe)); //todo skal nok gette Daglig Butiks Priser indenfor denne produktgruppe -.-
         }
     }
 
@@ -101,7 +100,7 @@ public class OpretUdlejningPane extends GridPane {
         cbbKunder.getItems().clear();
         cbbKunder.getItems().addAll(Controller.getKunder());
         cbbProduktgruppe.getItems().clear();
-        cbbProduktgruppe.getItems().addAll(Controller.getProduktgrupperWithUdlejningsattribut());
+        cbbProduktgruppe.getItems().addAll(Controller.getProduktgrupper(EnumArrangementVisning.UDLEJNING));
         cbbProdukt.getItems().clear();
     }
 }
