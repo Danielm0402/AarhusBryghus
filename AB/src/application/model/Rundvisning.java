@@ -1,6 +1,7 @@
 package application.model;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,7 +9,7 @@ public class Rundvisning extends Salg{
     private Kunde kunde;
 
     private boolean erBetalt;
-    private LocalDateTime modetidspunkt;
+    private LocalTime modetidspunkt;
     private int antalDeltagere;
 
 
@@ -23,7 +24,7 @@ public class Rundvisning extends Salg{
         this.erBetalt = erBetalt;
     }
 
-    public void setModetidspunkt(LocalDateTime modetidspunkt) {
+    public void setModetidspunkt(LocalTime modetidspunkt) {
         this.modetidspunkt = modetidspunkt;
     }
 
@@ -35,7 +36,24 @@ public class Rundvisning extends Salg{
         return erBetalt;
     }
 
-    public LocalDateTime getModetidspunkt() {
+    public LocalTime getModetidspunkt() {
         return modetidspunkt;
+    }
+
+    public int getAntalDeltagere() {
+        return antalDeltagere;
+    }
+
+    public void setAntalDeltagere(int antal){
+        antalDeltagere = antal;
+    }
+
+    @Override
+    public String toString() {
+        return
+                "erBetalt: " + erBetalt + ", Kunde: " + kunde.getNavn() +
+
+                ", Mødetid: " + modetidspunkt +
+                ", Deltagere: " + antalDeltagere;
     }
 }

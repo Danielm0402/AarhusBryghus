@@ -65,7 +65,7 @@ public class SalgsPane extends GridPane {
 
                 //Hvis produktet ikke allerede findes tilføjes en ny salgslinje
                 if (!existsAlready){
-                    Controller.createSalgsLinje(salg, 1, produktpris.getEnhedspris(),produktpris);
+                    Controller.createSalgsLinje(salg, 1, produktpris);
                 }
                 total += produktpris.getEnhedspris();
                 txfTotal.setText(String.valueOf(total));

@@ -104,8 +104,16 @@ public class Controller {
         return kunde;
     }
 
-    public static Salgslinje createSalgsLinje(Salg salg, int antal, double aftaltpris, Pris pris){
-        Salgslinje salgslinje = salg.createSalgslinje(antal, aftaltpris, pris);
+    public static void setKunde(Rundvisning rundvisning, Kunde kunde){
+        rundvisning.setKunde(kunde);
+    }
+
+    public static void setAntalDeltagere(Rundvisning rundvisning, int antal){
+        rundvisning.setAntalDeltagere(antal);
+    }
+
+    public static Salgslinje createSalgsLinje(Salg salg, int antal, Pris pris){
+        Salgslinje salgslinje = salg.createSalgslinje(antal, pris);
         Storage.addSalgslinje(salgslinje);
         return salgslinje;
     }
@@ -164,8 +172,13 @@ public class Controller {
         return produktgrupperWithUdlejningsattribut;
     }
 
+
     public static void setPant(Produkt produkt, int pant) {
         produkt.setPant(pant);
+    }
+
+    public static void setErBetalt(Rundvisning rundvisning, boolean erBetalt){
+        rundvisning.setErBetalt(erBetalt);
     }
 
 
@@ -182,7 +195,6 @@ public class Controller {
     //    Arrangementer
     Arrangement a1 = createArrangement("Fredagsbar");
     Arrangement a2 = createArrangement("Daglig butikssalg");
-    Arrangement a3 = createArrangement("Rundvisning");
 
 
     Produktgruppe pg1 = createProduktgruppe("Flaske");
@@ -308,7 +320,7 @@ public class Controller {
         Pris pris6 = createPris(30,p4,a2);
         Pris pris7 = createPris(30,p5,a2);
 
-        Pris pris10 = createPris(200,p74,a3);
+        Pris pris10 = createPris(100,p74,a2);
 
 
         //Kunder

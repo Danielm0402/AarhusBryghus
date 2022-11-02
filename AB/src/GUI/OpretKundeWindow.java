@@ -64,16 +64,12 @@ public class OpretKundeWindow extends Stage {
         lblError = new Label();
         pane.add(lblError,1,6);
 
-
     }
 
 
 
     //Metoder:
 
-    public void updateControl(){
-
-    }
     public void OpretKunde() {
         String kundeNavn = txfNavn.getText().trim();
         String kundeTelefon = txfTelefon.getText().trim();
@@ -81,7 +77,7 @@ public class OpretKundeWindow extends Stage {
         String kundeAdresse = txfAdresse.getText().trim();
         if (kundeNavn.length() < 1 || kundeEmail.length() < 1 || kundeTelefon.length() < 1 || kundeAdresse.length() < 1) {
             lblError.setText("Udfyld alle felter");
-        } else {
+        }else {
             Kunde kunde = Controller.createKunde(kundeNavn, kundeTelefon, kundeEmail, kundeAdresse);
             lblError.setStyle("-fx-text-fill: green");
             lblError.setText("Kunde oprettet");

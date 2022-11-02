@@ -2,6 +2,7 @@ package application.model;
 
 import application.Controller.Controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,7 +11,7 @@ public class Salg {
     private Betalingsmetode betalingsmetode;
 
     private double rabatprocent;
-    private Date dato;
+    private LocalDate dato;
 
     public Salg(){
     }
@@ -20,11 +21,13 @@ public class Salg {
         return new ArrayList<>(salgslinjer);
     }
 
-    public Salgslinje createSalgslinje(int antal, double aftaltPris, Pris pris){
-        Salgslinje salgslinje = new Salgslinje(antal,aftaltPris,pris);
+    public Salgslinje createSalgslinje(int antal, Pris pris){
+        Salgslinje salgslinje = new Salgslinje(antal, pris);
         salgslinjer.add(salgslinje);
         return salgslinje;
     }
+
+
 
     public void addSalgslinje(Salgslinje salgslinje){
         if(!salgslinjer.contains(salgslinje)){
@@ -46,7 +49,7 @@ public class Salg {
         this.rabatprocent = rabatprocent;
     }
 
-    public void setDato(Date dato) {
+    public void setDato(LocalDate dato) {
         this.dato = dato;
     }
 

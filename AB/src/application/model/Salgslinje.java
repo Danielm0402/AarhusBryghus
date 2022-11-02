@@ -5,9 +5,8 @@ public class Salgslinje {
     private double aftaltPris;
     private Pris pris;
 
-    public Salgslinje(int antal, double aftaltPris, Pris pris){
+    public Salgslinje(int antal, Pris pris){
         this.antal = antal;
-        this.aftaltPris=aftaltPris;
         this.pris=pris;
     }
 
