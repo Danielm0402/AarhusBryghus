@@ -14,12 +14,12 @@ public class StartWindow extends Application {
     private ControllerInterface controller;
     @Override
     public void init() {
+        controller = new Controller(Storage.getInstance());
         controller.init();
     }
 
     @Override
     public void start(Stage stage) {
-        controller = new Controller(Storage.getInstance());
         stage.setTitle("Århus Bryghus");
         BorderPane pane = new BorderPane();
         this.initContent(pane);
