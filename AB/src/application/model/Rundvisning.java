@@ -16,6 +16,9 @@ public class Rundvisning extends Salg{
     public Rundvisning(){
     }
 
+    public static int runvisningPrisID=78;
+
+
     public void setKunde(Kunde kunde) {
         this.kunde = kunde;
     }
@@ -51,9 +54,8 @@ public class Rundvisning extends Salg{
     @Override
     public String toString() {
         return
-                "erBetalt: " + erBetalt + ", Kunde: " + kunde.getNavn() +
-
-                ", Mødetid: " + modetidspunkt +
-                ", Deltagere: " + antalDeltagere;
+                kunde.getNavn() +
+                ", kl. " + modetidspunkt +
+                ", d. " + getDato()  + ", " + antalDeltagere  + " deltagere";
     }
 }

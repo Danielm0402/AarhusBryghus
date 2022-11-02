@@ -17,6 +17,12 @@ public class Storage {
     private static final ArrayList<Kunde> kunder = new ArrayList<>();
     private static final ArrayList<Betalingsmetode> betalingsmetoder = new ArrayList<>();
 
+    //Rundvisnings pris til oprettelse af rundvisnings salgslinje i GUI
+    private static Arrangement rundvisningsArrangement = new Arrangement("Rundvisning");
+    private static Produktgruppe rundvisningsProduktgruppe = new Produktgruppe("Rundvisning");
+    private static Produkt rundvisningProdukt=new Produkt("Rundvisning");
+    private static Pris rundvisningPris=new Pris(100, rundvisningProdukt, rundvisningsArrangement);
+
 
     public static ArrayList<Arrangement> getArrangementer() {
         return new ArrayList<Arrangement>(arrangementer);
@@ -117,6 +123,10 @@ public class Storage {
 
     public static void addUdlejning(Udlejning udlejning) {
         udlejninger.add(udlejning);
+    }
+
+    public static Pris getRundvisningPris(){
+        return rundvisningPris;
     }
 
     public static void removeUdlejning(Udlejning udlejning) {udlejninger.remove(udlejning);

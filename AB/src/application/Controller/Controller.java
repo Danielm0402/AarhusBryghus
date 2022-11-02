@@ -50,6 +50,22 @@ public class Controller {
 
     public static ArrayList<Rundvisning> getRundvisning() {return Storage.getRundvisninger();}
 
+    public static ArrayList<Rundvisning> getRundvisning(boolean erBetalt) {
+        ArrayList<Rundvisning> rundvisninger = Storage.getRundvisninger();
+        ArrayList<Rundvisning> rundvisningerIkkeBetalt = new ArrayList<>();
+
+        for (Rundvisning r : rundvisninger) {
+            if (r.isErBetalt() == false) {
+                rundvisningerIkkeBetalt.add(r);
+                }else if(r.isErBetalt()==true){
+                rundvisningerIkkeBetalt.remove(r);
+            }
+        }
+        return rundvisningerIkkeBetalt;
+    }
+
+
+
     public static ArrayList<Udlejning> getUdlejning() {return Storage.getUdlejninger();}
 
     public static ArrayList<Kunde> getKunder() {return Storage.getKunder();}
@@ -196,6 +212,10 @@ public class Controller {
     }
     public static void setErBetalt(Rundvisning rundvisning, boolean erBetalt){
         rundvisning.setErBetalt(erBetalt);
+    }
+
+    public static Pris getRundvisningsPris(){
+        return Storage.getRundvisningPris();
     }
 
 
@@ -427,10 +447,7 @@ public class Controller {
         Pris pr73 = createPris(75,p73,a2);
         Pris pr74 = createPris(75,p74,a2);
 
-
-
-
-
+        
         Pris pris10 = createPris(100,p74,a2);
 
 

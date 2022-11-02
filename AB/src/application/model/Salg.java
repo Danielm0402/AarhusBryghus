@@ -27,6 +27,9 @@ public class Salg {
         return salgslinje;
     }
 
+    public LocalDate getDato() {
+        return dato;
+    }
 
 
     public void addSalgslinje(Salgslinje salgslinje){
