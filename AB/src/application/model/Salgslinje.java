@@ -44,7 +44,11 @@ public class Salgslinje {
 
     @Override
     public String toString() {
-        return pris.getProdukt().toString() + " " + antal + " stk af " + pris.getEnhedspris()+",-";
+        String s = "";
+        if (pris.getProdukt().getPant() >0){
+            s = " pant: "+pris.getProdukt().getPant()+",-";
+        }
+        return pris.getProdukt().toString() + " " + antal + " stk af " + pris.getEnhedspris()+",-" +s;
     }
 
     public Pris getPris() {

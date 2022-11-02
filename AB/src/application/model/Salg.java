@@ -11,11 +11,10 @@ public class Salg {
     private Betalingsmetode betalingsmetode;
 
     private double rabatprocent;
-    private LocalDate dato;
+    private LocalDate dato = LocalDate.now();
 
     public Salg(){
     }
-
 
     public ArrayList<Salgslinje> getSalgsLinjer(){
         return new ArrayList<>(salgslinjer);

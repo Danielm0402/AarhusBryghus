@@ -1,11 +1,14 @@
 package application.model;
 
+import java.util.Date;
+
 public class Udlejning extends Salg{
     private Kunde kunde;
 
     private boolean erAfleveret;
 
-    public Udlejning(){
+    public Udlejning(Kunde kunde){
+        this.kunde = kunde;
     }
 
     public void setKunde(Kunde kunde) {
@@ -24,5 +27,8 @@ public class Udlejning extends Salg{
         return erAfleveret;
     }
 
-
+    @Override
+    public String toString() {
+        return kunde.getNavn() +", tlf. " + kunde.getTelefon() + ", udlejningsdato: "+super.getDato();
+    }
 }

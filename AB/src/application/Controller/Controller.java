@@ -66,7 +66,20 @@ public class Controller {
 
 
 
-    public static ArrayList<Udlejning> getUdlejning() {return Storage.getUdlejninger();}
+    public static ArrayList<Udlejning> getUdlejninger() {return Storage.getUdlejninger();}
+
+    public static ArrayList<Udlejning> getUdlejningerIkkeAfleveret() {
+        ArrayList<Udlejning> alleUdlejninger = Storage.getUdlejninger();
+        ArrayList<Udlejning> ikkeafleveredeUdlejninger = new ArrayList<>();
+
+        for (Udlejning udlejning : alleUdlejninger){
+            if (!udlejning.erAfleveret()){
+                ikkeafleveredeUdlejninger.add(udlejning);
+            }
+        }
+
+        return ikkeafleveredeUdlejninger;}
+
 
     public static ArrayList<Kunde> getKunder() {return Storage.getKunder();}
 
@@ -122,8 +135,8 @@ public class Controller {
         return rundvisning;
     }
 
-    public static Udlejning createUdlejning(){
-        Udlejning udlejning = new Udlejning();
+    public static Udlejning createUdlejning(Kunde selectedItem){
+        Udlejning udlejning = new Udlejning(selectedItem);
         Storage.addUdlejning(udlejning);
         return udlejning;
     }
@@ -136,6 +149,10 @@ public class Controller {
 
     public static void setKunde(Rundvisning rundvisning, Kunde kunde){
         rundvisning.setKunde(kunde);
+    }
+
+    public static void setUdlejningAfleveret(Udlejning udlejning){
+        udlejning.setErAfleveret(true);
     }
 
     public static void setAntalDeltagere(Rundvisning rundvisning, int antal){
@@ -332,10 +349,10 @@ public class Controller {
     Produkt p48 = createProdukt("India Pale Ale, 20 liter",pg4);
     Produkt p49 = createProdukt("Julebryg, 20 liter",pg4);
     Produkt p50 = createProdukt("Imperial Stout, 20 liter",pg4);
-    Produkt p51 = createProdukt("Pant",pg4);
+//    Produkt p51 = createProdukt("Pant",pg4);
 
     Produkt p52 = createProdukt("6 kg",pg5);
-    Produkt p53 = createProdukt("Pant",pg5);
+//    Produkt p53 = createProdukt("Pant",pg5);
     Produkt p54 = createProdukt("4 kg",pg5);
     Produkt p55 = createProdukt("10 kg",pg5);
 
@@ -422,14 +439,14 @@ public class Controller {
         Pris pr48 = createPris(75,p48,a2);
         Pris pr49 = createPris(75,p49,a2);
         Pris pr50 = createPris(75,p50,a2);
-        Pris pr51 = createPris(75,p51,a2);
+//        Pris pr51 = createPris(75,p51,a2); det er pantprodukt. Vi udregner pant på attribut.
         Pris pr52 = createPris(75,p52,a2);
-        Pris pr53 = createPris(75,p53,a2);
+//        Pris pr53 = createPris(75,p53,a2);  det er pantprodukt. Vi udregner pant på attribut.
         Pris pr54 = createPris(75,p54,a2);
         Pris pr55 = createPris(75,p55,a2);
         Pris pr56 = createPris(75,p56,a2);
         Pris pr57 = createPris(75,p57,a2);
-        Pris pr58= createPris(75,p58,a2);
+        Pris pr58 = createPris(75,p58,a2);
         Pris pr59 = createPris(75,p59,a2);
         Pris pr60 = createPris(75,p60,a2);
         Pris pr61 = createPris(75,p61,a2);
@@ -455,6 +472,18 @@ public class Controller {
         Kunde k1 = createKunde("Hans","12345678", "hans112@gmail.com","Vejen 1");
 
 
+        p42.setPant(200);
+        p43.setPant(200);
+        p44.setPant(200);
+        p45.setPant(200);
+        p46.setPant(200);
+        p47.setPant(200);
+        p48.setPant(200);
+        p49.setPant(200);
+        p50.setPant(200);
+        p52.setPant(1000);
+        p54.setPant(1000);
+        p55.setPant(1000);
 
 
 
