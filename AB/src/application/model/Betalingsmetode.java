@@ -14,4 +14,9 @@ public class Betalingsmetode {
     public void setBetalingstype(String betalingstype) {
         this.betalingstype = betalingstype;
     }
+
+    @Override
+    public String toString() {
+        return betalingstype;
+    }
 }

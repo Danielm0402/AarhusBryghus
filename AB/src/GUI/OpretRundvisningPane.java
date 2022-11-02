@@ -1,5 +1,6 @@
 package GUI;
 
+import Storage.Storage;
 import application.Controller.Controller;
 import application.model.*;
 import javafx.beans.value.ChangeListener;
@@ -16,6 +17,7 @@ import java.util.Date;
 
 public class OpretRundvisningPane extends GridPane{
 
+    private final ControllerInterface controller;
     private Rundvisning rundvisning;
     private ComboBox<Kunde> cbbKunde;
     private Button btnOpretKunde, btnOpretRundvisning;
@@ -27,6 +29,8 @@ public class OpretRundvisningPane extends GridPane{
 
 
     public OpretRundvisningPane(){
+        controller = new Controller(Storage.getInstance());
+
         this.setPadding(new Insets(20));
         this.setHgap(20);
         this.setVgap(10);
@@ -37,7 +41,7 @@ public class OpretRundvisningPane extends GridPane{
 
         cbbKunde = new ComboBox<>();
         //add(cbbKunde,0,2);
-        cbbKunde.getItems().addAll(Controller.getKunder());
+        cbbKunde.getItems().addAll(controller.getKunder());
 
         btnOpretKunde = new Button("Opret kunde");
       //  add(btnOpretKunde,1,2);
@@ -83,20 +87,23 @@ public class OpretRundvisningPane extends GridPane{
         lblOpretRundvisning = new Label("Opret rundvisning");
 
         lvwRundvisninger = new ListView<>();
-        lvwRundvisninger.getItems().setAll(Controller.getRundvisning(false));
+        lvwRundvisninger.getItems().setAll(controller.getRundvisning());
 
 
         Button btnDankort = new Button("Dankort");
-        btnDankort.setOnAction(event -> Payment(Controller.getBetalingsmetoder().get(0)));
+        btnDankort.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(0)));
 
         Button btnKontant = new Button("Kontant");
-        btnKontant.setOnAction(event -> Payment(Controller.getBetalingsmetoder().get(1)));
+        btnKontant.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(1)));
+
+        Button btnKlippekort = new Button("Klippekort");
+        btnKlippekort.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(2)));
 
         Button btnMobilpay = new Button("Mobilpay");
-        btnMobilpay.setOnAction(event -> Payment(Controller.getBetalingsmetoder().get(3)));
+        btnMobilpay.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(3)));
 
         Button btnRegning = new Button("Regning");
-        btnRegning.setOnAction(event -> Payment(Controller.getBetalingsmetoder().get(4)));
+        btnRegning.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(4)));
 
 
 
@@ -151,8 +158,8 @@ public class OpretRundvisningPane extends GridPane{
     public void createRundvisning(){
         if(rundvisning == null){
             System.out.println("Rundvisning created");
-            Rundvisning rundvisning = Controller.createRundvisning();
-            Controller.setErBetalt(rundvisning,false);
+            Rundvisning rundvisning = controller.createRundvisning();
+            controller.setErBetalt(rundvisning,false);
         }
     }
     //      Pris pris = new Pris(100, Controller.getProdukter().get(73), Controller.getArrangementer().get(1))
@@ -162,15 +169,17 @@ public class OpretRundvisningPane extends GridPane{
         int rundvisningAntal = Integer.parseInt(txfAntalDeltagere.getText().trim());
         LocalDate now = LocalDate.now();
         Kunde kunde = cbbKunde.getSelectionModel().getSelectedItem();
-        Pris pris = Controller.getRundvisningsPris();
+        //Betalingsmetode rundvisningBetalingsmetode =
+       //
+        Pris pris = controller.getRundvisningsPris();
         if(rundvisningDato.compareTo(now) < 1 || rundvisningTid == null || rundvisningAntal < 1 || kunde==null){
             lblError.setText("Udfyld felter korrekt");
         }
         else{
-            Rundvisning rundvisning = Controller.createRundvisning();
-            Controller.setErBetalt(rundvisning,false);
-            Controller.createSalgsLinje(rundvisning, rundvisningAntal, pris);
-            Controller.setAntalDeltagere(rundvisning, rundvisningAntal);
+            Rundvisning rundvisning = controller.createRundvisning();
+            controller.setErBetalt(rundvisning,false);
+            controller.createSalgsLinje(rundvisning, rundvisningAntal, pris);
+            controller.setAntalDeltagere(rundvisning, rundvisningAntal);
             rundvisning.setDato(rundvisningDato);
             rundvisning.setModetidspunkt(rundvisningTid);
             rundvisning.setKunde(kunde);
@@ -187,16 +196,16 @@ public class OpretRundvisningPane extends GridPane{
 
     public void Payment(Betalingsmetode betalingsmetode){
         Rundvisning rundvisning = lvwRundvisninger.getSelectionModel().getSelectedItem();
-        Controller.setBetalingsmetode(rundvisning,betalingsmetode);
-        Controller.setErBetalt(rundvisning,true);
+        controller.setBetalingsmetode(rundvisning,betalingsmetode);
+        controller.setErBetalt(rundvisning,true);
         updateControls();
 
     }
 
     public void updateControls() {
         cbbKunde.getItems().clear();
-        cbbKunde.getItems().addAll(Controller.getKunder());
+        cbbKunde.getItems().addAll(controller.getKunder());
         lvwRundvisninger.getItems().clear();
-        lvwRundvisninger.getItems().addAll(Controller.getRundvisning(false));
+        lvwRundvisninger.getItems().addAll(controller.getRundvisning());
     }
 }

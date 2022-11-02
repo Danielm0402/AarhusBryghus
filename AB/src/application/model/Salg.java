@@ -47,6 +47,10 @@ public class Salg {
         this.betalingsmetode = betalingsmetode;
     }
 
+    public Betalingsmetode getBetalingsmetode(){
+        return betalingsmetode;
+    }
+
     public void setRabatprocent(double rabatprocent) {
         this.rabatprocent = rabatprocent;
     }

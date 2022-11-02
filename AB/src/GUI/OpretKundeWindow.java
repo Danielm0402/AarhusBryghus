@@ -1,5 +1,6 @@
 package GUI;
 
+import Storage.Storage;
 import application.Controller.Controller;
 import application.model.Kunde;
 import javafx.geometry.Insets;
@@ -13,12 +14,15 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class OpretKundeWindow extends Stage {
+    private final ControllerInterface controller;
     private TextField txfNavn, txfEmail, txfTelefon, txfAdresse;
     private Label lblNavn, lblEmail, lblTelefon, lblAdresse;
     private Label lblError;
     private Button btnOpretKunde;
 
     public OpretKundeWindow(String opretKunde){
+        controller = new Controller(Storage.getInstance());
+
         this.initStyle(StageStyle.UTILITY);
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
@@ -78,7 +82,7 @@ public class OpretKundeWindow extends Stage {
         if (kundeNavn.length() < 1 || kundeEmail.length() < 1 || kundeTelefon.length() < 1 || kundeAdresse.length() < 1) {
             lblError.setText("Udfyld alle felter");
         }else {
-            Kunde kunde = Controller.createKunde(kundeNavn, kundeTelefon, kundeEmail, kundeAdresse);
+            Kunde kunde = controller.createKunde(kundeNavn, kundeTelefon, kundeEmail, kundeAdresse);
             lblError.setStyle("-fx-text-fill: green");
             lblError.setText("Kunde oprettet");
             this.hide();

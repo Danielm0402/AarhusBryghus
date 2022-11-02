@@ -1,5 +1,6 @@
 package GUI;
 
+import Storage.Storage;
 import application.Controller.Controller;
 import application.model.Arrangement;
 import application.model.Produkt;
@@ -14,6 +15,7 @@ import java.io.Console;
 
 public class OpretProduktPane extends GridPane {
 
+    private final ControllerInterface controller;
     private ComboBox<Produktgruppe> cbbProduktgruppe;
     private TextField txfProduktnavn, txfPant;
     private Label lblError,lblHarPant,lblPant;
@@ -21,6 +23,8 @@ public class OpretProduktPane extends GridPane {
 
 
     public OpretProduktPane() {
+        controller = new Controller(Storage.getInstance());
+
         this.setPadding(new Insets(20));
         this.setHgap(20);
         this.setVgap(10);
@@ -30,7 +34,7 @@ public class OpretProduktPane extends GridPane {
 
         cbbProduktgruppe = new ComboBox<>();
         this.add(cbbProduktgruppe, 2, 1);
-        cbbProduktgruppe.getItems().addAll(Controller.getProduktgrupper());
+        cbbProduktgruppe.getItems().addAll(controller.getProduktgrupper());
         cbbProduktgruppe.getSelectionModel().selectFirst();
 
 
@@ -80,10 +84,10 @@ public class OpretProduktPane extends GridPane {
             lblError.setText("Nogle felter mangle at blive udfyldt");
         }
         else {
-            Produkt produkt = Controller.createProdukt(produktnavn,produktgruppe);
+            Produkt produkt = controller.createProdukt(produktnavn,produktgruppe);
 //            tjekker om produktet skal oprettes med pant
             if (txfPant.getText().length()>0){
-                Controller.setPant(produkt,Integer.parseInt(txfPant.getText()));
+                controller.setPant(produkt,Integer.parseInt(txfPant.getText()));
             }
 
             lblError.setStyle("-fx-text-fill: green");
@@ -97,7 +101,7 @@ public class OpretProduktPane extends GridPane {
 
         public void updateControls() { // updateControls kaldes hver gange der klikkes til og fra fanen
             cbbProduktgruppe.getItems().clear(); //fjerner lige alle elementer i comboboxen, for at refreshe
-            cbbProduktgruppe.getItems().addAll(Controller.getProduktgrupper()); //tilføjer dem igen, for at refreshe
+            cbbProduktgruppe.getItems().addAll(controller.getProduktgrupper()); //tilføjer dem igen, for at refreshe
             lblError.setText(""); // fjerner den grønne eller røde besked
             txfProduktnavn.clear(); //fjerner det man har skrevet i tekstfeltet
 

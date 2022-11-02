@@ -6,22 +6,30 @@ import application.model.*;
 
 import java.util.ArrayList;
 
-public class Controller {
-
-    public static ArrayList<Arrangement> getArrangementer(){
-        return Storage.getArrangementer();
+public class Controller implements GUI.ControllerInterface {
+    private StorageInterface storage;
+    public Controller(StorageInterface storage) {
+        this.storage = storage;
     }
 
-    public static ArrayList<Betalingsmetode> getBetalingsmetoder(){
-        return Storage.getBetalingsmetoder();
+    @Override
+    public ArrayList<Arrangement> getArrangementer(){
+        return storage.getArrangementer();
     }
 
-    public static ArrayList<Produktgruppe> getProduktgrupper(){
-        return Storage.getProduktgrupper();
+    @Override
+    public ArrayList<Betalingsmetode> getBetalingsmetoder(){
+        return storage.getBetalingsmetoder();
     }
 
-    public static ArrayList<Produktgruppe> getProduktgrupper(EnumArrangementVisning enumArrangementVisning){
-        ArrayList<Produktgruppe> alleproduktgrupper = Storage.getProduktgrupper();
+    @Override
+    public ArrayList<Produktgruppe> getProduktgrupper(){
+        return storage.getProduktgrupper();
+    }
+
+    @Override
+    public ArrayList<Produktgruppe> getProduktgrupper(EnumArrangementVisning enumArrangementVisning){
+        ArrayList<Produktgruppe> alleproduktgrupper = storage.getProduktgrupper();
         ArrayList<Produktgruppe> produktgrupperDerSkalVises = new ArrayList<>();
         EnumArrangementVisning visning = enumArrangementVisning;
 
@@ -34,24 +42,32 @@ public class Controller {
     }
 
 
-    public static ArrayList<Produkt> getProdukter() {return Storage.getProdukter();}
+    @Override
+    public ArrayList<Produkt> getProdukter() {return storage.getProdukter();}
 
-    public static ArrayList<Produkt> getProdukter(Produktgruppe produktgruppe)
+    @Override
+    public ArrayList<Produkt> getProdukter(Produktgruppe produktgruppe)
     {
         return produktgruppe.getProdukter();
     }
 
 
-    public static ArrayList<Pris> getPriser() {return Storage.getPriser();}
+    @Override
+    public ArrayList<Pris> getPriser() {return storage.getPriser();}
 
-    public static ArrayList<Salg> getSalg() {return Storage.getSalg();}
+    @Override
+    public ArrayList<Salg> getSalg() {return storage.getSalg();}
 
-    public static ArrayList<Salgslinje> getSalgslinjer() {return Storage.getSalgslinjer();}
+    @Override
+    public ArrayList<Salgslinje> getSalgslinjer() {return storage.getSalgslinjer();}
 
-    public static ArrayList<Rundvisning> getRundvisning() {return Storage.getRundvisninger();}
+    @Override
+    public ArrayList<Rundvisning> getRundvisning() {return storage.getRundvisninger();}
 
-    public static ArrayList<Rundvisning> getRundvisning(boolean erBetalt) {
-        ArrayList<Rundvisning> rundvisninger = Storage.getRundvisninger();
+    @Override
+    public ArrayList<Udlejning> getUdlejning() {return storage.getUdlejninger();}
+    public ArrayList<Rundvisning> getRundvisning(boolean erBetalt) {
+        ArrayList<Rundvisning> rundvisninger = storage.getRundvisninger();
         ArrayList<Rundvisning> rundvisningerIkkeBetalt = new ArrayList<>();
 
         for (Rundvisning r : rundvisninger) {
@@ -66,10 +82,10 @@ public class Controller {
 
 
 
-    public static ArrayList<Udlejning> getUdlejninger() {return Storage.getUdlejninger();}
+    public ArrayList<Udlejning> getUdlejninger() {return storage.getUdlejninger();}
 
-    public static ArrayList<Udlejning> getUdlejningerIkkeAfleveret() {
-        ArrayList<Udlejning> alleUdlejninger = Storage.getUdlejninger();
+    public ArrayList<Udlejning> getUdlejningerIkkeAfleveret() {
+        ArrayList<Udlejning> alleUdlejninger = storage.getUdlejninger();
         ArrayList<Udlejning> ikkeafleveredeUdlejninger = new ArrayList<>();
 
         for (Udlejning udlejning : alleUdlejninger){
@@ -81,21 +97,25 @@ public class Controller {
         return ikkeafleveredeUdlejninger;}
 
 
-    public static ArrayList<Kunde> getKunder() {return Storage.getKunder();}
+    @Override
+    public ArrayList<Kunde> getKunder() {return storage.getKunder();}
 
-    public static void removePris(Pris pris){Storage.removePris(pris);}
+    @Override
+    public void removePris(Pris pris){storage.removePris(pris);}
 
-    public static ArrayList<Pris> getPriserFromArrangement(Arrangement arrangement){
+    @Override
+    public ArrayList<Pris> getPriserFromArrangement(Arrangement arrangement){
         ArrayList<Pris> priserFraArrangement = new ArrayList<>();
-        for (int i = 0; i < Storage.getPriser().size(); i++) {
-            if (Storage.getPriser().get(i).getArrangement().equals(arrangement)){
-                priserFraArrangement.add(Storage.getPriser().get(i));
+        for (int i = 0; i < storage.getPriser().size(); i++) {
+            if (storage.getPriser().get(i).getArrangement().equals(arrangement)){
+                priserFraArrangement.add(storage.getPriser().get(i));
             }
         }
         return priserFraArrangement;
     }
 
-    public static ArrayList<Pris> getPriserFromArrangementWithinProduktgruppe(Arrangement arrangement, Produktgruppe produktgruppe){
+    @Override
+    public ArrayList<Pris> getPriserFromArrangementWithinProduktgruppe(Arrangement arrangement, Produktgruppe produktgruppe){
         ArrayList<Pris> priserFraArrangementMedDenneProduktgruppe = new ArrayList<>();
         ArrayList<Produkt> produkterIDenneProduktgruppe = new ArrayList<>();
         if (produktgruppe != null){
@@ -112,102 +132,118 @@ public class Controller {
         return priserFraArrangementMedDenneProduktgruppe;
     }
 
-    public static Arrangement createArrangement(String navn){
+    @Override
+    public Arrangement createArrangement(String navn){
         Arrangement arrangement = new Arrangement(navn);
-        Storage.addArrangement(arrangement);
+        storage.addArrangement(arrangement);
         return arrangement;}
 
-    public static Produktgruppe createProduktgruppe(String navn) {
+    @Override
+    public Produktgruppe createProduktgruppe(String navn) {
         Produktgruppe produktgruppe = new Produktgruppe(navn);
-        Storage.addProduktgruppe(produktgruppe);
+        storage.addProduktgruppe(produktgruppe);
         return produktgruppe;
     }
 
-    public static Salg createSalg(){
+    @Override
+    public Salg createSalg(){
         Salg salg = new Salg();
-        Storage.addSalg(salg);
+        storage.addSalg(salg);
         return salg;
     }
 
-    public static Rundvisning createRundvisning(){
+    @Override
+    public Rundvisning createRundvisning(){
         Rundvisning rundvisning = new Rundvisning();
-        Storage.addRundvisning(rundvisning);
+        storage.addRundvisning(rundvisning);
         return rundvisning;
     }
 
-    public static Udlejning createUdlejning(Kunde selectedItem){
+    public Udlejning createUdlejning(Kunde selectedItem){
         Udlejning udlejning = new Udlejning(selectedItem);
-        Storage.addUdlejning(udlejning);
+        storage.addUdlejning(udlejning);
         return udlejning;
     }
 
-    public static Kunde createKunde(String navn, String telefon, String email, String adresse){
+    @Override
+    public Kunde createKunde(String navn, String telefon, String email, String adresse){
         Kunde kunde = new Kunde(navn, telefon, email, adresse);
-        Storage.addKunde(kunde);
+        storage.addKunde(kunde);
         return kunde;
     }
 
-    public static void setKunde(Rundvisning rundvisning, Kunde kunde){
+    @Override
+    public void setKunde(Rundvisning rundvisning, Kunde kunde){
         rundvisning.setKunde(kunde);
     }
 
-    public static void setUdlejningAfleveret(Udlejning udlejning){
+    public void setUdlejningAfleveret(Udlejning udlejning){
         udlejning.setErAfleveret(true);
     }
 
-    public static void setAntalDeltagere(Rundvisning rundvisning, int antal){
+    public void setAntalDeltagere(Rundvisning rundvisning, int antal){
         rundvisning.setAntalDeltagere(antal);
     }
 
-    public static Salgslinje createSalgsLinje(Salg salg, int antal, Pris pris){
+    @Override
+    public Salgslinje createSalgsLinje(Salg salg, int antal, Pris pris){
         Salgslinje salgslinje = salg.createSalgslinje(antal, pris);
-        Storage.addSalgslinje(salgslinje);
+        storage.addSalgslinje(salgslinje);
         return salgslinje;
     }
 
-    public static boolean incrementSalgslinje(Salg salg, Pris pris){
+    @Override
+    public boolean incrementSalgslinje(Salg salg, Pris pris){
         boolean existsAlready = salg.incrementSalgslinje(pris);
 
         return  existsAlready;
     }
 
-    public static void removeSalgsLinje(Salg salg,Salgslinje salgslinje) {
+    @Override
+    public void removeSalgsLinje(Salg salg, Salgslinje salgslinje) {
         salg.removeSalgslinje(salgslinje);
     }
 //               if (priser.contains(pris)) {
 //        priser.remove(pris);
-    public static Betalingsmetode createBetalingsmetode(String metode){
+    @Override
+    public Betalingsmetode createBetalingsmetode(String metode){
         Betalingsmetode betalingsmetode = new Betalingsmetode(metode);
-        Storage.addBetalingsmetode(betalingsmetode);
+        storage.addBetalingsmetode(betalingsmetode);
         return betalingsmetode;
     }
 
-    public static void setBetalingsmetode(Salg salg, Betalingsmetode betalingsmetode){
+    @Override
+    public void setBetalingsmetode(Salg salg, Betalingsmetode betalingsmetode){
         salg.setBetalingsmetode(betalingsmetode);
     }
 
 
-    public static void setRabatprocent(Salg salg, double rabatprocent){
+    @Override
+    public void setRabatprocent(Salg salg, double rabatprocent){
         salg.setRabatprocent(rabatprocent);
     }
 
-    public static Produkt createProdukt(String produktnavn, Produktgruppe produktgruppe) {
+    @Override
+    public Produkt createProdukt(String produktnavn, Produktgruppe produktgruppe) {
         Produkt produkt = produktgruppe.createProdukt(produktnavn);
-        Storage.addProdukt(produkt);
+        storage.addProdukt(produkt);
         return produkt;
     }
 
-    public static Pris createPris(int enhedsPris, Produkt produkt, Arrangement arrangement){
+    @Override
+    public Pris createPris(int enhedsPris, Produkt produkt, Arrangement arrangement){
         Pris pris = arrangement.createPris(enhedsPris, produkt);
-        Storage.addPris(pris);
+        storage.addPris(pris);
         return pris;
     }
 
-    public static void setProduktgruppeSomUdlejning(Produktgruppe produktgruppe) {
+    @Override
+    public void setProduktgruppeSomUdlejning(Produktgruppe produktgruppe) {
         produktgruppe.setProduktgruppeSomUdlejning();
     }
 
-    public static ArrayList<Produktgruppe> getProduktgrupperWithUdlejningsattribut() {
+    @Override
+    public ArrayList<Produktgruppe> getProduktgrupperWithUdlejningsattribut() {
         ArrayList<Produktgruppe> produktgrupperWithUdlejningsattribut = new ArrayList<>();
         ArrayList<Produktgruppe> alleproduktgrupper = getProduktgrupper();
 //        løber gennem alle produktgrupper og ser om de bruges til udlejning
@@ -220,29 +256,34 @@ public class Controller {
     }
 
 
-    public static void setPant(Produkt produkt, int pant) {
+    @Override
+    public void setPant(Produkt produkt, int pant) {
         produkt.setPant(pant);
     }
 
-    public static void setVisning(Produktgruppe produktgruppe, EnumArrangementVisning salg) {
+    @Override
+    public void setVisning(Produktgruppe produktgruppe, EnumArrangementVisning salg) {
         produktgruppe.setVisning(salg);
     }
-    public static void setErBetalt(Rundvisning rundvisning, boolean erBetalt){
+    @Override
+    public void setErBetalt(Rundvisning rundvisning, boolean erBetalt){
         rundvisning.setErBetalt(erBetalt);
     }
 
-    public static Pris getRundvisningsPris(){
+    public Pris getRundvisningsPris(){
         return Storage.getRundvisningPris();
     }
 
 
 
-    public static void init() {
+    @Override
+    public void init() {
         initStorage();
     }
 
 
-    public static void initStorage() {
+    @Override
+    public void initStorage() {
 
 
 
@@ -464,7 +505,7 @@ public class Controller {
         Pris pr73 = createPris(75,p73,a2);
         Pris pr74 = createPris(75,p74,a2);
 
-        
+
         Pris pris10 = createPris(100,p74,a2);
 
 

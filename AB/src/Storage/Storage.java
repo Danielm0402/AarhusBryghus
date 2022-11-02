@@ -4,18 +4,9 @@ import application.model.*;
 
 import java.util.ArrayList;
 
-public class Storage {
+public class Storage implements application.Controller.StorageInterface {
 
-    private static final ArrayList<Arrangement> arrangementer = new ArrayList<>();
-    private static final ArrayList<Produktgruppe> produktgrupper = new ArrayList<>();
-    private static final ArrayList<Produkt> produkter = new ArrayList<>();
-    private static final ArrayList<Pris> priser = new ArrayList<>();
-    private static final ArrayList<Salgslinje> salgslinjer = new ArrayList<>();
-    private static final ArrayList<Salg> salgs = new ArrayList<>();
-    private static final ArrayList<Rundvisning> rundvisninger = new ArrayList<>();
-    private static final ArrayList<Udlejning> udlejninger = new ArrayList<>();
-    private static final ArrayList<Kunde> kunder = new ArrayList<>();
-    private static final ArrayList<Betalingsmetode> betalingsmetoder = new ArrayList<>();
+    private static Storage uniqueInstance;
 
     //Rundvisnings pris til oprettelse af rundvisnings salgslinje i GUI
     private static Arrangement rundvisningsArrangement = new Arrangement("Rundvisning");
@@ -23,105 +14,142 @@ public class Storage {
     private static Produkt rundvisningProdukt=new Produkt("Rundvisning");
     private static Pris rundvisningPris=new Pris(100, rundvisningProdukt, rundvisningsArrangement);
 
+    private final ArrayList<Arrangement> arrangementer = new ArrayList<>();
+    private final ArrayList<Produktgruppe> produktgrupper = new ArrayList<>();
+    private final ArrayList<Produkt> produkter = new ArrayList<>();
+    private final ArrayList<Pris> priser = new ArrayList<>();
+    private final ArrayList<Salgslinje> salgslinjer = new ArrayList<>();
+    private final ArrayList<Salg> salgs = new ArrayList<>();
+    private final ArrayList<Rundvisning> rundvisninger = new ArrayList<>();
+    private final ArrayList<Udlejning> udlejninger = new ArrayList<>();
+    private final ArrayList<Kunde> kunder = new ArrayList<>();
+    private final ArrayList<Betalingsmetode> betalingsmetoder = new ArrayList<>();
 
-    public static ArrayList<Arrangement> getArrangementer() {
+
+    @Override
+    public ArrayList<Arrangement> getArrangementer() {
         return new ArrayList<Arrangement>(arrangementer);
     }
 
-    public static void addArrangement(Arrangement arrangement) {
+    @Override
+    public void addArrangement(Arrangement arrangement) {
         arrangementer.add(arrangement);
     }
 
-    public static void removeArrangement(Arrangement arrangement) {arrangementer.remove(arrangement);
+    @Override
+    public void removeArrangement(Arrangement arrangement) {arrangementer.remove(arrangement);
     }
 
-    public static ArrayList<Betalingsmetode> getBetalingsmetoder(){
+    @Override
+    public ArrayList<Betalingsmetode> getBetalingsmetoder(){
         return new ArrayList<>(betalingsmetoder);
     }
 
-    public static void addBetalingsmetode(Betalingsmetode betalingsmetode){
+    @Override
+    public void addBetalingsmetode(Betalingsmetode betalingsmetode){
         betalingsmetoder.add(betalingsmetode);
     }
 
-    public static void removeBetalingsmetode(Betalingsmetode betalingsmetode){
+    @Override
+    public void removeBetalingsmetode(Betalingsmetode betalingsmetode){
         betalingsmetoder.remove(betalingsmetode);
     }
 
 
-    public static ArrayList<Produktgruppe> getProduktgrupper() {
+    @Override
+    public ArrayList<Produktgruppe> getProduktgrupper() {
         return new ArrayList<Produktgruppe>(produktgrupper);
     }
 
-    public static void addProduktgruppe(Produktgruppe produktgruppe) {
+    @Override
+    public void addProduktgruppe(Produktgruppe produktgruppe) {
         produktgrupper.add(produktgruppe);
     }
 
-    public static void removeProduktgruppe(Produktgruppe produktgruppe) {produktgrupper.remove(produktgruppe);
+    @Override
+    public void removeProduktgruppe(Produktgruppe produktgruppe) {produktgrupper.remove(produktgruppe);
     }
 
 
-    public static ArrayList<Produkt> getProdukter() {
+    @Override
+    public ArrayList<Produkt> getProdukter() {
         return new ArrayList<Produkt>(produkter);
     }
 
-    public static void addProdukt(Produkt produkt) {
+    @Override
+    public void addProdukt(Produkt produkt) {
         produkter.add(produkt);
     }
 
-    public static void removeProdukt(Produkt produkt) {produkter.remove(produkt);
+    @Override
+    public void removeProdukt(Produkt produkt) {produkter.remove(produkt);
     }
 
 
-    public static ArrayList<Pris> getPriser(){
+    @Override
+    public ArrayList<Pris> getPriser(){
         return new ArrayList<Pris>(priser);
     }
 
-    public static void addPris(Pris pris) {
+    @Override
+    public void addPris(Pris pris) {
         priser.add(pris);
     }
 
-    public static void removePris(Pris pris) {priser.remove(pris);
+    @Override
+    public void removePris(Pris pris) {priser.remove(pris);
     }
 
 
-    public static ArrayList<Salgslinje> getSalgslinjer() {
+    @Override
+    public ArrayList<Salgslinje> getSalgslinjer() {
         return new ArrayList<Salgslinje>(salgslinjer);
     }
 
-    public static void addSalgslinje(Salgslinje salgslinje) {
+    @Override
+    public void addSalgslinje(Salgslinje salgslinje) {
         salgslinjer.add(salgslinje);
     }
 
-    public static void removeSalgslinje(Salgslinje salgslinje) {salgslinjer.remove(salgslinje);
+    @Override
+    public void removeSalgslinje(Salgslinje salgslinje) {salgslinjer.remove(salgslinje);
     }
 
 
-    public static ArrayList<Salg> getSalg() {
+    @Override
+    public ArrayList<Salg> getSalg() {
         return new ArrayList<Salg>(salgs);
     }
 
-    public static void addSalg(Salg salg) {
+    @Override
+    public void addSalg(Salg salg) {
         salgs.add(salg);
     }
-    public static void removeSalg(Salg salg) {salgs.remove(salgs);
+    @Override
+    public void removeSalg(Salg salg) {salgs.remove(salgs);
     }
 
 
-    public static ArrayList<Rundvisning> getRundvisninger() {
+    @Override
+    public ArrayList<Rundvisning> getRundvisninger() {
         return new ArrayList<Rundvisning>(rundvisninger);
     }
 
-    public static void addRundvisning(Rundvisning rundvisning) {rundvisninger.add(rundvisning);}
+    @Override
+    public void addRundvisning(Rundvisning rundvisning) {rundvisninger.add(rundvisning);}
 
-    public static void removeRundvisning(Rundvisning rundvisning) {rundvisninger.remove(rundvisning);
+    @Override
+    public void removeRundvisning(Rundvisning rundvisning) {rundvisninger.remove(rundvisning);
     }
 
 
-    public static ArrayList<Udlejning> getUdlejninger() {
+    @Override
+    public ArrayList<Udlejning> getUdlejninger() {
         return new ArrayList<Udlejning>(udlejninger);
     }
 
-    public static void addUdlejning(Udlejning udlejning) {
+    @Override
+    public void addUdlejning(Udlejning udlejning) {
         udlejninger.add(udlejning);
     }
 
@@ -129,17 +157,29 @@ public class Storage {
         return rundvisningPris;
     }
 
-    public static void removeUdlejning(Udlejning udlejning) {udlejninger.remove(udlejning);
+    @Override
+    public void removeUdlejning(Udlejning udlejning) {udlejninger.remove(udlejning);
     }
 
-    public static ArrayList<Kunde> getKunder() {
+    @Override
+    public ArrayList<Kunde> getKunder() {
         return new ArrayList<Kunde>(kunder);
     }
 
-    public static void addKunde(Kunde kunde) {
+    @Override
+    public void addKunde(Kunde kunde) {
         kunder.add(kunde);
     }
 
-    public static void removeKunde(Kunde kunde) {kunder.remove(kunde);
+    @Override
+    public void removeKunde(Kunde kunde) {kunder.remove(kunde);
     }
+
+    public static Storage getInstance() {
+        if (Storage.uniqueInstance == null) {
+            Storage.uniqueInstance = new Storage();
+        }
+        return Storage.uniqueInstance;
+    }
+
 }

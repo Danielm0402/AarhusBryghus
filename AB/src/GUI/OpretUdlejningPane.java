@@ -1,5 +1,6 @@
 package GUI;
 
+import Storage.Storage;
 import application.Controller.Controller;
 import application.model.*;
 import javafx.beans.value.ChangeListener;
@@ -14,6 +15,7 @@ import javafx.scene.layout.VBox;
 
 public class OpretUdlejningPane extends GridPane {
 
+    private final ControllerInterface controller;
     private ComboBox<Kunde> cbbKunder;
     private ComboBox<Produktgruppe> cbbProduktgruppe;
     private ComboBox<Pris> cbbProdukt;
@@ -26,6 +28,8 @@ public class OpretUdlejningPane extends GridPane {
 
 
     public OpretUdlejningPane(){
+        controller = new Controller(Storage.getInstance());
+
         this.setPadding(new Insets(20));
         this.setHgap(20);
         this.setVgap(10);
@@ -38,7 +42,7 @@ public class OpretUdlejningPane extends GridPane {
 
 
         cbbKunder = new ComboBox<>();
-        cbbKunder.getItems().addAll(Controller.getKunder());
+        cbbKunder.getItems().addAll(controller.getKunder());
 
         HBox hbox = new HBox(10,lblvaelgKunde,cbbKunder,btnOpretKunde);
 
@@ -48,7 +52,7 @@ public class OpretUdlejningPane extends GridPane {
 
         Label lblProduktgruppe = new Label("Vælg produktgruppe");
         cbbProduktgruppe = new ComboBox<>();
-        cbbProduktgruppe.getItems().addAll(Controller.getProduktgrupper(EnumArrangementVisning.UDLEJNING));
+        cbbProduktgruppe.getItems().addAll(controller.getProduktgrupper(EnumArrangementVisning.UDLEJNING));
         ChangeListener<Produktgruppe> listener = (ov, oldValue, newValue) -> produktgruppeChanged(newValue);
         cbbProduktgruppe.getSelectionModel().selectedItemProperty().addListener(listener);
 
@@ -67,16 +71,16 @@ public class OpretUdlejningPane extends GridPane {
 
 //        ---------- knapper til afregning af pant ---------------------------
         Button btnDankort = new Button("Dankort");
-        btnDankort.setOnAction(event -> Payment(Controller.getBetalingsmetoder().get(0)));
+        btnDankort.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(0)));
 
         Button btnKontant = new Button("Kontant");
-        btnKontant.setOnAction(event -> Payment(Controller.getBetalingsmetoder().get(1)));
+        btnKontant.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(1)));
 
         Button btnMobilpay = new Button("Mobilpay");
-        btnMobilpay.setOnAction(event -> Payment(Controller.getBetalingsmetoder().get(3)));
+        btnMobilpay.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(3)));
 
         Button btnRegning = new Button("Regning");
-        btnRegning.setOnAction(event -> Payment(Controller.getBetalingsmetoder().get(4)));
+        btnRegning.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(4)));
 
         HBox hboxBetaling = new HBox(btnDankort,btnKontant,btnMobilpay,btnRegning);
 //        -------------------------------------------------------------------------
@@ -104,9 +108,9 @@ public class OpretUdlejningPane extends GridPane {
 
     private void AfleverUdlejning() {
         Udlejning valgteUdlejning = lvwIgangværendeUdlejninger.getSelectionModel().getSelectedItem();
-        Controller.setUdlejningAfleveret(valgteUdlejning);
+        controller.setUdlejningAfleveret(valgteUdlejning);
         lvwIgangværendeUdlejninger.getItems().clear();
-        lvwIgangværendeUdlejninger.getItems().setAll(Controller.getUdlejningerIkkeAfleveret());
+        lvwIgangværendeUdlejninger.getItems().setAll(controller.getUdlejningerIkkeAfleveret());
 
     }
 
@@ -115,8 +119,8 @@ public class OpretUdlejningPane extends GridPane {
             lblError.setText("Tilføj produkter før du udlejer");
         }
         else {
-            Controller.setBetalingsmetode(udlejning, betalingsmetode);
-            lvwIgangværendeUdlejninger.getItems().setAll(Controller.getUdlejningerIkkeAfleveret());
+            controller.setBetalingsmetode(udlejning, betalingsmetode);
+            lvwIgangværendeUdlejninger.getItems().setAll(controller.getUdlejningerIkkeAfleveret());
             udlejning = null; // sætter salg til null så den sletter salget
             lvwUdlejning.getItems().clear();
             total = 0;
@@ -132,10 +136,10 @@ public class OpretUdlejningPane extends GridPane {
         else {
             Pris pris = cbbProdukt.getSelectionModel().getSelectedItem();
             if (udlejning == null) {
-                udlejning = Controller.createUdlejning(cbbKunder.getSelectionModel().getSelectedItem());
+                udlejning = controller.createUdlejning(cbbKunder.getSelectionModel().getSelectedItem());
                 udlejning.setKunde(cbbKunder.getSelectionModel().getSelectedItem());
             }
-            Controller.createSalgsLinje(udlejning, 1, pris);
+            controller.createSalgsLinje(udlejning, 1, pris);
             lvwUdlejning.getItems().setAll(udlejning.getSalgsLinjer());
             total+=pris.getProdukt().getPant();
             lblTotalPant.setText("Pant til afregning: "+total+",-");
@@ -150,7 +154,7 @@ public class OpretUdlejningPane extends GridPane {
 
 //            Magic number "1" nedenfor betyder, at udlejning altid bare skal bruge arrangementet "daglig butikssalg".
 //            Der er ikke andre salgssituationer, hvor der skal udlejes.
-            cbbProdukt.getItems().addAll(Controller.getPriserFromArrangementWithinProduktgruppe(Controller.getArrangementer().get(1),selectedproduktgruppe)); //todo skal nok gette Daglig Butiks Priser indenfor denne produktgruppe -.-
+            cbbProdukt.getItems().addAll(controller.getPriserFromArrangementWithinProduktgruppe(controller.getArrangementer().get(1),selectedproduktgruppe)); //todo skal nok gette Daglig Butiks Priser indenfor denne produktgruppe -.-
         }
     }
 
@@ -167,9 +171,9 @@ public class OpretUdlejningPane extends GridPane {
         lblError.setText("");
         cbbKunder.getItems().clear();
         lvwUdlejning.getItems().clear();
-        cbbKunder.getItems().addAll(Controller.getKunder());
+        cbbKunder.getItems().addAll(controller.getKunder());
         cbbProduktgruppe.getItems().clear();
-        cbbProduktgruppe.getItems().addAll(Controller.getProduktgrupper(EnumArrangementVisning.UDLEJNING));
+        cbbProduktgruppe.getItems().addAll(controller.getProduktgrupper(EnumArrangementVisning.UDLEJNING));
         cbbProdukt.getItems().clear();
     }
 }

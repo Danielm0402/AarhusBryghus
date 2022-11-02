@@ -1,5 +1,6 @@
 package GUI;
 
+import Storage.Storage;
 import application.Controller.Controller;
 import application.model.EnumArrangementVisning;
 import application.model.Produktgruppe;
@@ -13,11 +14,14 @@ import javafx.scene.layout.GridPane;
 public class OpretProduktgruppePane extends GridPane {
 
 
+    private final ControllerInterface controller;
     private TextField txfProduktgruppenavn;
     private Label lblError;
     private CheckBox checkBoxBrugesTilUdlejning;
 
     public OpretProduktgruppePane() {
+        controller = new Controller(Storage.getInstance());
+
         this.setPadding(new Insets(20));
         this.setHgap(20);
         this.setVgap(10);
@@ -55,13 +59,13 @@ public class OpretProduktgruppePane extends GridPane {
             lblError.setText("Nogle felter mangle at blive udfyldt");
         }
         else {
-            Produktgruppe produktgruppe = Controller.createProduktgruppe(produktgruppenavn);
+            Produktgruppe produktgruppe = controller.createProduktgruppe(produktgruppenavn);
             if(checkBoxBrugesTilUdlejning.isSelected()) {
 //                Controller.setProduktgruppeSomUdlejning(produktgruppe);
-                Controller.setVisning(produktgruppe,EnumArrangementVisning.UDLEJNING);
+                controller.setVisning(produktgruppe,EnumArrangementVisning.UDLEJNING);
             }
             else{
-                Controller.setVisning(produktgruppe, EnumArrangementVisning.SALG);
+                controller.setVisning(produktgruppe, EnumArrangementVisning.SALG);
             }
             lblError.setStyle("-fx-text-fill: green");
             lblError.setText("Produktgruppe oprettet");

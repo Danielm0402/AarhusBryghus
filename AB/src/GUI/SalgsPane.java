@@ -1,5 +1,6 @@
 package GUI;
 
+import Storage.Storage;
 import application.Controller.Controller;
 import application.model.*;
 import javafx.beans.value.ChangeListener;
@@ -12,6 +13,7 @@ import javafx.scene.layout.HBox;
 
 public class SalgsPane extends GridPane {
 
+    private final ControllerInterface controller;
     private ComboBox<Arrangement> cbbArrangementer;
     private ListView<Pris> lvwProduktPriser;
     private ListView<Produktgruppe> lvwProduktgrupper;
@@ -23,6 +25,7 @@ public class SalgsPane extends GridPane {
 
 
     public SalgsPane() {
+        controller = new Controller(Storage.getInstance());
 
         this.setPadding(new Insets(20));
         this.setHgap(20);
@@ -35,7 +38,7 @@ public class SalgsPane extends GridPane {
 //        combobox over arrangementer
         cbbArrangementer = new ComboBox<>();
         this.add(cbbArrangementer, 1, 1);
-        cbbArrangementer.getItems().addAll(Controller.getArrangementer());
+        cbbArrangementer.getItems().addAll(controller.getArrangementer());
         cbbArrangementer.getSelectionModel().selectFirst();
         ChangeListener<Arrangement> listener = (ov, oldValue, newValue) -> selectedArrangementChanged(newValue);
         cbbArrangementer.getSelectionModel().selectedItemProperty().addListener(listener);
@@ -43,7 +46,7 @@ public class SalgsPane extends GridPane {
         //listview over produktgrupper
         lvwProduktgrupper = new ListView<>();
         this.add(lvwProduktgrupper,1,2);
-        lvwProduktgrupper.getItems().setAll(Controller.getProduktgrupper(EnumArrangementVisning.SALG));
+        lvwProduktgrupper.getItems().setAll(controller.getProduktgrupper(EnumArrangementVisning.SALG));
         ChangeListener<Produktgruppe> listener2 = (ov, oldValue, newValue) -> selectedProduktgruppeChanged(newValue);
         lvwProduktgrupper.getSelectionModel().selectedItemProperty().addListener(listener2);
 
@@ -58,14 +61,14 @@ public class SalgsPane extends GridPane {
                 Pris produktpris = lvwProduktPriser.getSelectionModel().getSelectedItem();
 
                 if (salg == null){
-                    salg = Controller.createSalg();
+                    salg = controller.createSalg();
                 }
 
-                boolean existsAlready = Controller.incrementSalgslinje(salg, produktpris);
+                boolean existsAlready = controller.incrementSalgslinje(salg, produktpris);
 
                 //Hvis produktet ikke allerede findes tilføjes en ny salgslinje
                 if (!existsAlready){
-                    Controller.createSalgsLinje(salg, 1, produktpris);
+                    controller.createSalgsLinje(salg, 1, produktpris);
                 }
                 total += produktpris.getEnhedspris();
                 txfTotal.setText(String.valueOf(total));
@@ -106,19 +109,19 @@ public class SalgsPane extends GridPane {
         //Dankort kontant, klippekort, mobilpay, regnning
 
         Button btnDankort = new Button("Dankort");
-        btnDankort.setOnAction(event -> Payment(Controller.getBetalingsmetoder().get(0)));
+        btnDankort.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(0)));
 
         Button btnKontant = new Button("Kontant");
-        btnKontant.setOnAction(event -> Payment(Controller.getBetalingsmetoder().get(1)));
+        btnKontant.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(1)));
 
         Button btnKlippekort = new Button("Klippekort");
-        btnKlippekort.setOnAction(event -> Payment(Controller.getBetalingsmetoder().get(2)));
+        btnKlippekort.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(2)));
 
         Button btnMobilpay = new Button("Mobilpay");
-        btnMobilpay.setOnAction(event -> Payment(Controller.getBetalingsmetoder().get(3)));
+        btnMobilpay.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(3)));
 
         Button btnRegning = new Button("Regning");
-        btnRegning.setOnAction(event -> Payment(Controller.getBetalingsmetoder().get(4)));
+        btnRegning.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(4)));
 
         HBox hboxBetaling = new HBox(btnDankort,btnKontant,btnKlippekort,btnMobilpay,btnRegning);
         this.add(hboxBetaling,3,5);
@@ -129,7 +132,7 @@ public class SalgsPane extends GridPane {
         lvwProduktgrupper.getSelectionModel().selectFirst();
         Produktgruppe produktgruppe = lvwProduktgrupper.getSelectionModel().getSelectedItem();
         Arrangement arrangement = cbbArrangementer.getSelectionModel().getSelectedItem();
-        lvwProduktPriser.getItems().setAll(Controller.getPriserFromArrangementWithinProduktgruppe(arrangement, produktgruppe));
+        lvwProduktPriser.getItems().setAll(controller.getPriserFromArrangementWithinProduktgruppe(arrangement, produktgruppe));
 
     }
 
@@ -137,23 +140,23 @@ public class SalgsPane extends GridPane {
     private void selectedProduktgruppeChanged(Produktgruppe newValue) {
         Produktgruppe produktgruppe = lvwProduktgrupper.getSelectionModel().getSelectedItem();
         Arrangement arrangement = cbbArrangementer.getSelectionModel().getSelectedItem();
-        lvwProduktPriser.getItems().setAll(Controller.getPriserFromArrangementWithinProduktgruppe(arrangement, produktgruppe));
+        lvwProduktPriser.getItems().setAll(controller.getPriserFromArrangementWithinProduktgruppe(arrangement, produktgruppe));
     }
 
     public void updateControls() {
         cbbArrangementer.getItems().clear(); //fjerner lige alle elementer i comboboxen, for at refreshe
-        cbbArrangementer.getItems().addAll(Controller.getArrangementer()); //tilføjer dem igen, for at refreshe
+        cbbArrangementer.getItems().addAll(controller.getArrangementer()); //tilføjer dem igen, for at refreshe
         cbbArrangementer.getSelectionModel().selectFirst(); // siger lige, at den skal vælge den første, så boksen ikke er tom
 
         lvwProduktPriser.getItems().clear();
 
 //        opdater produktgruppe:
         lvwProduktgrupper.getItems().clear();
-        lvwProduktgrupper.getItems().setAll(Controller.getProduktgrupper(EnumArrangementVisning.SALG));
+        lvwProduktgrupper.getItems().setAll(controller.getProduktgrupper(EnumArrangementVisning.SALG));
     }
 
     public void Payment(Betalingsmetode betalingsmetode){
-        Controller.setBetalingsmetode(salg, betalingsmetode);
+        controller.setBetalingsmetode(salg, betalingsmetode);
         salg = null; // sætter salg til null så den sletter salget
         lvwSalgslinjer.getItems().clear();
         total = 0;

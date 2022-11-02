@@ -1,6 +1,8 @@
 package GUI;
 
+import Storage.Storage;
 import application.Controller.Controller;
+import application.Controller.StorageInterface;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
@@ -9,15 +11,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class StartWindow extends Application {
-
-
+    private ControllerInterface controller;
     @Override
     public void init() {
-        Controller.init();
+        controller.init();
     }
 
     @Override
     public void start(Stage stage) {
+        controller = new Controller(Storage.getInstance());
         stage.setTitle("Århus Bryghus");
         BorderPane pane = new BorderPane();
         this.initContent(pane);
