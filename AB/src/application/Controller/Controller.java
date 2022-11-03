@@ -51,6 +51,10 @@ public class Controller implements GUI.ControllerInterface {
         return produktgruppe.getProdukter();
     }
 
+    @Override
+    public void setTotalPris(Salg salg, double totalPris){
+        salg.setTotalPris(totalPris);
+    }
 
     @Override
     public ArrayList<Pris> getPriser() {return storage.getPriser();}

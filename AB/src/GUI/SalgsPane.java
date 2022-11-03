@@ -156,12 +156,16 @@ public class SalgsPane extends GridPane {
     }
 
     public void Payment(Betalingsmetode betalingsmetode){
-        controller.setBetalingsmetode(salg, betalingsmetode);
-        salg = null; // sætter salg til null så den sletter salget
-        lvwSalgslinjer.getItems().clear();
-        total = 0;
-        txfTotal.setText(String.valueOf(total));
-        txfRabat.clear();
+        if (salg != null){
+            controller.setBetalingsmetode(salg, betalingsmetode);
+            controller.setTotalPris(salg, total);
+            salg = null; // sætter salg til null så den sletter salget
+            lvwSalgslinjer.getItems().clear();
+            total = 0;
+            txfTotal.setText(String.valueOf(total));
+            txfRabat.clear();
+        }
+
     }
 
     public void discount(){

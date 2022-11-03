@@ -92,4 +92,6 @@ public interface ControllerInterface {
     public ArrayList<Udlejning> getUdlejningerIkkeAfleveret();
 
     ArrayList<Salgslinje> getAlleProdukterIkkeAfleveret();
+
+    public void setTotalPris(Salg salg, double totalPris);
 }

@@ -1,15 +1,14 @@
 package application.model;
 
-import application.Controller.Controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 public class Salg {
     private final ArrayList<Salgslinje> salgslinjer = new ArrayList<>();
     private Betalingsmetode betalingsmetode;
-
+    private double totalPris;
     private double rabatprocent;
     private LocalDate dato = LocalDate.now();
 
@@ -30,6 +29,13 @@ public class Salg {
         return dato;
     }
 
+    public double getTotalPris() {
+        return totalPris;
+    }
+
+    public void setTotalPris(double totalPris) {
+        this.totalPris = totalPris;
+    }
 
     public void addSalgslinje(Salgslinje salgslinje){
         if(!salgslinjer.contains(salgslinje)){
@@ -92,8 +98,8 @@ public class Salg {
             return existsAlready;
         }
 
-
-
-
-
+    @Override
+    public String toString() {
+        return totalPris + " kr, betalt med " + betalingsmetode;
+    }
 }
