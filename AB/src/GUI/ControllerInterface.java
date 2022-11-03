@@ -25,6 +25,8 @@ public interface ControllerInterface {
 
     ArrayList<Rundvisning> getRundvisning();
 
+    ArrayList<Rundvisning> getRundvisning(boolean erBetalt);
+
     ArrayList<Udlejning> getUdlejning();
 
     ArrayList<Kunde> getKunder();

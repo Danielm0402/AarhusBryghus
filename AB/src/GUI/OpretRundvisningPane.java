@@ -22,10 +22,9 @@ public class OpretRundvisningPane extends GridPane{
     private ComboBox<Kunde> cbbKunde;
     private Button btnOpretKunde, btnOpretRundvisning;
     private Label lblvaelgKunde, lblEmpty, lblDato, lblTid, lblAntalDeltagere, lblError, lblOpretRundvisning, lblIkkeBetaltRundvisning;
-    private TextField txfDato, txfTid, txfAntalDeltagere;
+    private TextField txfTid, txfAntalDeltagere;
     private DatePicker dpDato;
     private ListView<Rundvisning> lvwRundvisninger;
-
 
 
     public OpretRundvisningPane(){
@@ -37,57 +36,35 @@ public class OpretRundvisningPane extends GridPane{
         this.setGridLinesVisible(false);
 
         lblvaelgKunde = new Label("Vælg kunde");
-        //add(lblvaelgKunde,0,1);
-
         cbbKunde = new ComboBox<>();
+        cbbKunde.getItems().addAll(controller.getKunder());
         //add(cbbKunde,0,2);
         cbbKunde.getItems().addAll(controller.getKunder());
 
         btnOpretKunde = new Button("Opret kunde");
-      //  add(btnOpretKunde,1,2);
         btnOpretKunde.setOnAction(event -> this.popUpOpretKunde());
-
-        lblEmpty = new Label(" ");
 
         dpDato = new DatePicker();
         lblDato = new Label("Dato:");
-        txfDato = new TextField();
-//        add(txfDato,1,4);
-//        add(lblDato,0,4);
 
         lblTid = new Label("Tid (hh:mm):");
         txfTid = new TextField();
-//        add(txfTid,1,5);
-//        add(lblTid,0,5);
 
         lblAntalDeltagere = new Label("Antal:");
         txfAntalDeltagere = new TextField();
-//        add(txfAntalDeltagere,1,6);
-//        add(lblAntalDeltagere,0,6);
 
-
-
-
-
-
+        lblEmpty = new Label(" ");
 
         btnOpretRundvisning = new Button("Opret rundvisning");
-      //  add(btnOpretRundvisning,1,7);
         btnOpretRundvisning.setOnAction(event -> createRundvisningOgSalgslinje());
-
-        lblError = new Label();
-        add(lblError,1,8);
-
-//        ChangeListener<Kunde> listener = (ov, oldValue, newValue) -> createRundvisning();
-//        cbbKunde.getSelectionModel().selectedItemProperty().addListener(listener);
-        //cbbKunde.setOn(event -> createRundvisning());
 
         lblIkkeBetaltRundvisning = new Label("Ikke betalte rundvisninger:");
 
         lblOpretRundvisning = new Label("Opret rundvisning");
 
         lvwRundvisninger = new ListView<>();
-        lvwRundvisninger.getItems().setAll(controller.getRundvisning());
+        lvwRundvisninger.getItems().setAll(controller.getRundvisning(false));
+
 
 
         Button btnDankort = new Button("Dankort");
@@ -106,45 +83,30 @@ public class OpretRundvisningPane extends GridPane{
         btnRegning.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(4)));
 
 
-
-//        VBox vboxLbl = new VBox(10, lblDato, lblTid, lblAntalDeltagere);
-//        add(vboxLbl,0,4);
-//
-//        VBox vboxTxf = new VBox(10, txfDato, txfTid, txfAntalDeltagere, btnOpretRundvisning);
-//        add(vboxTxf,1,4);
-
-        HBox hboxBetaling = new HBox(btnDankort,btnKontant,btnMobilpay,btnRegning);
-        //this.add(hboxBetaling,3,9);
-
-        VBox vboxRundvisninger = new VBox(10, lblIkkeBetaltRundvisning, lblEmpty, lvwRundvisninger, hboxBetaling);
-        add(vboxRundvisninger,3,4);
-
+        lblError = new Label();
+        add(lblError,1,8);
 
 
         HBox hboxDato = new HBox(65, lblDato, dpDato);
-        this.add(hboxDato,0,4 );
+
+        HBox hboxBetaling = new HBox(btnDankort,btnKontant,btnMobilpay,btnRegning);
+
+        VBox vboxRundvisninger = new VBox(10, lblIkkeBetaltRundvisning, lblEmpty, lvwRundvisninger, hboxBetaling);
 
         HBox hboxTid = new HBox(19, lblTid, txfTid);
-        //add(hboxTid,0,5);
 
         HBox hboxAntalDeltagere = new HBox(62, lblAntalDeltagere, txfAntalDeltagere);
-        //add(hboxAntalDeltagere,0,6);
 
         HBox hboxKunde = new HBox(10, cbbKunde, btnOpretKunde);
-        //add(hboxKunde, 0,2);
+
+        VBox vboxInfo = new VBox(10, lblOpretRundvisning, lblEmpty, hboxDato, hboxTid, hboxAntalDeltagere, btnOpretRundvisning);
+
 
         VBox vboxKunde = new VBox(10,lblvaelgKunde, hboxKunde);
         add(vboxKunde, 1, 2);
 
-        VBox vboxInfo = new VBox(10, lblOpretRundvisning, lblEmpty, hboxDato, hboxTid, hboxAntalDeltagere, btnOpretRundvisning);
-        //add(vboxInfo,1,5);
-
         HBox hboxAltRundvisning = new HBox(65, vboxInfo, vboxRundvisninger);
         add(hboxAltRundvisning, 1,6);
-
-
-
-
     }
 
 
@@ -155,22 +117,12 @@ public class OpretRundvisningPane extends GridPane{
         cbbKunde.getSelectionModel().selectLast();
     }
 
-    public void createRundvisning(){
-        if(rundvisning == null){
-            System.out.println("Rundvisning created");
-            Rundvisning rundvisning = controller.createRundvisning();
-            controller.setErBetalt(rundvisning,false);
-        }
-    }
-    //      Pris pris = new Pris(100, Controller.getProdukter().get(73), Controller.getArrangementer().get(1))
     public void createRundvisningOgSalgslinje(){
         LocalDate rundvisningDato = dpDato.getValue();
         LocalTime rundvisningTid = LocalTime.parse(txfTid.getText().trim());
         int rundvisningAntal = Integer.parseInt(txfAntalDeltagere.getText().trim());
         LocalDate now = LocalDate.now();
         Kunde kunde = cbbKunde.getSelectionModel().getSelectedItem();
-        //Betalingsmetode rundvisningBetalingsmetode =
-       //
         Pris pris = controller.getRundvisningsPris();
         if(rundvisningDato.compareTo(now) < 1 || rundvisningTid == null || rundvisningAntal < 1 || kunde==null){
             lblError.setText("Udfyld felter korrekt");
@@ -190,7 +142,6 @@ public class OpretRundvisningPane extends GridPane{
             txfTid.clear();
             txfAntalDeltagere.clear();
             System.out.println(rundvisning.getSalgsLinjer());
-
         }
     }
 
@@ -199,13 +150,12 @@ public class OpretRundvisningPane extends GridPane{
         controller.setBetalingsmetode(rundvisning,betalingsmetode);
         controller.setErBetalt(rundvisning,true);
         updateControls();
-
     }
 
     public void updateControls() {
         cbbKunde.getItems().clear();
         cbbKunde.getItems().addAll(controller.getKunder());
         lvwRundvisninger.getItems().clear();
-        lvwRundvisninger.getItems().addAll(controller.getRundvisning());
+        lvwRundvisninger.getItems().addAll(controller.getRundvisning(false));
     }
 }

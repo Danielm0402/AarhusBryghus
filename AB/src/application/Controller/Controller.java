@@ -65,7 +65,6 @@ public class Controller implements GUI.ControllerInterface {
     public ArrayList<Rundvisning> getRundvisning() {return storage.getRundvisninger();}
 
     @Override
-    public ArrayList<Udlejning> getUdlejning() {return storage.getUdlejninger();}
     public ArrayList<Rundvisning> getRundvisning(boolean erBetalt) {
         ArrayList<Rundvisning> rundvisninger = storage.getRundvisninger();
         ArrayList<Rundvisning> rundvisningerIkkeBetalt = new ArrayList<>();
@@ -80,7 +79,8 @@ public class Controller implements GUI.ControllerInterface {
         return rundvisningerIkkeBetalt;
     }
 
-
+    @Override
+    public ArrayList<Udlejning> getUdlejning() {return storage.getUdlejninger();}
 
     public ArrayList<Udlejning> getUdlejninger() {return storage.getUdlejninger();}
 
@@ -331,10 +331,6 @@ public class Controller implements GUI.ControllerInterface {
 
 
 
-
-
-
-
 //
 
     Produkt p1 = createProdukt("Klosterbryg",pg1);
@@ -511,6 +507,10 @@ public class Controller implements GUI.ControllerInterface {
 
         //Kunder
         Kunde k1 = createKunde("Hans","12345678", "hans112@gmail.com","Vejen 1");
+        Kunde k2 = createKunde("Michael","32783292","mich43fw@gmail.com","Solen 43");
+        Kunde k3 = createKunde("Torben","87398409","torbenfradk@gmail.com","Hejgade 12");
+
+
 
 
         p42.setPant(200);
