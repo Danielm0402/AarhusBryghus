@@ -90,4 +90,6 @@ public interface ControllerInterface {
     void setUdlejningAfleveret(Udlejning valgteUdlejning);
 
     public ArrayList<Udlejning> getUdlejningerIkkeAfleveret();
+
+    ArrayList<Salgslinje> getAlleProdukterIkkeAfleveret();
 }

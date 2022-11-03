@@ -106,7 +106,7 @@ public class SalgsPane extends GridPane {
         HBox hboxTotal = new HBox(10, lblTotal,txfTotal);
         this.add(hboxTotal,3,4);
 
-        //Dankort kontant, klippekort, mobilpay, regnning
+        //----------- - Dankort kontant, klippekort, mobilpay, regnning - --------------------
 
         Button btnDankort = new Button("Dankort");
         btnDankort.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(0)));

@@ -20,10 +20,12 @@ public class OpretUdlejningPane extends GridPane {
     private ComboBox<Produktgruppe> cbbProduktgruppe;
     private ComboBox<Pris> cbbProdukt;
     private Udlejning udlejning;
-    ListView<Udlejning> lvwIgangværendeUdlejninger;
-    ListView<Salgslinje> lvwUdlejning;
+    private ListView<Udlejning> lvwIgangværendeUdlejninger;
+    private ListView<Salgslinje> lvwUdlejning;
+    private ListView<Salgslinje> lvwAlleUdlejedeProdukter;
     private Label lblError,lblTotalPant;
     private int total =0;
+
 
 
 
@@ -43,6 +45,7 @@ public class OpretUdlejningPane extends GridPane {
 
         cbbKunder = new ComboBox<>();
         cbbKunder.getItems().addAll(controller.getKunder());
+        cbbKunder.setMaxWidth(100);
 
         HBox hbox = new HBox(10,lblvaelgKunde,cbbKunder,btnOpretKunde);
 
@@ -86,7 +89,7 @@ public class OpretUdlejningPane extends GridPane {
 //        -------------------------------------------------------------------------
         lblError = new Label();
 
-//        ---------- listview over igangværende udlejninger ude i højre--------------------
+//        ---------- listview over igangværende udlejninger i midten--------------------
 
         Label lblIgangværendeUdlejninger = new Label("Igangværende udlejninger:");
         lvwIgangværendeUdlejninger = new ListView<>();
@@ -94,8 +97,11 @@ public class OpretUdlejningPane extends GridPane {
         Button btnAfleverUdlejning = new Button("Aflever valgte udlejning");
         btnAfleverUdlejning.setOnAction(event -> AfleverUdlejning());
 
+//        ---------- oversigt over alle udlejede produkter--------------------
 
-
+        Label lblAlleUdlejedeProdukter = new Label("Oversigt over alle udlejede produkter:");
+        lvwAlleUdlejedeProdukter = new ListView<>();
+//---------------------------------------
 
 
         VBox vbox = new VBox(10,hbox,hbox2,hbox3,btnTilføjProduktPris,lblError,lvwUdlejning,lblTotalPant,hboxBetaling);
@@ -104,14 +110,21 @@ public class OpretUdlejningPane extends GridPane {
         VBox vbox2 = new VBox(10,lblIgangværendeUdlejninger,lvwIgangværendeUdlejninger,btnAfleverUdlejning);
         this.add(vbox2,1,1);
 
+        VBox vbox3 = new VBox(10,lblAlleUdlejedeProdukter,lvwAlleUdlejedeProdukter);
+        this.add(vbox3,2,1);
+
     }
 
     private void AfleverUdlejning() {
         Udlejning valgteUdlejning = lvwIgangværendeUdlejninger.getSelectionModel().getSelectedItem();
         if(valgteUdlejning != null ) {
-            controller.setUdlejningAfleveret(valgteUdlejning);
+            AfleverUdlejningWindow afleverUdlejningWindow = new AfleverUdlejningWindow("Aflever Udlejning",valgteUdlejning);
+            afleverUdlejningWindow.showAndWait();
+
+//            controller.setUdlejningAfleveret(valgteUdlejning);
             lvwIgangværendeUdlejninger.getItems().clear();
             lvwIgangværendeUdlejninger.getItems().setAll(controller.getUdlejningerIkkeAfleveret());
+            updateAlleUdlejedeProdukterOversigt();
         }
         else {
             lblError.setText("Vælg en udlejning at aflevere");
@@ -129,6 +142,7 @@ public class OpretUdlejningPane extends GridPane {
             lvwUdlejning.getItems().clear();
             total = 0;
             lblTotalPant.setText("Pant til afregning: " + total + ",-");
+            updateAlleUdlejedeProdukterOversigt();
         }
 
     }
@@ -170,6 +184,10 @@ public class OpretUdlejningPane extends GridPane {
         cbbKunder.getSelectionModel().selectLast();
     }
 
+    public void updateAlleUdlejedeProdukterOversigt(){
+        lvwAlleUdlejedeProdukter.getItems().setAll(controller.getAlleProdukterIkkeAfleveret());
+    }
+
 
     public void updateControls() {
         lblError.setText("");
@@ -179,5 +197,6 @@ public class OpretUdlejningPane extends GridPane {
         cbbProduktgruppe.getItems().clear();
         cbbProduktgruppe.getItems().addAll(controller.getProduktgrupper(EnumArrangementVisning.UDLEJNING));
         cbbProdukt.getItems().clear();
+
     }
 }

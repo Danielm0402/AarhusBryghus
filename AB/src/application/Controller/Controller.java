@@ -93,8 +93,20 @@ public class Controller implements GUI.ControllerInterface {
                 ikkeafleveredeUdlejninger.add(udlejning);
             }
         }
-
         return ikkeafleveredeUdlejninger;}
+
+    @Override
+    public ArrayList<Salgslinje> getAlleProdukterIkkeAfleveret(){
+        ArrayList<Udlejning> UdlejningerIkkeAfleveret = getUdlejningerIkkeAfleveret();
+        ArrayList<Salgslinje> ProdukterIkkeAfleveret = new ArrayList<>();
+
+        for (Udlejning u : UdlejningerIkkeAfleveret){
+            ProdukterIkkeAfleveret.addAll(u.getSalgsLinjer());
+        }
+
+        return ProdukterIkkeAfleveret;
+    }
+
 
 
     @Override
@@ -256,6 +268,7 @@ public class Controller implements GUI.ControllerInterface {
     }
 
 
+
     @Override
     public void setPant(Produkt produkt, int pant) {
         produkt.setPant(pant);
@@ -290,7 +303,6 @@ public class Controller implements GUI.ControllerInterface {
     //    Arrangementer
     Arrangement a1 = createArrangement("Fredagsbar");
     Arrangement a2 = createArrangement("Daglig butikssalg");
-    Arrangement a3 = createArrangement("Rundvisning");
 
 
     Produktgruppe pg1 = createProduktgruppe("Flaske");
@@ -303,7 +315,7 @@ public class Controller implements GUI.ControllerInterface {
     Produktgruppe pg8 = createProduktgruppe("Anlæg");
     Produktgruppe pg9 = createProduktgruppe("Glas");
     Produktgruppe pg10 = createProduktgruppe("Sampakninger");
-    Produktgruppe pg11 = createProduktgruppe("Rundvisning");
+//    Produktgruppe pg11 = createProduktgruppe("Rundvisning");
 
     // Betalingsmetoder
     Betalingsmetode b1 = createBetalingsmetode("Dankort");
@@ -415,9 +427,9 @@ public class Controller implements GUI.ControllerInterface {
     Produkt p71 = createProdukt("trækasse 12 øl",pg10);
     Produkt p72 = createProdukt("papkasse 12 øl",pg10);
 
-    Produkt p73 = createProdukt("pr person dag",pg11);
+//    Produkt p73 = createProdukt("pr person dag",pg11);
 
-    Produkt p74 = createProdukt("Rundvisning", pg11);
+//    Produkt p74 = createProdukt("Rundvisning", pg11);
 
         //        priser
 
@@ -498,11 +510,11 @@ public class Controller implements GUI.ControllerInterface {
         Pris pr70 = createPris(75,p70,a2);
         Pris pr71 = createPris(75,p71,a2);
         Pris pr72 = createPris(75,p72,a2);
-        Pris pr73 = createPris(75,p73,a2);
-        Pris pr74 = createPris(75,p74,a2);
-
-
-        Pris pris10 = createPris(100,p74,a2);
+//        Pris pr73 = createPris(75,p73,a2);
+//        Pris pr74 = createPris(75,p74,a2);
+//
+//
+//        Pris pris10 = createPris(100,p74,a2);
 
 
         //Kunder
