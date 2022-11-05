@@ -233,6 +233,10 @@ public class Controller implements GUI.ControllerInterface {
         salg.setBetalingsmetode(betalingsmetode);
     }
 
+    @Override
+    public int getTotalPant(Udlejning udlejning){
+        return udlejning.getTotalPant();
+    }
 
     @Override
     public void setRabatprocent(Salg salg, double rabatprocent){
@@ -288,6 +292,8 @@ public class Controller implements GUI.ControllerInterface {
 
         return totalpris;
     }
+
+
 
     @Override
     public void setPant(Produkt produkt, int pant) {
@@ -499,28 +505,28 @@ public class Controller implements GUI.ControllerInterface {
         Pris pr39 = createPris(75,p39,a2);
         Pris pr40 = createPris(75,p40,a2);
         Pris pr41 = createPris(75,p41,a2);
-        Pris pr42 = createPris(75,p42,a2);
-        Pris pr43 = createPris(75,p43,a2);
-        Pris pr44 = createPris(75,p44,a2);
-        Pris pr45 = createPris(75,p45,a2);
-        Pris pr46 = createPris(75,p46,a2);
-        Pris pr47 = createPris(75,p47,a2);
-        Pris pr48 = createPris(75,p48,a2);
-        Pris pr49 = createPris(75,p49,a2);
-        Pris pr50 = createPris(75,p50,a2);
+        Pris pr42 = createPris(775,p42,a2);
+        Pris pr43 = createPris(625,p43,a2);
+        Pris pr44 = createPris(575,p44,a2);
+        Pris pr45 = createPris(775,p45,a2);
+        Pris pr46 = createPris(700,p46,a2);
+        Pris pr47 = createPris(775,p47,a2);
+        Pris pr48 = createPris(775,p48,a2);
+        Pris pr49 = createPris(775,p49,a2);
+        Pris pr50 = createPris(775,p50,a2);
 //        Pris pr51 = createPris(75,p51,a2); det er pantprodukt. Vi udregner pant på attribut.
-        Pris pr52 = createPris(75,p52,a2);
+        Pris pr52 = createPris(400,p52,a2);
 //        Pris pr53 = createPris(75,p53,a2);  det er pantprodukt. Vi udregner pant på attribut.
-        Pris pr54 = createPris(75,p54,a2);
-        Pris pr55 = createPris(75,p55,a2);
+        Pris pr54 = createPris(350,p54,a2);
+        Pris pr55 = createPris(600,p55,a2);
         Pris pr56 = createPris(75,p56,a2);
         Pris pr57 = createPris(75,p57,a2);
         Pris pr58 = createPris(75,p58,a2);
         Pris pr59 = createPris(75,p59,a2);
-        Pris pr60 = createPris(75,p60,a2);
-        Pris pr61 = createPris(75,p61,a2);
-        Pris pr62 = createPris(75,p62,a2);
-        Pris pr63 = createPris(75,p63,a2);
+        Pris pr60 = createPris(250,p60,a2);
+        Pris pr61 = createPris(400,p61,a2);
+        Pris pr62 = createPris(500,p62,a2);
+        Pris pr63 = createPris(500,p63,a2);
         Pris pr64 = createPris(75,p64,a2);
         Pris pr65 = createPris(75,p65,a2);
         Pris pr66 = createPris(75,p66,a2);

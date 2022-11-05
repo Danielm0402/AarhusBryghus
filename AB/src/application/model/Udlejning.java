@@ -27,8 +27,18 @@ public class Udlejning extends Salg{
         return erAfleveret;
     }
 
+    public int getTotalPant() {
+        int totalPant = 0;
+        for (Salgslinje s : super.getSalgsLinjer()){
+            totalPant += s.getProdukt().getPant();
+        }
+        return totalPant;
+    }
+
     @Override
     public String toString() {
         return kunde.getNavn() +", tlf. " + kunde.getTelefon() + ", udlejningsdato: "+super.getDato();
     }
+
+
 }

@@ -56,6 +56,7 @@ public class OpretUdlejningPane extends GridPane {
         Label lblProduktgruppe = new Label("Vælg produktgruppe");
         cbbProduktgruppe = new ComboBox<>();
         cbbProduktgruppe.getItems().addAll(controller.getProduktgrupper(EnumArrangementVisning.UDLEJNING));
+        cbbProduktgruppe.setPrefWidth(146);
         ChangeListener<Produktgruppe> listener = (ov, oldValue, newValue) -> produktgruppeChanged(newValue);
         cbbProduktgruppe.getSelectionModel().selectedItemProperty().addListener(listener);
 
@@ -63,6 +64,7 @@ public class OpretUdlejningPane extends GridPane {
 
         Label lblProdukt = new Label("Vælg produkt");
         cbbProdukt = new ComboBox<>();
+        cbbProdukt.setPrefWidth(146);
 
         HBox hbox3 = new HBox(48,lblProdukt,cbbProdukt);
 
@@ -172,7 +174,8 @@ public class OpretUdlejningPane extends GridPane {
 
 //            Magic number "1" nedenfor betyder, at udlejning altid bare skal bruge arrangementet "daglig butikssalg".
 //            Der er ikke andre salgssituationer, hvor der skal udlejes.
-            cbbProdukt.getItems().addAll(controller.getPriserFromArrangementWithinProduktgruppe(controller.getArrangementer().get(1),selectedproduktgruppe)); //todo skal nok gette Daglig Butiks Priser indenfor denne produktgruppe -.-
+            cbbProdukt.getItems().addAll(controller.getPriserFromArrangementWithinProduktgruppe(controller.getArrangementer().get(1),selectedproduktgruppe));
+            cbbProdukt.getSelectionModel().selectFirst();
         }
     }
 

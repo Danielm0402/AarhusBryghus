@@ -98,4 +98,6 @@ public interface ControllerInterface {
     public void setTotalPris(Salg salg, double totalPris);
 
     double udregnTotalPris(Salg salg);
+
+    int getTotalPant(Udlejning udlejning);
 }
