@@ -254,6 +254,13 @@ public class Controller implements GUI.ControllerInterface {
     }
 
     @Override
+    public Pris createPris(int klip,int enhedsPris, Produkt produkt, Arrangement arrangement){
+        Pris pris = arrangement.createPris(enhedsPris, produkt);
+        storage.addPris(pris);
+        return pris;
+    }
+
+    @Override
     public void setProduktgruppeSomUdlejning(Produktgruppe produktgruppe) {
         produktgruppe.setProduktgruppeSomUdlejning();
     }
@@ -271,7 +278,16 @@ public class Controller implements GUI.ControllerInterface {
         return produktgrupperWithUdlejningsattribut;
     }
 
+    @Override
+    public double udregnTotalPris(Salg salg){
+        double totalpris = 0;
 
+        for (Salgslinje salgslinje : salg.getSalgsLinjer()){
+            totalpris += salgslinje.getAftaltPris() * salgslinje.getAntal();
+        }
+
+        return totalpris;
+    }
 
     @Override
     public void setPant(Produkt produkt, int pant) {
@@ -437,7 +453,7 @@ public class Controller implements GUI.ControllerInterface {
 
         //        priser
 
-        Pris pris1 = createPris(70,p1,a1);
+        Pris pris1 = createPris(2,70,p1,a1);
         Pris pris2 = createPris(65,p2,a1);
         Pris pris3 = createPris(70,p15,a1);
         Pris pris4 = createPris(65,p16,a1);
@@ -519,6 +535,8 @@ public class Controller implements GUI.ControllerInterface {
 //
 //
 //        Pris pris10 = createPris(100,p74,a2);
+
+        Pris pris75 = createPris(2,p72, a1);
 
 
         //Kunder

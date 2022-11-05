@@ -71,6 +71,8 @@ public interface ControllerInterface {
 
     Pris createPris(int enhedsPris, Produkt produkt, Arrangement arrangement);
 
+    Pris createPris(int klip, int enhedsPris, Produkt produkt, Arrangement arrangement);
+
     void setProduktgruppeSomUdlejning(Produktgruppe produktgruppe);
 
     ArrayList<Produktgruppe> getProduktgrupperWithUdlejningsattribut();
@@ -94,4 +96,6 @@ public interface ControllerInterface {
     ArrayList<Salgslinje> getAlleProdukterIkkeAfleveret();
 
     public void setTotalPris(Salg salg, double totalPris);
+
+    double udregnTotalPris(Salg salg);
 }

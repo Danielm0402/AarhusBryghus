@@ -64,7 +64,7 @@ public class OpretUdlejningPane extends GridPane {
         Label lblProdukt = new Label("Vælg produkt");
         cbbProdukt = new ComboBox<>();
 
-        HBox hbox3 = new HBox(10,lblProdukt,cbbProdukt);
+        HBox hbox3 = new HBox(48,lblProdukt,cbbProdukt);
 
         Button btnTilføjProduktPris = new Button("Tilføj Produkt");
         btnTilføjProduktPris.setOnAction(event -> tilføjProduktPris());

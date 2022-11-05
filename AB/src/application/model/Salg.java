@@ -83,12 +83,6 @@ public class Salg {
 
         public boolean incrementSalgslinje(Pris pris){
             boolean existsAlready = false;
-//            for (int i = 0; i < salgslinjer.size(); i++) {
-//                if (salgslinjer.get(i).getPris() == pris) {
-//                    salgslinjer.get(i).incrementSalgslinje();
-//                    existsAlready = true;
-//                }
-//            }
             for (Salgslinje s : getSalgsLinjer()) {
                 if (s.getPris() == pris) {
                     s.incrementSalgslinje();

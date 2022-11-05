@@ -2,19 +2,20 @@ package application.model;
 
 public class Salgslinje {
     private int antal;
-    private double aftaltPris;
     private Pris pris;
+    private int aftaltPris;
 
     public Salgslinje(int antal, Pris pris){
         this.antal = antal;
         this.pris=pris;
+        this.aftaltPris = pris.getEnhedspris();
     }
 
     public int getAntal() {
         return antal;
     }
 
-    public double getAftaltPris() {
+    public int getAftaltPris() {
         return aftaltPris;
     }
 
@@ -30,7 +31,7 @@ public class Salgslinje {
         this.antal = antal;
     }
 
-    public void setAftaltPris(double aftaltPris) {
+    public void setAftaltPris(int aftaltPris) {
         this.aftaltPris = aftaltPris;
     }
 
@@ -48,7 +49,7 @@ public class Salgslinje {
         if (pris.getProdukt().getPant() >0){
             s = " pant: "+pris.getProdukt().getPant()+",-";
         }
-        return pris.getProdukt().toString() + " " + antal + " stk af " + pris.getEnhedspris()+",-" +s;
+        return pris.getProdukt().toString() + " " + antal + " stk af " + getAftaltPris()+",-" +s;
     }
 
     public Pris getPris() {

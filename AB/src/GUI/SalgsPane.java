@@ -22,6 +22,8 @@ public class SalgsPane extends GridPane {
     private TextField txfTotal;
     private double total = 0;
     private Salg salg;
+    private Salgslinje valgteSalgsLinje;
+
 
 
     public SalgsPane() {
@@ -60,19 +62,25 @@ public class SalgsPane extends GridPane {
             public void handle(MouseEvent mouseEvent) {
                 Pris produktpris = lvwProduktPriser.getSelectionModel().getSelectedItem();
 
-                if (salg == null){
-                    salg = controller.createSalg();
-                }
+                if (produktpris != null) {
 
-                boolean existsAlready = controller.incrementSalgslinje(salg, produktpris);
+                    if (salg == null) {
+                        salg = controller.createSalg();
+                    }
 
-                //Hvis produktet ikke allerede findes tilføjes en ny salgslinje
-                if (!existsAlready){
-                    controller.createSalgsLinje(salg, 1, produktpris);
+//                incementSalgslinje sætter existsAlready til false, medmindre produktprisen findes i salget allerede
+                    boolean existsAlready = controller.incrementSalgslinje(salg, produktpris);
+
+                    //Hvis produktet ikke allerede findes tilføjes en ny salgslinje
+                    if (!existsAlready) {
+                        controller.createSalgsLinje(salg, 1, produktpris);
+                    }
+
+//                total += produktpris.getEnhedspris();
+                    total = controller.udregnTotalPris(salg);
+                    txfTotal.setText(String.valueOf(total));
+                    lvwSalgslinjer.getItems().setAll(salg.getSalgsLinjer());
                 }
-                total += produktpris.getEnhedspris();
-                txfTotal.setText(String.valueOf(total));
-                lvwSalgslinjer.getItems().setAll(salg.getSalgsLinjer());
             }
         });
 //        ---------------- salgslinjer ------------------------------
@@ -81,6 +89,22 @@ public class SalgsPane extends GridPane {
         //listview over salgslinjer
         lvwSalgslinjer = new ListView<>();
         this.add(lvwSalgslinjer,3,2);
+//        --------------- dette er for at lave et popup når man klikker på salgslinjen----------
+        lvwSalgslinjer.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                valgteSalgsLinje = lvwSalgslinjer.getSelectionModel().getSelectedItem();
+
+                if (valgteSalgsLinje!=null){
+                    popUpRedigerSalgslinje(valgteSalgsLinje);
+
+                }
+
+            }
+        });
+
+
+
 
 //------------------- rabat ----------------------------------------------
         Label lblRabat = new Label("Rabat i %");
@@ -127,7 +151,19 @@ public class SalgsPane extends GridPane {
         this.add(hboxBetaling,3,5);
     }
 
-    //    opdaterer hver gang der er lavet en ændring på "Vælg arrangement" bomboboksen.
+
+// ---------- popup til at ændre aftalt pris på salgslinjer  ------------------
+    public void popUpRedigerSalgslinje(Salgslinje valgteSalgsLinje){
+        RedigerSalgslinjeWindow redigerSalgsLinje = new RedigerSalgslinjeWindow("Rediger salgslinje", valgteSalgsLinje, salg);
+        redigerSalgsLinje.showAndWait();
+        lvwSalgslinjer.getItems().setAll(salg.getSalgsLinjer());
+        total = controller.udregnTotalPris(salg);
+        txfTotal.setText(String.valueOf(total));
+    }
+
+
+
+        //    opdaterer hver gang der er lavet en ændring på "Vælg arrangement" bomboboksen.
     private void selectedArrangementChanged(Arrangement newValue) {
         lvwProduktgrupper.getSelectionModel().selectFirst();
         Produktgruppe produktgruppe = lvwProduktgrupper.getSelectionModel().getSelectedItem();
@@ -169,8 +205,11 @@ public class SalgsPane extends GridPane {
     }
 
     public void discount(){
-        double rabat = Double.parseDouble(txfRabat.getText());
-        total = total * (1-(rabat/100));
-        txfTotal.setText(String.valueOf(total));
+        if (!txfRabat.getText().isEmpty()){
+            double rabat = Double.parseDouble(txfRabat.getText());
+            total = total * (1-(rabat/100));
+            txfTotal.setText(String.valueOf(total));
+        }
+
     }
 }
