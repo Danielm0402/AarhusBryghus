@@ -2,6 +2,8 @@ package GUI;
 
 import application.model.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public interface ControllerInterface {
@@ -90,6 +92,10 @@ public interface ControllerInterface {
     Pris getRundvisningsPris();
 
     void setUdlejningAfleveret(Udlejning valgteUdlejning);
+
+    void setDato(Salg salg, LocalDate dato);
+
+    void setModetidspunkt(Rundvisning rundvisning, LocalTime modetidspunkt);
 
     public ArrayList<Udlejning> getUdlejningerIkkeAfleveret();
 

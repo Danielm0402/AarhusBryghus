@@ -4,12 +4,18 @@ import Storage.Storage;
 import application.model.*;
 
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Controller implements GUI.ControllerInterface {
     private StorageInterface storage;
     public Controller(StorageInterface storage) {
         this.storage = storage;
+    }
+
+    public static Controller getTestController() {
+        return new Controller(Storage.getInstance());
     }
 
     @Override
@@ -304,10 +310,19 @@ public class Controller implements GUI.ControllerInterface {
     public void setVisning(Produktgruppe produktgruppe, EnumArrangementVisning salg) {
         produktgruppe.setVisning(salg);
     }
+
     @Override
     public void setErBetalt(Rundvisning rundvisning, boolean erBetalt){
         rundvisning.setErBetalt(erBetalt);
     }
+
+    @Override
+    public  void setDato(Salg salg, LocalDate dato) {
+        salg.setDato(dato);
+    }
+
+    @Override
+    public void setModetidspunkt(Rundvisning rundvisning, LocalTime modetidspunkt){rundvisning.setModetidspunkt(modetidspunkt);}
 
     public Pris getRundvisningsPris(){
         return Storage.getRundvisningPris();
@@ -319,7 +334,6 @@ public class Controller implements GUI.ControllerInterface {
     public void init() {
         initStorage();
     }
-
 
     @Override
     public void initStorage() {

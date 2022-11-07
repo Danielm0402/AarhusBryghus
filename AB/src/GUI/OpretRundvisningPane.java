@@ -124,7 +124,7 @@ public class OpretRundvisningPane extends GridPane{
         LocalDate now = LocalDate.now();
         Kunde kunde = cbbKunde.getSelectionModel().getSelectedItem();
         Pris pris = controller.getRundvisningsPris();
-        if(rundvisningDato.compareTo(now) < 1 || rundvisningTid == null || rundvisningAntal < 1 || kunde==null){
+        if(rundvisningDato.compareTo(now) < 0 || rundvisningTid == null || rundvisningAntal < 1 || kunde==null || pris==null){
             lblError.setText("Udfyld felter korrekt");
         }
         else{
@@ -132,16 +132,15 @@ public class OpretRundvisningPane extends GridPane{
             controller.setErBetalt(rundvisning,false);
             controller.createSalgsLinje(rundvisning, rundvisningAntal, pris);
             controller.setAntalDeltagere(rundvisning, rundvisningAntal);
-            rundvisning.setDato(rundvisningDato);
-            rundvisning.setModetidspunkt(rundvisningTid);
-            rundvisning.setKunde(kunde);
+            controller.setDato(rundvisning,rundvisningDato);
+            controller.setModetidspunkt(rundvisning,rundvisningTid);
+            controller.setKunde(rundvisning,kunde);
             updateControls();
             lblError.setStyle("-fx-text-fill: green");
             lblError.setText("Rundvisning opretettet");
             dpDato.setValue(null);
             txfTid.clear();
             txfAntalDeltagere.clear();
-            System.out.println(rundvisning.getSalgsLinjer());
         }
     }
 
