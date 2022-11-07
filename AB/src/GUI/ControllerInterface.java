@@ -65,7 +65,7 @@ public interface ControllerInterface {
 
     //               if (priser.contains(pris)) {
     //        priser.remove(pris);
-    Betalingsmetode createBetalingsmetode(String metode);
+    Betalingsmetode createBetalingsmetode(EnumBetalingsmetode metode);
 
     void setBetalingsmetode(Salg salg, Betalingsmetode betalingsmetode);
 

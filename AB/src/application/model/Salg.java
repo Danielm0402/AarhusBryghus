@@ -76,12 +76,12 @@ public class Salg {
         if (rabatprocent > 0) {
             double procent = 1 - (rabatprocent / 100);
             for (Salgslinje s : salgslinjer) {
-                samletPris += s.getEnhedspris();
+                samletPris += s.getEnhedspris()*s.getAntal();
             }
             return samletPris * procent;
         }else {
                 for (Salgslinje s : salgslinjer) {
-                    samletPris += s.getEnhedspris();
+                    samletPris += s.getEnhedspris()*s.getAntal();
                 }
                 return samletPris;
             }
@@ -100,6 +100,6 @@ public class Salg {
 
     @Override
     public String toString() {
-        return totalPris + " kr, betalt med " + betalingsmetode;
+        return SamletPris() + " kr, betalt med " + betalingsmetode;
     }
 }

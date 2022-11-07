@@ -1,22 +1,22 @@
 package application.model;
 
 public class Betalingsmetode {
-    private String betalingstype;
+    private EnumBetalingsmetode betalingstype;
 
-    public Betalingsmetode (String betalingstype){
-        this.betalingstype=betalingstype;
+    public Betalingsmetode (EnumBetalingsmetode enumBetalingsmetode){
+        this.betalingstype=enumBetalingsmetode;
     }
 
-    public String getBetalingstype() {
+    public EnumBetalingsmetode getBetalingstype() {
         return betalingstype;
     }
 
-    public void setBetalingstype(String betalingstype) {
+    public void setBetalingstype(EnumBetalingsmetode betalingstype) {
         this.betalingstype = betalingstype;
     }
 
     @Override
     public String toString() {
-        return betalingstype;
+        return betalingstype.toString();
     }
 }

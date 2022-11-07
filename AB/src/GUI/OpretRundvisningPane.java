@@ -68,19 +68,19 @@ public class OpretRundvisningPane extends GridPane{
 
 
         Button btnDankort = new Button("Dankort");
-        btnDankort.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(0)));
+        btnDankort.setOnAction(event -> Payment(EnumBetalingsmetode.DANKORT));
 
         Button btnKontant = new Button("Kontant");
-        btnKontant.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(1)));
+        btnKontant.setOnAction(event -> Payment(EnumBetalingsmetode.KONTANT));
 
         Button btnKlippekort = new Button("Klippekort");
-        btnKlippekort.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(2)));
+        btnKlippekort.setOnAction(event -> Payment(EnumBetalingsmetode.KLIPPEKORT));
 
         Button btnMobilpay = new Button("Mobilpay");
-        btnMobilpay.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(3)));
+        btnMobilpay.setOnAction(event -> Payment(EnumBetalingsmetode.MOBILEPAY));
 
         Button btnRegning = new Button("Regning");
-        btnRegning.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(4)));
+        btnRegning.setOnAction(event -> Payment(EnumBetalingsmetode.REGNING));
 
 
         lblError = new Label();
@@ -148,10 +148,11 @@ public class OpretRundvisningPane extends GridPane{
 
     }
 
-    public void Payment(Betalingsmetode betalingsmetode){
+    public void Payment(EnumBetalingsmetode betalingsmetode){
         if (rundvisning != null){
+            Betalingsmetode b1 = new Betalingsmetode(betalingsmetode);
             Rundvisning rundvisning = lvwRundvisninger.getSelectionModel().getSelectedItem();
-            controller.setBetalingsmetode(rundvisning,betalingsmetode);
+            controller.setBetalingsmetode(rundvisning,b1);
             controller.setErBetalt(rundvisning,true);
             updateControls();
         }

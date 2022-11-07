@@ -235,7 +235,7 @@ public class Controller implements GUI.ControllerInterface {
 //               if (priser.contains(pris)) {
 //        priser.remove(pris);
     @Override
-    public Betalingsmetode createBetalingsmetode(String metode){
+    public Betalingsmetode createBetalingsmetode(EnumBetalingsmetode metode){
         Betalingsmetode betalingsmetode = new Betalingsmetode(metode);
         storage.addBetalingsmetode(betalingsmetode);
         return betalingsmetode;
@@ -373,11 +373,11 @@ public class Controller implements GUI.ControllerInterface {
 //    Produktgruppe pg11 = createProduktgruppe("Rundvisning");
 
     // Betalingsmetoder
-    Betalingsmetode b1 = createBetalingsmetode("Dankort");
-    Betalingsmetode b2 = createBetalingsmetode("Kontant");
-    Betalingsmetode b3 = createBetalingsmetode("Klippekort");
-    Betalingsmetode b4 = createBetalingsmetode("Mobilpay");
-    Betalingsmetode b5 = createBetalingsmetode("Regning");
+    Betalingsmetode dankort = createBetalingsmetode(EnumBetalingsmetode.DANKORT);
+    Betalingsmetode kontant = createBetalingsmetode(EnumBetalingsmetode.KONTANT);
+    Betalingsmetode klippekort = createBetalingsmetode(EnumBetalingsmetode.KLIPPEKORT);
+    Betalingsmetode mobilepay = createBetalingsmetode(EnumBetalingsmetode.MOBILEPAY);
+    Betalingsmetode regning = createBetalingsmetode(EnumBetalingsmetode.REGNING);
 
 //    sætter lige Fustager og Kulsyre og Anlæg til at kunne udlejes
     pg4.setProduktgruppeSomUdlejning();
@@ -396,10 +396,7 @@ public class Controller implements GUI.ControllerInterface {
     pg9.setVisning(EnumArrangementVisning.SALG);
     pg10.setVisning(EnumArrangementVisning.SALG);
     pg11.setVisning(EnumArrangementVisning.SALG);
-
-
-
-//
+    //
 
     Produkt p1 = createProdukt("Klosterbryg",pg1);
     Produkt p2 = createProdukt("Sweet Georgia Brown",pg1);
@@ -616,9 +613,6 @@ public class Controller implements GUI.ControllerInterface {
         Kunde k2 = createKunde("Michael","32783292","mich43fw@gmail.com","Solen 43");
         Kunde k3 = createKunde("Torben","87398409","torbenfradk@gmail.com","Hejgade 12");
 
-
-
-
         p42.setPant(200);
         p43.setPant(200);
         p44.setPant(200);
@@ -631,6 +625,53 @@ public class Controller implements GUI.ControllerInterface {
         p52.setPant(1000);
         p54.setPant(1000);
         p55.setPant(1000);
+
+//        Lav lidt salg at kunne vise i oversigten
+        Salg salg1 = createSalg();
+        Salg salg2 = createSalg();
+        Salg salg3 = createSalg();
+        Salg salg4 = createSalg();
+        Salg salg5 = createSalg();
+
+
+        salg1.createSalgslinje(2,pris1);
+        salg1.createSalgslinje(2,pris5);
+        salg1.createSalgslinje(2,pris9);
+
+        salg2.createSalgslinje(2,pris76);
+
+        salg3.createSalgslinje(3,pris76);
+
+        salg4.createSalgslinje(1,pris12);
+        salg4.createSalgslinje(3,pris3);
+        salg4.createSalgslinje(1,pris21);
+        salg4.createSalgslinje(2,pris16);
+
+        salg5.createSalgslinje(1,pris3);
+        salg5.createSalgslinje(1,pris4);
+        salg5.createSalgslinje(2,pris8);
+        salg5.createSalgslinje(1,pris10);
+
+        salg1.setBetalingsmetode(dankort);
+        salg2.setBetalingsmetode(kontant);
+        salg3.setBetalingsmetode(klippekort);
+        salg4.setBetalingsmetode(mobilepay);
+        salg5.setBetalingsmetode(dankort);
+
+        LocalDate localDate1 = LocalDate.now();
+        LocalDate localDate2 = LocalDate.of(2022,11,5);
+        LocalDate localDate3 = LocalDate.of(2022,11,6);
+        LocalDate localDate4 = LocalDate.of(2022,11,3);
+
+
+
+        salg1.setDato(localDate1);
+        salg2.setDato(localDate2);
+        salg3.setDato(localDate3);
+        salg4.setDato(localDate4);
+
+
+
 
 
 

@@ -4,11 +4,13 @@ import Storage.Storage;
 import application.Controller.Controller;
 import application.model.Salgslinje;
 import application.model.Udlejning;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -86,7 +88,6 @@ public class AfleverUdlejningWindow extends Stage {
         VBox vBox2 = new VBox(10,lvwRetur,lvwPant);
         pane.add(vBox2,3,1);
 
-
 //        ------labels til udregning----------
         pant = controller.getTotalPant(valgteUdlejning);
         double subtotal = controller.udregnTotalPris(valgteUdlejning);
@@ -104,6 +105,50 @@ public class AfleverUdlejningWindow extends Stage {
         lblTilBetaling = new Label("Til betaling: "+ totalPris+",-");
         pane.add(lblTilBetaling,1,5);
 
+//        --------------------- Klik på linjen for at fjerne den--------------
+        lvwPant.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+                Salgslinje valgteLinje = lvwPant.getSelectionModel().getSelectedItem();
+
+                if (valgteLinje!=null){
+
+                    int pantværdi = valgteLinje.getProdukt().getPant();
+
+                        produkter.add(valgteLinje);
+                        pantliste.remove(valgteLinje);
+
+                        pant += pantværdi;
+
+                        totalPris -= pantværdi;
+
+                        updateControls();
+
+
+                }
+
+            }
+        });
+
+        lvwRetur.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Salgslinje valgteLinje = lvwRetur.getSelectionModel().getSelectedItem();
+
+                if (valgteLinje!=null){
+                    int enhedspris = valgteLinje.getEnhedspris();
+
+                    produkter.add(valgteLinje);
+                    returliste.remove(valgteLinje);
+
+                    retur -= enhedspris;
+
+                    totalPris += enhedspris;
+                    updateControls();
+                }
+            }
+        });
 
 
         //----------- - Dankort kontant, klippekort, mobilpay, regnning - --------------------
@@ -122,33 +167,30 @@ public class AfleverUdlejningWindow extends Stage {
 
         HBox hboxBetaling = new HBox(btnDankort,btnKontant,btnMobilpay,btnRegning);
         pane.add(hboxBetaling,1,8);
-
-
     }
 
+    //        --------------------ovenstående er initcontent---------------------
+
+
     private void bntRetur() {
-        Salgslinje valgeSalgslinje = lvwprodukter.getSelectionModel().getSelectedItem();
+        Salgslinje valgteSalgslinje = lvwprodukter.getSelectionModel().getSelectedItem();
         lblError.setText("");
         lblError2.setText("");
 
-        if (valgeSalgslinje !=null) {
+        if (valgteSalgslinje !=null) {
 
 //            går ud fra at alle produkter der kan komme retur ubrudt, har en pant. Derfor tjek på om pant er større end 0
-            if (valgeSalgslinje.getProdukt().getPant() > 0){
+            if (valgteSalgslinje.getProdukt().getPant() > 0){
 
-                int enhedspris = valgeSalgslinje.getEnhedspris();
+                int enhedspris = valgteSalgslinje.getEnhedspris();
 
-                produkter.remove(valgeSalgslinje);
-                returliste.add(valgeSalgslinje);
-
-                lvwprodukter.getItems().setAll(produkter);
-                lvwRetur.getItems().setAll(returliste);
+                produkter.remove(valgteSalgslinje);
+                returliste.add(valgteSalgslinje);
 
                 retur += enhedspris;
-                lblReturIUbrudtEmballage.setText("Retur i ubrudt emballage: "+ retur+",-");
 
                 totalPris -= enhedspris;
-                lblTilBetaling.setText("Til betaling: "+ totalPris+",-");
+                updateControls();
         }
             else {
                 lblError.setText("Vælg et uåbnet produkt");
@@ -168,24 +210,28 @@ public class AfleverUdlejningWindow extends Stage {
                 produkter.remove(valgteSalgslinje);
                 pantliste.add(valgteSalgslinje);
 
-                lvwprodukter.getItems().setAll(produkter);
-                lvwPant.getItems().setAll(pantliste);
-
                 pant -= pantværdi;
-                lblBetaltPant.setText("Pant kommet retur: " + pant + ",-");
 
                 totalPris += pantværdi;
-                lblTilBetaling.setText("Til betaling: "+ totalPris+",-");
+
+                updateControls();
 
             } else {
                 lblError2.setText("Vælg et produkt med pant");
             }
         }
-
     }
 
 
-    //Metoder:
+    private void updateControls(){
+        lblTilBetaling.setText("Til betaling: "+ totalPris+",-");
+        lblBetaltPant.setText("Pant kommet retur: " + pant + ",-");
+        lblReturIUbrudtEmballage.setText("Retur i ubrudt emballage: "+ retur+",-");
+        lvwprodukter.getItems().setAll(produkter);
+        lvwPant.getItems().setAll(pantliste);
+        lvwRetur.getItems().setAll(returliste);
+
+    }
 
     public void afleverUdlejning() {
             valgteUdlejning.setErAfleveret(true);

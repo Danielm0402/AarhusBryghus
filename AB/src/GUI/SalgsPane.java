@@ -11,6 +11,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
+import java.beans.beancontext.BeanContext;
+
 public class SalgsPane extends GridPane {
 
     private final ControllerInterface controller;
@@ -144,24 +146,38 @@ public class SalgsPane extends GridPane {
 
         //----------- - Dankort kontant, klippekort, mobilpay, regnning - --------------------
 
+
         Button btnDankort = new Button("Dankort");
-        btnDankort.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(0)));
+        btnDankort.setOnAction(event -> Payment(EnumBetalingsmetode.DANKORT));
 
         Button btnKontant = new Button("Kontant");
-        btnKontant.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(1)));
+        btnKontant.setOnAction(event -> Payment(EnumBetalingsmetode.KONTANT));
 
         Button btnKlippekort = new Button("Klippekort");
-        btnKlippekort.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(2)));
+        btnKlippekort.setOnAction(event -> Payment(EnumBetalingsmetode.KLIPPEKORT));
 
         Button btnMobilpay = new Button("Mobilpay");
-        btnMobilpay.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(3)));
+        btnMobilpay.setOnAction(event -> Payment(EnumBetalingsmetode.MOBILEPAY));
 
         Button btnRegning = new Button("Regning");
-        btnRegning.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(4)));
+        btnRegning.setOnAction(event -> Payment(EnumBetalingsmetode.REGNING));
 
         HBox hboxBetaling = new HBox(btnDankort,btnKontant,btnKlippekort,btnMobilpay,btnRegning);
         this.add(hboxBetaling,3,6);
     }
+
+    public void Payment(EnumBetalingsmetode betalingsmetode){
+        if (salg != null){
+            Betalingsmetode b1 = new Betalingsmetode(betalingsmetode);
+            controller.setBetalingsmetode(salg, b1);
+            controller.setTotalPris(salg, total);
+            salg = null; // sætter salg til null så den sletter salget
+            lvwSalgslinjer.getItems().clear();
+            total = 0;
+            txfTotal.setText(String.valueOf(total));
+            txfRabat.clear();
+        }
+}
 
 
 // ---------- popup til at ændre aftalt pris på salgslinjer  ------------------
@@ -203,18 +219,6 @@ public class SalgsPane extends GridPane {
         lvwProduktgrupper.getItems().setAll(controller.getProduktgrupper(EnumArrangementVisning.SALG));
     }
 
-    public void Payment(Betalingsmetode betalingsmetode){
-        if (salg != null){
-            controller.setBetalingsmetode(salg, betalingsmetode);
-            controller.setTotalPris(salg, total);
-            salg = null; // sætter salg til null så den sletter salget
-            lvwSalgslinjer.getItems().clear();
-            total = 0;
-            txfTotal.setText(String.valueOf(total));
-            txfRabat.clear();
-        }
-
-    }
 
     public void discount(){
         if (!txfRabat.getText().isEmpty()){

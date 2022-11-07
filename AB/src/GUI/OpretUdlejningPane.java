@@ -76,16 +76,19 @@ public class OpretUdlejningPane extends GridPane {
 
 //        ---------- knapper til afregning af pant ---------------------------
         Button btnDankort = new Button("Dankort");
-        btnDankort.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(0)));
+        btnDankort.setOnAction(event -> Payment(EnumBetalingsmetode.DANKORT));
 
         Button btnKontant = new Button("Kontant");
-        btnKontant.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(1)));
+        btnKontant.setOnAction(event -> Payment(EnumBetalingsmetode.KONTANT));
+
+        Button btnKlippekort = new Button("Klippekort");
+        btnKlippekort.setOnAction(event -> Payment(EnumBetalingsmetode.KLIPPEKORT));
 
         Button btnMobilpay = new Button("Mobilpay");
-        btnMobilpay.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(3)));
+        btnMobilpay.setOnAction(event -> Payment(EnumBetalingsmetode.MOBILEPAY));
 
         Button btnRegning = new Button("Regning");
-        btnRegning.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(4)));
+        btnRegning.setOnAction(event -> Payment(EnumBetalingsmetode.REGNING));
 
         HBox hboxBetaling = new HBox(btnDankort,btnKontant,btnMobilpay,btnRegning);
 //        -------------------------------------------------------------------------
@@ -117,6 +120,23 @@ public class OpretUdlejningPane extends GridPane {
 
     }
 
+    private void Payment(EnumBetalingsmetode betalingsmetode) {
+        if (lvwUdlejning.getItems().isEmpty()){
+            lblError.setText("Tilføj produkter før du udlejer");
+        }
+        else {
+            Betalingsmetode b1 = new Betalingsmetode(betalingsmetode);
+            controller.setBetalingsmetode(udlejning, b1);
+            lvwIgangværendeUdlejninger.getItems().setAll(controller.getUdlejningerIkkeAfleveret());
+            lvwIgangværendeUdlejninger.getSelectionModel().selectLast();
+            udlejning = null; // sætter salg til null så den sletter salget
+            lvwUdlejning.getItems().clear();
+            total = 0;
+            lblTotalPant.setText("Pant til afregning: " + total + ",-");
+            updateAlleUdlejedeProdukterOversigt();
+        }
+    }
+
     private void AfleverUdlejning() {
         Udlejning valgteUdlejning = lvwIgangværendeUdlejninger.getSelectionModel().getSelectedItem();
         if(valgteUdlejning != null ) {
@@ -133,21 +153,6 @@ public class OpretUdlejningPane extends GridPane {
         }
     }
 
-    private void Payment(Betalingsmetode betalingsmetode) {
-        if (lvwUdlejning.getItems().isEmpty()){
-            lblError.setText("Tilføj produkter før du udlejer");
-        }
-        else {
-            controller.setBetalingsmetode(udlejning, betalingsmetode);
-            lvwIgangværendeUdlejninger.getItems().setAll(controller.getUdlejningerIkkeAfleveret());
-            udlejning = null; // sætter salg til null så den sletter salget
-            lvwUdlejning.getItems().clear();
-            total = 0;
-            lblTotalPant.setText("Pant til afregning: " + total + ",-");
-            updateAlleUdlejedeProdukterOversigt();
-        }
-
-    }
 
     private void tilføjProduktPris() {
         if (cbbKunder.getSelectionModel().getSelectedItem() == null|| cbbProdukt.getSelectionModel().getSelectedItem() == null){
