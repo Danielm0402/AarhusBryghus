@@ -18,9 +18,9 @@ public class SalgsPane extends GridPane {
     private ListView<Pris> lvwProduktPriser;
     private ListView<Produktgruppe> lvwProduktgrupper;
     private ListView<Salgslinje> lvwSalgslinjer;
-    private TextField txfRabat;
-    private TextField txfTotal;
+    private TextField txfRabat, txfTotal, txfTotalKlip;
     private double total = 0;
+    private int totalKlip = 0;
     private Salg salg;
     private Salgslinje valgteSalgsLinje;
 
@@ -73,12 +73,18 @@ public class SalgsPane extends GridPane {
 
                     //Hvis produktet ikke allerede findes tilføjes en ny salgslinje
                     if (!existsAlready) {
-                        controller.createSalgsLinje(salg, 1, produktpris);
+                        if (produktpris.getKlip() != 0){
+                            controller.createSalgsLinje(salg,1,produktpris,produktpris.getKlip());
+                        }else {
+                            controller.createSalgsLinje(salg, 1, produktpris);
+                        }
                     }
 
 //                total += produktpris.getEnhedspris();
                     total = controller.udregnTotalPris(salg);
                     txfTotal.setText(String.valueOf(total));
+                    totalKlip = controller.udregnTotalKlip(salg);
+                    txfTotalKlip.setText(String.valueOf(totalKlip));
                     lvwSalgslinjer.getItems().setAll(salg.getSalgsLinjer());
                 }
             }
@@ -121,14 +127,20 @@ public class SalgsPane extends GridPane {
         this.add(hboxRabat,3,3);
 
         Label lblTotal = new Label("Total");
+        Label lblTotalKlip = new Label("Total Klip");
 
         //textArea for total
         txfTotal = new TextField();
         txfTotal.setEditable(false);
 
+        txfTotalKlip = new TextField();
+        txfTotalKlip.setEditable(false);
 
-        HBox hboxTotal = new HBox(10, lblTotal,txfTotal);
+
+        HBox hboxTotal = new HBox(33, lblTotal,txfTotal);
         this.add(hboxTotal,3,4);
+        HBox hboxTotalKlip = new HBox(10,lblTotalKlip, txfTotalKlip);
+        this.add(hboxTotalKlip,3,5);
 
         //----------- - Dankort kontant, klippekort, mobilpay, regnning - --------------------
 
@@ -148,7 +160,7 @@ public class SalgsPane extends GridPane {
         btnRegning.setOnAction(event -> Payment(controller.getBetalingsmetoder().get(4)));
 
         HBox hboxBetaling = new HBox(btnDankort,btnKontant,btnKlippekort,btnMobilpay,btnRegning);
-        this.add(hboxBetaling,3,5);
+        this.add(hboxBetaling,3,6);
     }
 
 

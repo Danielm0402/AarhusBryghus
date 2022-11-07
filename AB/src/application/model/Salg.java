@@ -25,6 +25,12 @@ public class Salg {
         return salgslinje;
     }
 
+    public Salgslinje createSalgslinje(int antal, Pris pris, int klip){
+        Salgslinje salgslinje = new Salgslinje(antal, pris, klip);
+        salgslinjer.add(salgslinje);
+        return salgslinje;
+    }
+
     public LocalDate getDato() {
         return dato;
     }

@@ -21,6 +21,12 @@ public class Arrangement {
         return pris;
     }
 
+    public Pris createPris(int klip,int enhedspris, Produkt produkt){
+        Pris pris = new Pris(enhedspris, produkt,this, klip);
+        priser.add(pris);
+        return pris;
+    }
+
     public void removePris(Pris pris){
         if (priser.contains(pris)){
             priser.remove(pris);

@@ -137,19 +137,21 @@ public class OpretArrangementPane extends GridPane {
         Produkt produkt = cbbAlleProdukter.getSelectionModel().getSelectedItem();
         Arrangement arrangement = cbbArrangementer.getSelectionModel().getSelectedItem();
         boolean e = true;
-
-        for (Pris pris : arrangement.getPriser()){
-            if (pris.getProdukt() == produkt){
-                lblError.setStyle("-fx-text-fill: red");
-                lblError.setText("Dette produkt findes allerede");
-                e=false;
+        if (arrangement != null || produkt != null){
+            for (Pris pris : arrangement.getPriser()){
+                if (pris.getProdukt() == produkt){
+                    lblError.setStyle("-fx-text-fill: red");
+                    lblError.setText("Dette produkt findes allerede");
+                    e=false;
+                }
+            }
+            if (e && !txfPris.getText().isEmpty()) {
+                int pris1 = Integer.parseInt((txfPris.getText().trim()));
+                controller.createPris(pris1, produkt, arrangement);
+                updateControls();
             }
         }
-        if (e) {
-            int pris1 = Integer.parseInt((txfPris.getText().trim()));
-            controller.createPris(pris1, produkt, arrangement);
-            updateControls();
-        }
+
         }
 
 

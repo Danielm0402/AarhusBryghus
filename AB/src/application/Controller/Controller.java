@@ -209,6 +209,13 @@ public class Controller implements GUI.ControllerInterface {
     }
 
     @Override
+    public Salgslinje createSalgsLinje(Salg salg, int antal, Pris pris, int klip){
+        Salgslinje salgslinje = salg.createSalgslinje(antal, pris, klip);
+        storage.addSalgslinje(salgslinje);
+        return salgslinje;
+    }
+
+    @Override
     public boolean incrementSalgslinje(Salg salg, Pris pris){
         boolean existsAlready = salg.incrementSalgslinje(pris);
 
@@ -259,7 +266,7 @@ public class Controller implements GUI.ControllerInterface {
 
     @Override
     public Pris createPris(int klip,int enhedsPris, Produkt produkt, Arrangement arrangement){
-        Pris pris = arrangement.createPris(enhedsPris, produkt);
+        Pris pris = arrangement.createPris(klip,enhedsPris, produkt);
         storage.addPris(pris);
         return pris;
     }
@@ -292,8 +299,15 @@ public class Controller implements GUI.ControllerInterface {
 
         return totalpris;
     }
+    @Override
+    public int udregnTotalKlip(Salg salg){
+        int totalKlip = 0;
 
-
+        for (Salgslinje salgslinje : salg.getSalgsLinjer()){
+            totalKlip += salgslinje.getKlip() * salgslinje.getAntal();
+        }
+        return totalKlip;
+    }
 
     @Override
     public void setPant(Produkt produkt, int pant) {
@@ -341,6 +355,7 @@ public class Controller implements GUI.ControllerInterface {
     Produktgruppe pg8 = createProduktgruppe("Anlæg");
     Produktgruppe pg9 = createProduktgruppe("Glas");
     Produktgruppe pg10 = createProduktgruppe("Sampakninger");
+    Produktgruppe pg11 = createProduktgruppe("Klippekort");
 //    Produktgruppe pg11 = createProduktgruppe("Rundvisning");
 
     // Betalingsmetoder
@@ -366,6 +381,7 @@ public class Controller implements GUI.ControllerInterface {
     pg7.setVisning(EnumArrangementVisning.SALG);
     pg9.setVisning(EnumArrangementVisning.SALG);
     pg10.setVisning(EnumArrangementVisning.SALG);
+    pg11.setVisning(EnumArrangementVisning.SALG);
 
 
 
@@ -453,6 +469,8 @@ public class Controller implements GUI.ControllerInterface {
     Produkt p71 = createProdukt("trækasse 12 øl",pg10);
     Produkt p72 = createProdukt("papkasse 12 øl",pg10);
 
+    Produkt p73 = createProdukt("Klippekort", pg11);
+
 //    Produkt p73 = createProdukt("pr person dag",pg11);
 
 //    Produkt p74 = createProdukt("Rundvisning", pg11);
@@ -460,9 +478,41 @@ public class Controller implements GUI.ControllerInterface {
         //        priser
 
         Pris pris1 = createPris(2,70,p1,a1);
-        Pris pris2 = createPris(65,p2,a1);
-        Pris pris3 = createPris(70,p15,a1);
-        Pris pris4 = createPris(65,p16,a1);
+        Pris pris2 = createPris(2,65,p2,a1);
+        Pris pris3 = createPris(2,70,p15,a1);
+        Pris pris4 = createPris(2,65,p16,a1);
+        Pris pris5 = createPris(2,70,p1,a1);
+        Pris pris6 = createPris(2,65,p2,a1);
+        Pris pris7 = createPris(2,70,p3,a1);
+        Pris pris8 = createPris(2,65,p4,a1);
+        Pris pris9 = createPris(2,70,p5,a1);
+        Pris pris10 = createPris(2,65,p6,a1);
+        Pris pris11 = createPris(2,70,p7,a1);
+        Pris pris12 = createPris(2,65,p8,a1);
+        Pris pris13 = createPris(2,70,p9,a1);
+        Pris pris14 = createPris(3,65,p10,a1);
+        Pris pris15 = createPris(1,70,p11,a1);
+        Pris pris16 = createPris(1,65,p12,a1);
+        Pris pris17 = createPris(1,70,p13,a1);
+        Pris pris18 = createPris(1,65,p14,a1);
+        Pris pris19= createPris(1,75,p15,a1);
+        Pris pris20= createPris(1,75,p16,a1);
+        Pris pris21 = createPris(1,70,p17,a1);
+        Pris pris22 = createPris(1,65,p18,a1);
+        Pris pris23 = createPris(1,75,p19,a1);
+        Pris pris24 = createPris(1,75,p20,a1);
+        Pris pris25= createPris(75,p21,a1);
+        Pris pris26 = createPris(75,p22,a1);
+        Pris pris27 = createPris(75,p23,a1);
+        Pris pris28 = createPris(75,p24,a1);
+        Pris pris29 = createPris(75,p25,a1);
+        Pris pris30 = createPris(75,p26,a1);
+        Pris pris31 = createPris(75,p27,a1);
+        Pris pris32 = createPris(75,p28,a1);
+        Pris pris33 = createPris(75,p29,a1);
+        Pris pris34 = createPris(75,p30,a1);
+        Pris pris35 = createPris(75,p31,a1);
+        Pris pros36 = createPris(1,75,p32,a1);
 
         Pris pr1 = createPris(70,p1,a2);
         Pris pr2 = createPris(65,p2,a2);
@@ -543,6 +593,8 @@ public class Controller implements GUI.ControllerInterface {
 //        Pris pris10 = createPris(100,p74,a2);
 
         Pris pris75 = createPris(2,p72, a1);
+
+        Pris pris76 = createPris(130,p73,a1);
 
 
         //Kunder

@@ -97,11 +97,16 @@ public class OversigtsPane extends GridPane {
         }
 
     public void updateListViewSalg(){
-        lvwSalg.getItems().addAll(getSalgFromGivenPeriod());
-        for (int i = 0; i < getSalgFromGivenPeriod().size(); i++) {
-            totalPris += getSalgFromGivenPeriod().get(i).getTotalPris();
+        if (dpDatoFra != null && dpDatoTil != null){
+            totalPris = 0;
+            lvwSalg.getItems().clear();
+            lvwSalgslinjer.getItems().clear();
+            lvwSalg.getItems().addAll(getSalgFromGivenPeriod());
+            for (int i = 0; i < getSalgFromGivenPeriod().size(); i++) {
+                totalPris += getSalgFromGivenPeriod().get(i).getTotalPris();
+            }
+            lblTotalPris.setText("Total pris: " + totalPris);
         }
-        lblTotalPris.setText("Total pris: " + totalPris);
     }
 
     private void selectedVisningChanged(DatePicker newValue) {
@@ -110,6 +115,8 @@ public class OversigtsPane extends GridPane {
 
 
     public void updateControls() {
+        totalPris = 0;
+        lblTotalPris.setText("Total pris: " + totalPris);
         lvwSalg.getItems().clear();
         lvwSalgslinjer.getItems().clear();
         dpDatoFra.getEditor().clear();

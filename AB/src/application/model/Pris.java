@@ -5,11 +5,19 @@ public class Pris {
     private Produkt produkt;
     private int enhedspris;
     private Arrangement arrangement;
+    private int Klip;
 
     public Pris(int enhedspris,Produkt produkt, Arrangement arrangement) {
         this.enhedspris = enhedspris;
         this.produkt = produkt;
         this.arrangement = arrangement;
+    }
+
+    public Pris(int enhedspris,Produkt produkt, Arrangement arrangement, int klip){
+        this.enhedspris = enhedspris;
+        this.produkt = produkt;
+        this.arrangement = arrangement;
+        this.Klip = klip;
     }
 
     public int getEnhedspris() {
@@ -24,9 +32,20 @@ public class Pris {
         return produkt;
     }
 
+    public int getKlip() {
+        return Klip;
+    }
+
     @Override
     public String toString() {
-        return  produkt +
-                ", pris: " + enhedspris + ",-";
+        if (Klip != 0){
+            return  produkt +
+                    ", pris: " + enhedspris + ",-" +
+                    "/ " + Klip + " klip";
+        }else {
+            return  produkt +
+                    ", pris: " + enhedspris + ",-";
+        }
+
     }
 }

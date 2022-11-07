@@ -182,4 +182,27 @@ public class Storage implements application.Controller.StorageInterface {
         return Storage.uniqueInstance;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

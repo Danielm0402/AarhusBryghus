@@ -118,38 +118,43 @@ public class OpretRundvisningPane extends GridPane{
     }
 
     public void createRundvisningOgSalgslinje(){
-        LocalDate rundvisningDato = dpDato.getValue();
-        LocalTime rundvisningTid = LocalTime.parse(txfTid.getText().trim());
-        int rundvisningAntal = Integer.parseInt(txfAntalDeltagere.getText().trim());
-        LocalDate now = LocalDate.now();
-        Kunde kunde = cbbKunde.getSelectionModel().getSelectedItem();
-        Pris pris = controller.getRundvisningsPris();
-        if(rundvisningDato.compareTo(now) < 1 || rundvisningTid == null || rundvisningAntal < 1 || kunde==null){
-            lblError.setText("Udfyld felter korrekt");
+        if (!txfTid.getText().isEmpty() && !txfAntalDeltagere.getText().isEmpty() && !(dpDato.getValue() == null)){
+            LocalDate rundvisningDato = dpDato.getValue();
+            LocalTime rundvisningTid = LocalTime.parse(txfTid.getText().trim());
+            int rundvisningAntal = Integer.parseInt(txfAntalDeltagere.getText().trim());
+            LocalDate now = LocalDate.now();
+            Kunde kunde = cbbKunde.getSelectionModel().getSelectedItem();
+            Pris pris = controller.getRundvisningsPris();
+            if(rundvisningDato.compareTo(now) < 1 || rundvisningTid == null || rundvisningAntal < 1 || kunde==null){
+                lblError.setText("Udfyld felter korrekt");
+            }
+            else{
+                Rundvisning rundvisning = controller.createRundvisning();
+                controller.setErBetalt(rundvisning,false);
+                controller.createSalgsLinje(rundvisning, rundvisningAntal, pris);
+                controller.setAntalDeltagere(rundvisning, rundvisningAntal);
+                rundvisning.setDato(rundvisningDato);
+                rundvisning.setModetidspunkt(rundvisningTid);
+                rundvisning.setKunde(kunde);
+                updateControls();
+                lblError.setStyle("-fx-text-fill: green");
+                lblError.setText("Rundvisning opretettet");
+                dpDato.setValue(null);
+                txfTid.clear();
+                txfAntalDeltagere.clear();
+                System.out.println(rundvisning.getSalgsLinjer());
+            }
         }
-        else{
-            Rundvisning rundvisning = controller.createRundvisning();
-            controller.setErBetalt(rundvisning,false);
-            controller.createSalgsLinje(rundvisning, rundvisningAntal, pris);
-            controller.setAntalDeltagere(rundvisning, rundvisningAntal);
-            rundvisning.setDato(rundvisningDato);
-            rundvisning.setModetidspunkt(rundvisningTid);
-            rundvisning.setKunde(kunde);
-            updateControls();
-            lblError.setStyle("-fx-text-fill: green");
-            lblError.setText("Rundvisning opretettet");
-            dpDato.setValue(null);
-            txfTid.clear();
-            txfAntalDeltagere.clear();
-            System.out.println(rundvisning.getSalgsLinjer());
-        }
+
     }
 
     public void Payment(Betalingsmetode betalingsmetode){
-        Rundvisning rundvisning = lvwRundvisninger.getSelectionModel().getSelectedItem();
-        controller.setBetalingsmetode(rundvisning,betalingsmetode);
-        controller.setErBetalt(rundvisning,true);
-        updateControls();
+        if (rundvisning != null){
+            Rundvisning rundvisning = lvwRundvisninger.getSelectionModel().getSelectedItem();
+            controller.setBetalingsmetode(rundvisning,betalingsmetode);
+            controller.setErBetalt(rundvisning,true);
+            updateControls();
+        }
     }
 
     public void updateControls() {

@@ -4,11 +4,19 @@ public class Salgslinje {
     private int antal;
     private Pris pris;
     private int aftaltPris;
+    private int klip;
 
     public Salgslinje(int antal, Pris pris){
         this.antal = antal;
         this.pris=pris;
         this.aftaltPris = pris.getEnhedspris();
+    }
+
+    public Salgslinje(int antal, Pris pris,int klip){
+        this.antal = antal;
+        this.pris=pris;
+        this.aftaltPris = pris.getEnhedspris();
+        this.klip = klip;
     }
 
     public int getAntal() {
@@ -39,6 +47,10 @@ public class Salgslinje {
         this.pris = pris;
     }
 
+    public int getKlip() {
+        return klip;
+    }
+
     public void incrementSalgslinje(){
         this.antal++;
     }
@@ -48,6 +60,8 @@ public class Salgslinje {
         String s = "";
         if (pris.getProdukt().getPant() >0){
             s = " pant: "+pris.getProdukt().getPant()+",-";
+        }else if (pris.getKlip() != 0){
+            return pris.getProdukt().toString() + " " + antal + " stk af " + getAftaltPris()+",- / " + pris.getKlip() + " klip";
         }
         return pris.getProdukt().toString() + " " + antal + " stk af " + getAftaltPris()+",-" +s;
     }

@@ -55,6 +55,8 @@ public interface ControllerInterface {
 
     Salgslinje createSalgsLinje(Salg salg, int antal, Pris pris);
 
+    Salgslinje createSalgsLinje(Salg salg, int antal, Pris pris, int klip);
+
     boolean incrementSalgslinje(Salg salg, Pris pris);
 
     void removeSalgsLinje(Salg salg, Salgslinje salgslinje);
@@ -98,6 +100,8 @@ public interface ControllerInterface {
     public void setTotalPris(Salg salg, double totalPris);
 
     double udregnTotalPris(Salg salg);
+
+    public int udregnTotalKlip(Salg salg);
 
     int getTotalPant(Udlejning udlejning);
 }
