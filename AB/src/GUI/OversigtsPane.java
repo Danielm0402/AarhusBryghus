@@ -2,6 +2,7 @@ package GUI;
 
 import Storage.Storage;
 import application.Controller.Controller;
+import application.model.EnumBetalingsmetode;
 import application.model.Salg;
 import application.model.Salgslinje;
 import javafx.beans.Observable;
@@ -19,11 +20,12 @@ import java.util.ArrayList;
 public class OversigtsPane extends GridPane {
     private final ControllerInterface controller;
     private DatePicker dpDatoFra, dpDatoTil;
-    private Label lblDatoFra, lblDatoTil, lblTotalPris;
+    private Label lblDatoFra, lblDatoTil, lblTotalPris, lblTotalKlip;
     private Button btnSearch;
     private ListView<Salg> lvwSalg;
     private ListView<Salgslinje> lvwSalgslinjer;
     private double totalPris = 0;
+    private int totalKlip = 0;
 
 
     public OversigtsPane() {
@@ -79,7 +81,8 @@ public class OversigtsPane extends GridPane {
         lblTotalPris = new Label("Total pris: " + totalPris);
         this.add(lblTotalPris,1,4);
 
-
+        lblTotalKlip = new Label("Total klip: " + totalKlip);
+        this.add(lblTotalKlip,1,5);
 
     }
 
@@ -103,9 +106,15 @@ public class OversigtsPane extends GridPane {
             lvwSalgslinjer.getItems().clear();
             lvwSalg.getItems().addAll(getSalgFromGivenPeriod());
             for (int i = 0; i < getSalgFromGivenPeriod().size(); i++) {
-                totalPris += getSalgFromGivenPeriod().get(i).getTotalPris();
+                if (getSalgFromGivenPeriod().get(i).getBetalingsmetode().getBetalingstype().equals(EnumBetalingsmetode.KLIPPEKORT)){
+                    totalKlip += getSalgFromGivenPeriod().get(i).getTotalKlip();
+                    System.out.println("hej");
+                }else {
+                    totalPris += getSalgFromGivenPeriod().get(i).getTotalPris();
+                }
             }
             lblTotalPris.setText("Total pris: " + totalPris);
+            lblTotalKlip.setText("Total klip: " + totalKlip);
         }
     }
 
@@ -117,6 +126,7 @@ public class OversigtsPane extends GridPane {
     public void updateControls() {
         totalPris = 0;
         lblTotalPris.setText("Total pris: " + totalPris);
+        lblTotalKlip.setText("Total klip: " + totalKlip);
         lvwSalg.getItems().clear();
         lvwSalgslinjer.getItems().clear();
         dpDatoFra.getEditor().clear();

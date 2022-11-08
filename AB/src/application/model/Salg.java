@@ -9,6 +9,7 @@ public class Salg {
     private final ArrayList<Salgslinje> salgslinjer = new ArrayList<>();
     private Betalingsmetode betalingsmetode;
     private double totalPris;
+    private int totalKlip;
     private double rabatprocent;
     private LocalDate dato = LocalDate.now();
 
@@ -41,6 +42,14 @@ public class Salg {
 
     public void setTotalPris(double totalPris) {
         this.totalPris = totalPris;
+    }
+
+    public int getTotalKlip() {
+        return totalKlip;
+    }
+
+    public void setTotalKlip(int totalKlip) {
+        this.totalKlip = totalKlip;
     }
 
     public void addSalgslinje(Salgslinje salgslinje){
@@ -87,6 +96,14 @@ public class Salg {
             }
         }
 
+        public int samletKlip(){
+            int samletKlip = 0;
+                for (Salgslinje s : salgslinjer){
+                    samletKlip += s.getKlip() * s.getAntal();
+                }
+            return samletKlip;
+        }
+
         public boolean incrementSalgslinje(Pris pris){
             boolean existsAlready = false;
             for (Salgslinje s : getSalgsLinjer()) {
@@ -100,6 +117,10 @@ public class Salg {
 
     @Override
     public String toString() {
-        return SamletPris() + " kr, betalt med " + betalingsmetode;
+        if (betalingsmetode.getBetalingstype().equals(EnumBetalingsmetode.KLIPPEKORT)){
+            return samletKlip() + " klip, betalt med " + betalingsmetode;
+        }else {
+            return SamletPris() + " kr, betalt med " + betalingsmetode;
+        }
     }
 }

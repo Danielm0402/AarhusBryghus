@@ -652,9 +652,9 @@ public class Controller implements GUI.ControllerInterface {
         salg5.createSalgslinje(2,pris8);
         salg5.createSalgslinje(1,pris10);
 
-        salg1.setBetalingsmetode(dankort);
-        salg2.setBetalingsmetode(kontant);
-        salg3.setBetalingsmetode(klippekort);
+        salg1.setBetalingsmetode(klippekort);
+        salg2.setBetalingsmetode(dankort);
+        salg3.setBetalingsmetode(kontant);
         salg4.setBetalingsmetode(mobilepay);
         salg5.setBetalingsmetode(dankort);
 

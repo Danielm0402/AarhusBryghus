@@ -58,12 +58,14 @@ public class Salgslinje {
     @Override
     public String toString() {
         String s = "";
-        if (pris.getProdukt().getPant() >0){
-            s = " pant: "+pris.getProdukt().getPant()+",-";
-        }else if (pris.getKlip() != 0){
-            return pris.getProdukt().toString() + " " + antal + " stk af " + getAftaltPris()+",- / " + pris.getKlip() + " klip";
+        if (pris.getProdukt().getPant() > 0) {
+            s = " pant: " + pris.getProdukt().getPant() + ",-";
+        } else if (pris.getKlip() != 0) {
+            return pris.getProdukt().toString() + " " + antal + " stk af " + getAftaltPris() + ",- / " + pris.getKlip() + " klip";
+        } else {
+            return pris.getProdukt().toString() + " " + antal + " stk af " + getAftaltPris() + ",-" + s;
         }
-        return pris.getProdukt().toString() + " " + antal + " stk af " + getAftaltPris()+",-" +s;
+        return null;
     }
 
     public Pris getPris() {
