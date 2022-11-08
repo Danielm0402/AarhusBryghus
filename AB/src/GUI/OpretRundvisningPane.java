@@ -125,7 +125,7 @@ public class OpretRundvisningPane extends GridPane{
             LocalDate now = LocalDate.now();
             Kunde kunde = cbbKunde.getSelectionModel().getSelectedItem();
             Pris pris = controller.getRundvisningsPris();
-            if(rundvisningDato.compareTo(now) < 1 || rundvisningTid == null || rundvisningAntal < 1 || kunde==null){
+            if((rundvisningDato.compareTo(now)+1) < 1 || rundvisningTid == null || rundvisningAntal < 1 || kunde==null){
                 lblError.setText("Udfyld felter korrekt");
             }
             else{
@@ -142,16 +142,15 @@ public class OpretRundvisningPane extends GridPane{
                 dpDato.setValue(null);
                 txfTid.clear();
                 txfAntalDeltagere.clear();
-                System.out.println(rundvisning.getSalgsLinjer());
             }
         }
 
     }
 
     public void Payment(EnumBetalingsmetode betalingsmetode){
+        Rundvisning rundvisning = lvwRundvisninger.getSelectionModel().getSelectedItem();
         if (rundvisning != null){
-            Betalingsmetode b1 = new Betalingsmetode(betalingsmetode);
-            Rundvisning rundvisning = lvwRundvisninger.getSelectionModel().getSelectedItem();
+            Betalingsmetode b1 = controller.createBetalingsmetode(betalingsmetode);
             controller.setBetalingsmetode(rundvisning,b1);
             controller.setErBetalt(rundvisning,true);
             updateControls();
@@ -163,5 +162,6 @@ public class OpretRundvisningPane extends GridPane{
         cbbKunde.getItems().addAll(controller.getKunder());
         lvwRundvisninger.getItems().clear();
         lvwRundvisninger.getItems().addAll(controller.getRundvisning(false));
+        lblError.setText("");
     }
 }

@@ -94,7 +94,7 @@ public class Salg {
 
     public double SamletPris() {
         double samletPris = 0;
-        if (rabatprocent > 0) {
+        if (rabatprocent > 0) { // det kan være en exception hvis rabat er nul eller mindre
             double procent = 1 - (rabatprocent / 100);
             for (Salgslinje s : salgslinjer) {
                 samletPris += s.getEnhedspris()*s.getAntal();

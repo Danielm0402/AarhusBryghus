@@ -59,9 +59,10 @@ public class AfleverUdlejningWindow extends Stage {
         pane.setHgap(20);
         pane.setVgap(10);
 
-
+        Label lblprodukter = new Label("Alle produkter udlejet:");
         lvwprodukter = new ListView<>();
-        pane.add(lvwprodukter,1,1);
+        VBox vBoxProdukter = new VBox(lblprodukter,lvwprodukter);
+        pane.add(vBoxProdukter,1,1);
         lvwprodukter.setMaxHeight(300);
         produkter = valgteUdlejning.getSalgsLinjer();
         lvwprodukter.getItems().setAll(produkter);
@@ -78,14 +79,15 @@ public class AfleverUdlejningWindow extends Stage {
         VBox vBox = new VBox(47, lblError,btnRetur, lblError2,btnPant);
         pane.add(vBox,2,1);
 
-
+        Label lblRetur = new Label("Det som kunden ikke har drukket:");
         lvwRetur = new ListView<>();
         lvwRetur.setMaxHeight(145);
 
+        Label lblPant = new Label("Pantflasker som kunden ikke afleverer:");
         lvwPant = new ListView<>();
         lvwPant.setMaxHeight(145);
 
-        VBox vBox2 = new VBox(10,lvwRetur,lvwPant);
+        VBox vBox2 = new VBox(5,lblRetur,lvwRetur,lblPant,lvwPant);
         pane.add(vBox2,3,1);
 
 //        ------labels til udregning----------
@@ -184,8 +186,6 @@ public class AfleverUdlejningWindow extends Stage {
 
                 int enhedspris = valgteSalgslinje.getEnhedspris();
 
-
-
                 produkter.remove(valgteSalgslinje);
                 returliste.add(valgteSalgslinje);
 
@@ -227,8 +227,6 @@ public class AfleverUdlejningWindow extends Stage {
 
 
     private void updateControls(){
-
-//        controller.;
         lblTilBetaling.setText("Til betaling: "+ totalPris+",-");
         lblBetaltPant.setText("Pant kommet retur: " + pant + ",-");
         lblReturIUbrudtEmballage.setText("Retur i ubrudt emballage: "+ retur+",-");

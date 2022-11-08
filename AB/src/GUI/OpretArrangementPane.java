@@ -141,7 +141,7 @@ public class OpretArrangementPane extends GridPane {
             for (Pris pris : arrangement.getPriser()){
                 if (pris.getProdukt() == produkt){
                     lblError.setStyle("-fx-text-fill: red");
-                    lblError.setText("Dette produkt findes allerede");
+                    lblError.setText("Pris på dette produkt findes allerede");
                     e=false;
                 }
             }

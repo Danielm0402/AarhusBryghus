@@ -110,4 +110,6 @@ public interface ControllerInterface {
     public int udregnTotalKlip(Salg salg);
 
     int getTotalPant(Udlejning udlejning);
+
+//    double getTotalPrisAfleverUdlejning(Udlejning valgteUdlejning);
 }

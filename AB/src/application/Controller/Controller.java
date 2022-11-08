@@ -342,7 +342,10 @@ public class Controller implements GUI.ControllerInterface {
         return Storage.getRundvisningPris();
     }
 
-
+//    @Override
+//    public double getTotalPrisAfleverUdlejning(Udlejning valgteUdlejning) {
+//        return 0;
+//    }
 
     @Override
     public void init() {
@@ -669,10 +672,6 @@ public class Controller implements GUI.ControllerInterface {
         salg2.setDato(localDate2);
         salg3.setDato(localDate3);
         salg4.setDato(localDate4);
-
-
-
-
 
     }
 
