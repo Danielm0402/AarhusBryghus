@@ -70,6 +70,10 @@ public class Controller implements GUI.ControllerInterface {
 
     @Override
     public ArrayList<Salgslinje> getSalgslinjer() {return storage.getSalgslinjer();}
+    @Override
+    public ArrayList<Salgslinje> getSalgslinjer(Salg salg){
+        return new ArrayList<>(salg.getSalgsLinjer());
+    }
 
     @Override
     public ArrayList<Rundvisning> getRundvisning() {return storage.getRundvisninger();}
@@ -614,7 +618,7 @@ public class Controller implements GUI.ControllerInterface {
 
         Pris pris75 = createPris(2,p72, a1);
 
-        Pris pris76 = createPris(2,130,p73,a1);
+        Pris pris76 = createPris(130,p73,a1);
 
 
         //Kunder

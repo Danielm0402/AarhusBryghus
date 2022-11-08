@@ -73,20 +73,21 @@ public class OversigtsPane extends GridPane {
             public void handle(MouseEvent mouseEvent) {
                 Salg salg = lvwSalg.getSelectionModel().getSelectedItem();
                 lvwSalgslinjer.getItems().clear();
-                lvwSalgslinjer.getItems().addAll(salg.getSalgsLinjer());
+                lvwSalgslinjer.getItems().addAll(controller.getSalgslinjer(salg));
             }
         });
 
-        lblTotalPris = new Label("Total pris: " + totalPris);
+        lblTotalPris = new Label("Total omsætning i perioden: " + totalPris);
         this.add(lblTotalPris,1,4);
 
-        lblTotalKlip = new Label("Total brugte klip: " + totalKlip);
+        lblTotalKlip = new Label("Total brugte klip i perioden: " + totalKlip);
         this.add(lblTotalKlip,1,5);
 
-        lblTotalKøbteKlippekort = new Label("Antal købte klippekort: " + totalKøbteKlippekort);
+        lblTotalKøbteKlippekort = new Label("Total købte klippekort i perioden: " + totalKøbteKlippekort);
         this.add(lblTotalKøbteKlippekort,1,6);
 
     }
+
 
     public ArrayList<Salg> getSalgFromGivenPeriod(){
         ArrayList<Salg> salgFromTheGivenPeriod = new ArrayList<>();
@@ -122,9 +123,9 @@ public class OversigtsPane extends GridPane {
                 }
 
             }
-            lblTotalPris.setText("Total pris: " + totalPris);
-            lblTotalKlip.setText("Total klip: " + totalKlip);
-            lblTotalKøbteKlippekort.setText("Total købte klippekort: " + totalKøbteKlippekort);
+            lblTotalPris.setText("Total omsætning i perioden: " + totalPris);
+            lblTotalKlip.setText("Total brugte klip i perioden: " + totalKlip);
+            lblTotalKøbteKlippekort.setText("Total købte klippekort i perioden: " + totalKøbteKlippekort);
         }
     }
 
@@ -132,8 +133,11 @@ public class OversigtsPane extends GridPane {
 
     public void updateControls() {
         totalPris = 0;
-        lblTotalPris.setText("Total pris: " + totalPris);
-        lblTotalKlip.setText("Total klip: " + totalKlip);
+        totalKlip = 0;
+        totalKøbteKlippekort = 0;
+        lblTotalPris.setText("Total omsætning i perioden: " + totalPris);
+        lblTotalKlip.setText("Total brugte klip i perioden: " + totalKlip);
+        lblTotalKøbteKlippekort.setText("Total købte klippekort i perioden: " + totalKøbteKlippekort);
         lvwSalg.getItems().clear();
         lvwSalgslinjer.getItems().clear();
         dpDatoFra.getEditor().clear();

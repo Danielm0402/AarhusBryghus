@@ -25,6 +25,8 @@ public interface ControllerInterface {
 
     ArrayList<Salgslinje> getSalgslinjer();
 
+    ArrayList<Salgslinje> getSalgslinjer(Salg salg);
+
     ArrayList<Rundvisning> getRundvisning();
 
     ArrayList<Rundvisning> getRundvisning(boolean erBetalt);

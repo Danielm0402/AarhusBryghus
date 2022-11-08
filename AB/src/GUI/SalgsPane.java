@@ -85,7 +85,7 @@ public class SalgsPane extends GridPane {
                     txfTotal.setText(String.valueOf(totalPris));
                     totalKlip = controller.udregnTotalKlip(salg);
                     txfTotalKlip.setText(String.valueOf(totalKlip));
-                    lvwSalgslinjer.getItems().setAll(salg.getSalgsLinjer());
+                    lvwSalgslinjer.getItems().setAll(controller.getSalgslinjer(salg));
                 }
             }
         });
@@ -119,9 +119,6 @@ public class SalgsPane extends GridPane {
         txfRabat = new TextField();
         Button btnrabat = new Button("Udregn rabat");
         btnrabat.setOnAction(event -> discount());
-
-        //        txfRabat.textProperty().addListener((observable, oldValue, newValue) -> discount());
-
 
         HBox hboxRabat = new HBox(10,lblRabat,txfRabat,btnrabat);
         this.add(hboxRabat,3,3);
@@ -184,7 +181,7 @@ public class SalgsPane extends GridPane {
     public void popUpRedigerSalgslinje(Salgslinje valgteSalgsLinje){
         RedigerSalgslinjeWindow redigerSalgsLinje = new RedigerSalgslinjeWindow("Rediger salgslinje", valgteSalgsLinje, salg);
         redigerSalgsLinje.showAndWait();
-        lvwSalgslinjer.getItems().setAll(salg.getSalgsLinjer());
+        lvwSalgslinjer.getItems().setAll(controller.getSalgslinjer(salg));
         totalPris = controller.udregnTotalPris(salg);
         txfTotal.setText(String.valueOf(totalPris));
     }
