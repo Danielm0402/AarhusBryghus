@@ -93,9 +93,9 @@ public class OpretRundvisningPane extends GridPane{
 
         VBox vboxRundvisninger = new VBox(10, lblIkkeBetaltRundvisning, lblEmpty, lvwRundvisninger, hboxBetaling);
 
-        HBox hboxTid = new HBox(19, lblTid, txfTid);
+        HBox hboxTid = new HBox(27, lblTid, txfTid);
 
-        HBox hboxAntalDeltagere = new HBox(62, lblAntalDeltagere, txfAntalDeltagere);
+        HBox hboxAntalDeltagere = new HBox(63, lblAntalDeltagere, txfAntalDeltagere);
 
         HBox hboxKunde = new HBox(10, cbbKunde, btnOpretKunde);
 

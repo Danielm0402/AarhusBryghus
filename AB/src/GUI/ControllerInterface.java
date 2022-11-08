@@ -111,5 +111,7 @@ public interface ControllerInterface {
 
     int getTotalPant(Udlejning udlejning);
 
+    double fraTrækRabatFraTotalPris(double totalPris, double rabat);
+
 //    double getTotalPrisAfleverUdlejning(Udlejning valgteUdlejning);
 }

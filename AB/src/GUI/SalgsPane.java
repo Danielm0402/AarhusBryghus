@@ -223,7 +223,7 @@ public class SalgsPane extends GridPane {
     public void discount(){
         if (!txfRabat.getText().isEmpty()){
             double rabat = Double.parseDouble(txfRabat.getText());
-            totalPris = totalPris * (1-(rabat/100));
+            totalPris = controller.fraTrækRabatFraTotalPris(totalPris,rabat);
             txfTotal.setText(String.valueOf(totalPris));
         }
 

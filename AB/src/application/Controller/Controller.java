@@ -342,6 +342,12 @@ public class Controller implements GUI.ControllerInterface {
         return Storage.getRundvisningPris();
     }
 
+    @Override
+    public double fraTrækRabatFraTotalPris(double totalPris, double rabat){
+        return totalPris * (1-(rabat/100));
+    }
+
+
 //    @Override
 //    public double getTotalPrisAfleverUdlejning(Udlejning valgteUdlejning) {
 //        return 0;
