@@ -671,10 +671,6 @@ public class Controller implements GUI.ControllerInterface {
         salg4.setDato(localDate4);
 
 
-        System.out.println(salg1.getSalgsLinjer().get(0).getKlip());
-
-
-
 
 
 
