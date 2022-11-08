@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class OversigtsPane extends GridPane {
@@ -130,9 +131,9 @@ public class OversigtsPane extends GridPane {
         lvwSalg.getItems().clear();
         lvwSalgslinjer.getItems().clear();
         dpDatoFra.getEditor().clear();
-        dpDatoFra.setValue(null);
+        dpDatoFra.setValue(LocalDate.now());
         dpDatoTil.getEditor().clear();
-        dpDatoTil.setValue(null);
+        dpDatoTil.setValue(LocalDate.now());
 
     }
 }

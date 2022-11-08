@@ -184,12 +184,15 @@ public class AfleverUdlejningWindow extends Stage {
 
                 int enhedspris = valgteSalgslinje.getEnhedspris();
 
+
+
                 produkter.remove(valgteSalgslinje);
                 returliste.add(valgteSalgslinje);
 
                 retur += enhedspris;
 
                 totalPris -= enhedspris;
+
                 updateControls();
         }
             else {
@@ -224,6 +227,8 @@ public class AfleverUdlejningWindow extends Stage {
 
 
     private void updateControls(){
+
+//        controller.;
         lblTilBetaling.setText("Til betaling: "+ totalPris+",-");
         lblBetaltPant.setText("Pant kommet retur: " + pant + ",-");
         lblReturIUbrudtEmballage.setText("Retur i ubrudt emballage: "+ retur+",-");
