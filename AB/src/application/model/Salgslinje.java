@@ -10,6 +10,7 @@ public class Salgslinje {
         this.antal = antal;
         this.pris=pris;
         this.aftaltPris = pris.getEnhedspris();
+
     }
 
     public Salgslinje(int antal, Pris pris,int klip){

@@ -525,11 +525,11 @@ public class Controller implements GUI.ControllerInterface {
         Pris pris35 = createPris(75,p31,a1);
         Pris pros36 = createPris(1,75,p32,a1);
 
-        Pris pr1 = createPris(70,p1,a2);
+        Pris pr1 = createPris(2,70,p1,a2);
         Pris pr2 = createPris(65,p2,a2);
         Pris pr3 = createPris(70,p3,a2);
         Pris pr4 = createPris(65,p4,a2);
-        Pris pr5 = createPris(70,p5,a2);
+        Pris pr5 = createPris(2,70,p5,a2);
         Pris pr6 = createPris(65,p6,a2);
         Pris pr7 = createPris(70,p7,a2);
         Pris pr8 = createPris(65,p8,a2);
@@ -605,7 +605,7 @@ public class Controller implements GUI.ControllerInterface {
 
         Pris pris75 = createPris(2,p72, a1);
 
-        Pris pris76 = createPris(130,p73,a1);
+        Pris pris76 = createPris(2,130,p73,a1);
 
 
         //Kunder
@@ -634,9 +634,9 @@ public class Controller implements GUI.ControllerInterface {
         Salg salg5 = createSalg();
 
 
-        salg1.createSalgslinje(2,pris1);
-        salg1.createSalgslinje(2,pris5);
-        salg1.createSalgslinje(2,pris9);
+        salg1.createSalgslinje(2,pris1,2);
+        salg1.createSalgslinje(2,pris5,2);
+        salg1.createSalgslinje(2,pris9,2);
 
         salg2.createSalgslinje(2,pris76);
 
@@ -671,6 +671,7 @@ public class Controller implements GUI.ControllerInterface {
         salg4.setDato(localDate4);
 
 
+        System.out.println(salg1.getSalgsLinjer().get(0).getKlip());
 
 
 
