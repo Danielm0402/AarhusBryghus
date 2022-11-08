@@ -11,8 +11,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
-import java.beans.beancontext.BeanContext;
-
 public class SalgsPane extends GridPane {
 
     private final ControllerInterface controller;
@@ -21,7 +19,7 @@ public class SalgsPane extends GridPane {
     private ListView<Produktgruppe> lvwProduktgrupper;
     private ListView<Salgslinje> lvwSalgslinjer;
     private TextField txfRabat, txfTotal, txfTotalKlip;
-    private double total = 0;
+    private double totalPris = 0;
     private int totalKlip = 0;
     private Salg salg;
     private Salgslinje valgteSalgsLinje;
@@ -83,8 +81,8 @@ public class SalgsPane extends GridPane {
                     }
 
 //                total += produktpris.getEnhedspris();
-                    total = controller.udregnTotalPris(salg);
-                    txfTotal.setText(String.valueOf(total));
+                    totalPris = controller.udregnTotalPris(salg);
+                    txfTotal.setText(String.valueOf(totalPris));
                     totalKlip = controller.udregnTotalKlip(salg);
                     txfTotalKlip.setText(String.valueOf(totalKlip));
                     lvwSalgslinjer.getItems().setAll(salg.getSalgsLinjer());
@@ -170,11 +168,11 @@ public class SalgsPane extends GridPane {
         if (salg != null){
             Betalingsmetode b1 = new Betalingsmetode(betalingsmetode);
             controller.setBetalingsmetode(salg, b1);
-            controller.setTotalPris(salg, total);
+            controller.setTotalPris(salg, totalPris);
             salg = null; // sætter salg til null så den sletter salget
             lvwSalgslinjer.getItems().clear();
-            total = 0;
-            txfTotal.setText(String.valueOf(total));
+            totalPris = 0;
+            txfTotal.setText(String.valueOf(totalPris));
             txfRabat.clear();
         }
 }
@@ -185,8 +183,8 @@ public class SalgsPane extends GridPane {
         RedigerSalgslinjeWindow redigerSalgsLinje = new RedigerSalgslinjeWindow("Rediger salgslinje", valgteSalgsLinje, salg);
         redigerSalgsLinje.showAndWait();
         lvwSalgslinjer.getItems().setAll(salg.getSalgsLinjer());
-        total = controller.udregnTotalPris(salg);
-        txfTotal.setText(String.valueOf(total));
+        totalPris = controller.udregnTotalPris(salg);
+        txfTotal.setText(String.valueOf(totalPris));
     }
 
 
@@ -223,8 +221,8 @@ public class SalgsPane extends GridPane {
     public void discount(){
         if (!txfRabat.getText().isEmpty()){
             double rabat = Double.parseDouble(txfRabat.getText());
-            total = total * (1-(rabat/100));
-            txfTotal.setText(String.valueOf(total));
+            totalPris = totalPris * (1-(rabat/100));
+            txfTotal.setText(String.valueOf(totalPris));
         }
 
     }

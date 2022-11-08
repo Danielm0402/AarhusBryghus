@@ -109,7 +109,6 @@ public class OversigtsPane extends GridPane {
             for (int i = 0; i < getSalgFromGivenPeriod().size(); i++) {
                 if (getSalgFromGivenPeriod().get(i).getBetalingsmetode().getBetalingstype().equals(EnumBetalingsmetode.KLIPPEKORT)){
                     totalKlip += getSalgFromGivenPeriod().get(i).getTotalKlip();
-                    System.out.println("hej");
                 }else {
                     totalPris += getSalgFromGivenPeriod().get(i).getTotalPris();
                 }
