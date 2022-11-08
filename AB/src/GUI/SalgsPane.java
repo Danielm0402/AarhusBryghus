@@ -166,13 +166,15 @@ public class SalgsPane extends GridPane {
 
     public void Payment(EnumBetalingsmetode betalingsmetode){
         if (salg != null){
-            Betalingsmetode b1 = new Betalingsmetode(betalingsmetode);
+            Betalingsmetode b1 = controller.createBetalingsmetode(betalingsmetode);
             controller.setBetalingsmetode(salg, b1);
             controller.setTotalPris(salg, totalPris);
             salg = null; // sætter salg til null så den sletter salget
             lvwSalgslinjer.getItems().clear();
             totalPris = 0;
-            txfTotal.setText(String.valueOf(totalPris));
+            txfTotal.clear();
+            totalKlip = 0;
+            txfTotalKlip.clear();
             txfRabat.clear();
         }
 }

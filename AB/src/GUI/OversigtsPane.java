@@ -5,9 +5,6 @@ import application.Controller.Controller;
 import application.model.EnumBetalingsmetode;
 import application.model.Salg;
 import application.model.Salgslinje;
-import javafx.beans.Observable;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -21,12 +18,13 @@ import java.util.ArrayList;
 public class OversigtsPane extends GridPane {
     private final ControllerInterface controller;
     private DatePicker dpDatoFra, dpDatoTil;
-    private Label lblDatoFra, lblDatoTil, lblTotalPris, lblTotalKlip;
+    private Label lblDatoFra, lblDatoTil, lblTotalPris, lblTotalKlip, lblTotalKøbteKlippekort, lblAntalBrugteKlip;
     private Button btnSearch;
     private ListView<Salg> lvwSalg;
     private ListView<Salgslinje> lvwSalgslinjer;
     private double totalPris = 0;
     private int totalKlip = 0;
+    private int totalKøbteKlippekort = 0;
 
 
     public OversigtsPane() {
@@ -82,8 +80,11 @@ public class OversigtsPane extends GridPane {
         lblTotalPris = new Label("Total pris: " + totalPris);
         this.add(lblTotalPris,1,4);
 
-        lblTotalKlip = new Label("Total klip: " + totalKlip);
+        lblTotalKlip = new Label("Total brugte klip: " + totalKlip);
         this.add(lblTotalKlip,1,5);
+
+        lblTotalKøbteKlippekort = new Label("Antal købte klippekort: " + totalKøbteKlippekort);
+        this.add(lblTotalKøbteKlippekort,1,6);
 
     }
 
@@ -103,6 +104,8 @@ public class OversigtsPane extends GridPane {
     public void updateListViewSalg(){
         if (dpDatoFra != null && dpDatoTil != null){
             totalPris = 0;
+            totalKlip = 0;
+            totalKøbteKlippekort = 0;
             lvwSalg.getItems().clear();
             lvwSalgslinjer.getItems().clear();
             lvwSalg.getItems().addAll(getSalgFromGivenPeriod());
@@ -112,15 +115,19 @@ public class OversigtsPane extends GridPane {
                 }else {
                     totalPris += getSalgFromGivenPeriod().get(i).getTotalPris();
                 }
+                for (int j = 0; j < getSalgFromGivenPeriod().get(i).getSalgsLinjer().size(); j++) {
+                    if (getSalgFromGivenPeriod().get(i).getSalgsLinjer().get(j).getProdukt().getNavn().equals("Klippekort")){
+                        totalKøbteKlippekort += getSalgFromGivenPeriod().get(i).getSalgsLinjer().get(j).getAntal();
+                    }
+                }
+
             }
             lblTotalPris.setText("Total pris: " + totalPris);
             lblTotalKlip.setText("Total klip: " + totalKlip);
+            lblTotalKøbteKlippekort.setText("Total købte klippekort: " + totalKøbteKlippekort);
         }
     }
 
-    private void selectedVisningChanged(DatePicker newValue) {
-        System.out.println("visning ændret");
-    }
 
 
     public void updateControls() {

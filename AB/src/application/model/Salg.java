@@ -37,6 +37,12 @@ public class Salg {
     }
 
     public double getTotalPris() {
+        totalPris = 0;
+        for (Salgslinje s : salgslinjer){
+            if (!betalingsmetode.getBetalingstype().equals(EnumBetalingsmetode.KLIPPEKORT)){
+                totalPris += s.getAftaltPris() * s.getAntal();
+            }
+        }
         return totalPris;
     }
 
@@ -45,6 +51,12 @@ public class Salg {
     }
 
     public int getTotalKlip() {
+        totalKlip = 0;
+        for (Salgslinje s : salgslinjer){
+            if (betalingsmetode.getBetalingstype().equals(EnumBetalingsmetode.KLIPPEKORT)){
+                totalKlip += s.getKlip() * s.getAntal();
+            }
+        }
         return totalKlip;
     }
 

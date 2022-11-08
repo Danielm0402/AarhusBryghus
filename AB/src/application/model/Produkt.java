@@ -43,4 +43,8 @@ public class Produkt {
     public int getPant() {
         return pant;
     }
+
+    public String getNavn() {
+        return navn;
+    }
 }
