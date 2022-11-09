@@ -1,7 +1,5 @@
 package application.model;
 
-import java.util.Date;
-
 public class Udlejning extends Salg{
     private Kunde kunde;
     private boolean erAfleveret;

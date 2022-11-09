@@ -3,8 +3,6 @@ package application.model;
 import java.util.ArrayList;
 
 public class Produktgruppe {
-
-
     private String navn;
     private final ArrayList<Produkt> produkter = new ArrayList<>();
     private boolean isBrugtTilUdlejning = false;
@@ -48,7 +46,6 @@ public class Produktgruppe {
     public String toString() {
         return navn;
     }
-
 
     public void setProduktgruppeSomUdlejning() {
         isBrugtTilUdlejning = true;

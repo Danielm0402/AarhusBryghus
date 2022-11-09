@@ -290,6 +290,7 @@ public class Controller implements GUI.ControllerInterface {
     public ArrayList<Produktgruppe> getProduktgrupperWithUdlejningsattribut() {
         ArrayList<Produktgruppe> produktgrupperWithUdlejningsattribut = new ArrayList<>();
         ArrayList<Produktgruppe> alleproduktgrupper = getProduktgrupper();
+
 //        løber gennem alle produktgrupper og ser om de bruges til udlejning
         for (Produktgruppe pg : alleproduktgrupper){
             if (pg.isBrugtTilUdlejning()){
@@ -301,15 +302,11 @@ public class Controller implements GUI.ControllerInterface {
 
     @Override
     public double udregnTotalPris(Salg salg){
-        double totalpris = salg.udregnTotalPris();
-
-        return totalpris;
+        return salg.udregnTotalPris();
     }
     @Override
     public int udregnTotalKlip(Salg salg){
-        int totalKlip = salg.udregnTotalKlip();
-
-        return totalKlip;
+        return salg.udregnTotalKlip();
     }
 
     @Override

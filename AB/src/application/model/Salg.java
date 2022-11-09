@@ -110,14 +110,13 @@ public class Salg {
         this.dato = dato;
     }
 
-        public double fraTrækRabatFraTotalPris(double totalPris, double rabat){
+    public double fraTrækRabatFraTotalPris(double totalPris, double rabat){
         if (rabat < 0){
             throw new IllegalArgumentException("Rabat må ikke være negativ");
         }else {
             this.rabatprocent = rabat;
             return totalPris * (1-(rabat/100));
         }
-
     }
 
         public boolean incrementSalgslinje(Pris pris){
