@@ -125,5 +125,7 @@ public interface ControllerInterface {
 
     int getTotalPant(Udlejning udlejning);
 
+    void setAftaltPris(Salgslinje valgteSalgsLinje, int indtastetPris);
+
 //    double getTotalPrisAfleverUdlejning(Udlejning valgteUdlejning);
 }

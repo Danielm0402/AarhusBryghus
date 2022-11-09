@@ -68,7 +68,8 @@ public class RedigerSalgslinjeWindow extends Stage {
     }
 
     private void gemAftaltPris() {
-         valgteSalgsLinje.setAftaltPris(Integer.parseInt(txfAftaltPris.getText()));
+        int indtastetPris = Integer.parseInt(txfAftaltPris.getText());
+        controller.setAftaltPris(valgteSalgsLinje,indtastetPris);
          this.hide();
     }
 

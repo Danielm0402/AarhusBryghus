@@ -342,6 +342,11 @@ public class Controller implements GUI.ControllerInterface {
     }
 
     @Override
+    public void setAftaltPris(Salgslinje valgteSalgsLinje, int indtastetPris){
+        valgteSalgsLinje.setAftaltPris(indtastetPris);
+    }
+
+    @Override
     public void init() {
         initStorage();
     }
