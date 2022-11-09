@@ -13,6 +13,10 @@ public interface ControllerInterface {
 
     ArrayList<Produktgruppe> getProduktgrupper();
 
+    /**
+     *Finder og returnerer alle de produktgrupper som hører under en bestemt
+     *type arrangement (fx alle produktgrupper under Salg, udlejning eller rundvisning)
+     */
     ArrayList<Produktgruppe> getProduktgrupper(EnumArrangementVisning enumArrangementVisning);
 
     ArrayList<Produkt> getProdukter();
@@ -29,6 +33,9 @@ public interface ControllerInterface {
 
     ArrayList<Rundvisning> getRundvisning();
 
+    /**
+     *Kører igennem alle rundvisninger og returnerer så dem hvor "rundvisning.isErBetalt==false" i en ny liste
+     */
     ArrayList<Rundvisning> getRundvisning(boolean erBetalt);
 
     ArrayList<Udlejning> getUdlejning();
@@ -103,7 +110,10 @@ public interface ControllerInterface {
 
     void setModetidspunkt(Rundvisning rundvisning, LocalTime modetidspunkt);
 
-    public ArrayList<Udlejning> getUdlejningerIkkeAfleveret();
+    /**
+     *Kører igennem alle udlejninger og returnerer dem hvor "udlejning.erAfleveret==false" i en ny liste
+     */
+    ArrayList<Udlejning> getUdlejningerIkkeAfleveret();
 
     ArrayList<Salgslinje> getAlleProdukterIkkeAfleveret();
 

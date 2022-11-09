@@ -98,16 +98,17 @@ public class Controller implements GUI.ControllerInterface {
 
     public ArrayList<Udlejning> getUdlejninger() {return storage.getUdlejninger();}
 
+    @Override
     public ArrayList<Udlejning> getUdlejningerIkkeAfleveret() {
         ArrayList<Udlejning> alleUdlejninger = storage.getUdlejninger();
-        ArrayList<Udlejning> ikkeafleveredeUdlejninger = new ArrayList<>();
+        ArrayList<Udlejning> ikkeAfleveredeUdlejninger = new ArrayList<>();
 
         for (Udlejning udlejning : alleUdlejninger){
             if (!udlejning.erAfleveret()){
-                ikkeafleveredeUdlejninger.add(udlejning);
+                ikkeAfleveredeUdlejninger.add(udlejning);
             }
         }
-        return ikkeafleveredeUdlejninger;}
+        return ikkeAfleveredeUdlejninger;}
 
     @Override
     public ArrayList<Salgslinje> getAlleProdukterIkkeAfleveret(){
