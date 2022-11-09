@@ -39,10 +39,7 @@ public class RedigerSalgslinjeWindow extends Stage {
 
         Scene scene = new Scene(pane);
         this.setScene(scene);
-
-
     }
-
 
     public void initContent(GridPane pane){
         pane.setPadding(new Insets(20));

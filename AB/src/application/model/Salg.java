@@ -1,6 +1,8 @@
 package application.model;
 
 
+import javafx.scene.control.DatePicker;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -109,8 +111,13 @@ public class Salg {
     }
 
     public double fraTrækRabatFraTotalPris(double totalPris, double rabat){
-        this.rabatprocent = rabat;
-        return totalPris * (1-(rabat/100));
+        if (rabat < 0){
+            throw new IllegalArgumentException("Rabat må ikke være negativ");
+        }else {
+            this.rabatprocent = rabat;
+            return totalPris * (1-(rabat/100));
+        }
+
     }
 
         public boolean incrementSalgslinje(Pris pris){

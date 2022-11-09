@@ -89,18 +89,19 @@ public class OversigtsPane extends GridPane {
     }
 
 
-    public ArrayList<Salg> getSalgFromGivenPeriod(){
+    public ArrayList<Salg> getSalgFromGivenPeriod() {
         ArrayList<Salg> salgFromTheGivenPeriod = new ArrayList<>();
-        if (dpDatoFra != null && dpDatoTil != null)
+        if (dpDatoFra != null && dpDatoTil != null) {
             for (int i = 0; i < controller.getSalg().size(); i++) {
-                if (controller.getSalg().get(i).getDato().isEqual(dpDatoFra.getValue()) || controller.getSalg().get(i).getDato().isEqual(dpDatoTil.getValue())){
+                if (controller.getSalg().get(i).getDato().isEqual(dpDatoFra.getValue()) || controller.getSalg().get(i).getDato().isEqual(dpDatoTil.getValue())) {
                     salgFromTheGivenPeriod.add(controller.getSalg().get(i));
-                }else if (controller.getSalg().get(i).getDato().isAfter(dpDatoFra.getValue()) && controller.getSalg().get(i).getDato().isBefore(dpDatoTil.getValue())){
+                } else if (controller.getSalg().get(i).getDato().isAfter(dpDatoFra.getValue()) && controller.getSalg().get(i).getDato().isBefore(dpDatoTil.getValue())) {
                     salgFromTheGivenPeriod.add(controller.getSalg().get(i));
                 }
             }
-        return new ArrayList<>(salgFromTheGivenPeriod);
         }
+        return new ArrayList<>(salgFromTheGivenPeriod);
+    }
 
     public void updateListViewSalg(){
         if (dpDatoFra != null && dpDatoTil != null){

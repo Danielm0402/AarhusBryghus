@@ -65,16 +65,6 @@ public class SalgsPane extends GridPane {
                 if (produktpris != null) {
 
                     if (salg == null) {
-//                        try {
-//                            salg =
-//                        }
-//                        catch (Exception e){
-//                            System.out.println(e.getMessage());
-//                        }
-//                        finally  {
-//
-//                        }
-
                         salg = controller.createSalg();
                     }
 
@@ -230,9 +220,18 @@ public class SalgsPane extends GridPane {
 
     public void discount(){
         if (!txfRabat.getText().isEmpty()){
-            double rabat = Double.parseDouble(txfRabat.getText());
-            totalPris = controller.fraTrækRabatFraTotalPris(salg,totalPris,rabat);
-            txfTotal.setText(String.valueOf(totalPris));
+            try {
+                double rabat = Double.parseDouble(txfRabat.getText());
+                totalPris = controller.fraTrækRabatFraTotalPris(salg,totalPris,rabat);
+                txfTotal.setText(String.valueOf(totalPris));
+            } catch (Exception e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Fejl");
+                alert.setHeaderText("Der skete en fejl");
+                alert.setContentText(e.getMessage());
+                alert.show();
+            }
+
         }
 
     }
