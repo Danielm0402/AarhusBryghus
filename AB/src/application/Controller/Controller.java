@@ -121,8 +121,6 @@ public class Controller implements GUI.ControllerInterface {
         return ProdukterIkkeAfleveret;
     }
 
-
-
     @Override
     public ArrayList<Kunde> getKunder() {return storage.getKunder();}
 
@@ -236,8 +234,7 @@ public class Controller implements GUI.ControllerInterface {
     public void removeSalgsLinje(Salg salg, Salgslinje salgslinje) {
         salg.removeSalgslinje(salgslinje);
     }
-//               if (priser.contains(pris)) {
-//        priser.remove(pris);
+
     @Override
     public Betalingsmetode createBetalingsmetode(EnumBetalingsmetode metode){
         Betalingsmetode betalingsmetode = new Betalingsmetode(metode);
@@ -301,21 +298,14 @@ public class Controller implements GUI.ControllerInterface {
 
     @Override
     public double udregnTotalPris(Salg salg){
-        double totalpris = 0;
-
-        for (Salgslinje salgslinje : salg.getSalgsLinjer()){
-            totalpris += salgslinje.getAftaltPris() * salgslinje.getAntal();
-        }
+        double totalpris = salg.udregnTotalPris();
 
         return totalpris;
     }
     @Override
     public int udregnTotalKlip(Salg salg){
-        int totalKlip = 0;
+        int totalKlip = salg.udregnTotalKlip();
 
-        for (Salgslinje salgslinje : salg.getSalgsLinjer()){
-            totalKlip += salgslinje.getKlip() * salgslinje.getAntal();
-        }
         return totalKlip;
     }
 
@@ -347,15 +337,9 @@ public class Controller implements GUI.ControllerInterface {
     }
 
     @Override
-    public double fraTrækRabatFraTotalPris(double totalPris, double rabat){
-        return totalPris * (1-(rabat/100));
+    public double fraTrækRabatFraTotalPris(Salg salg, double totalPris, double rabat){
+        return salg.fraTrækRabatFraTotalPris(totalPris, rabat);
     }
-
-
-//    @Override
-//    public double getTotalPrisAfleverUdlejning(Udlejning valgteUdlejning) {
-//        return 0;
-//    }
 
     @Override
     public void init() {

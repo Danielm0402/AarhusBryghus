@@ -89,6 +89,8 @@ public interface ControllerInterface {
 
     void setErBetalt(Rundvisning rundvisning, boolean erBetalt);
 
+    double fraTrækRabatFraTotalPris(Salg salg, double totalPris, double rabat);
+
     void init();
 
     void initStorage();
@@ -112,8 +114,6 @@ public interface ControllerInterface {
     public int udregnTotalKlip(Salg salg);
 
     int getTotalPant(Udlejning udlejning);
-
-    double fraTrækRabatFraTotalPris(double totalPris, double rabat);
 
 //    double getTotalPrisAfleverUdlejning(Udlejning valgteUdlejning);
 }

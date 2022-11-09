@@ -46,6 +46,16 @@ public class Salg {
         return totalPris;
     }
 
+    public double udregnTotalPris(){
+        double totalPris = 0;
+
+        for (Salgslinje salgslinje : getSalgsLinjer()){
+            totalPris += salgslinje.getAftaltPris() * salgslinje.getAntal();
+        }
+
+        return totalPris;
+    }
+
     public void setTotalPris(double totalPris) {
         this.totalPris = totalPris;
     }
@@ -60,8 +70,14 @@ public class Salg {
         return totalKlip;
     }
 
-    public void setTotalKlip(int totalKlip) {
-        this.totalKlip = totalKlip;
+    public int udregnTotalKlip(){
+        int totalKlip = 0;
+
+        for (Salgslinje salgslinje : getSalgsLinjer()){
+            totalKlip += salgslinje.getKlip() * salgslinje.getAntal();
+        }
+
+        return totalKlip;
     }
 
     public void addSalgslinje(Salgslinje salgslinje){
@@ -92,29 +108,10 @@ public class Salg {
         this.dato = dato;
     }
 
-    public double SamletPris() {
-        double samletPris = 0;
-        if (rabatprocent > 0) { // det kan være en exception hvis rabat er nul eller mindre
-            double procent = 1 - (rabatprocent / 100);
-            for (Salgslinje s : salgslinjer) {
-                samletPris += s.getEnhedspris()*s.getAntal();
-            }
-            return samletPris * procent;
-        }else {
-                for (Salgslinje s : salgslinjer) {
-                    samletPris += s.getEnhedspris()*s.getAntal();
-                }
-                return samletPris;
-            }
-        }
-
-        public int samletKlip(){
-            int samletKlip = 0;
-                for (Salgslinje s : salgslinjer){
-                    samletKlip += s.getKlip() * s.getAntal();
-                }
-            return samletKlip;
-        }
+    public double fraTrækRabatFraTotalPris(double totalPris, double rabat){
+        this.rabatprocent = rabat;
+        return totalPris * (1-(rabat/100));
+    }
 
         public boolean incrementSalgslinje(Pris pris){
             boolean existsAlready = false;
@@ -130,9 +127,9 @@ public class Salg {
     @Override
     public String toString() {
         if (betalingsmetode.getBetalingstype().equals(EnumBetalingsmetode.KLIPPEKORT)){
-            return samletKlip() + " klip, betalt med " + betalingsmetode;
+            return getTotalKlip() + " klip, betalt med " + betalingsmetode;
         }else {
-            return SamletPris() + " kr, betalt med " + betalingsmetode;
+            return getTotalPris() + " kr, betalt med " + betalingsmetode;
         }
     }
 }

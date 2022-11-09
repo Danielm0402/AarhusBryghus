@@ -65,10 +65,20 @@ public class SalgsPane extends GridPane {
                 if (produktpris != null) {
 
                     if (salg == null) {
+//                        try {
+//                            salg =
+//                        }
+//                        catch (Exception e){
+//                            System.out.println(e.getMessage());
+//                        }
+//                        finally  {
+//
+//                        }
+
                         salg = controller.createSalg();
                     }
 
-//                incementSalgslinje sætter existsAlready til false, medmindre produktprisen findes i salget allerede
+//                incrementSalgslinje sætter existsAlready til false, medmindre produktprisen findes i salget allerede
                     boolean existsAlready = controller.incrementSalgslinje(salg, produktpris);
 
                     //Hvis produktet ikke allerede findes tilføjes en ny salgslinje
@@ -79,6 +89,7 @@ public class SalgsPane extends GridPane {
                             controller.createSalgsLinje(salg, 1, produktpris);
                         }
                     }
+
 
 //                total += produktpris.getEnhedspris();
                     totalPris = controller.udregnTotalPris(salg);
@@ -220,7 +231,7 @@ public class SalgsPane extends GridPane {
     public void discount(){
         if (!txfRabat.getText().isEmpty()){
             double rabat = Double.parseDouble(txfRabat.getText());
-            totalPris = controller.fraTrækRabatFraTotalPris(totalPris,rabat);
+            totalPris = controller.fraTrækRabatFraTotalPris(salg,totalPris,rabat);
             txfTotal.setText(String.valueOf(totalPris));
         }
 
