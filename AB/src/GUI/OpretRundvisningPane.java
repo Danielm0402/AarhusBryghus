@@ -76,8 +76,8 @@ public class OpretRundvisningPane extends GridPane{
         Button btnKlippekort = new Button("Klippekort");
         btnKlippekort.setOnAction(event -> Payment(EnumBetalingsmetode.KLIPPEKORT));
 
-        Button btnMobilpay = new Button("Mobilpay");
-        btnMobilpay.setOnAction(event -> Payment(EnumBetalingsmetode.MOBILEPAY));
+        Button btnMobilepay = new Button("Mobilepay");
+        btnMobilepay.setOnAction(event -> Payment(EnumBetalingsmetode.MOBILEPAY));
 
         Button btnRegning = new Button("Regning");
         btnRegning.setOnAction(event -> Payment(EnumBetalingsmetode.REGNING));
@@ -89,7 +89,7 @@ public class OpretRundvisningPane extends GridPane{
 
         HBox hboxDato = new HBox(65, lblDato, dpDato);
 
-        HBox hboxBetaling = new HBox(btnDankort,btnKontant,btnMobilpay,btnRegning);
+        HBox hboxBetaling = new HBox(btnDankort,btnKontant,btnMobilepay,btnRegning);
 
         VBox vboxRundvisninger = new VBox(10, lblIkkeBetaltRundvisning, lblEmpty, lvwRundvisninger, hboxBetaling);
 

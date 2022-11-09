@@ -152,13 +152,13 @@ public class SalgsPane extends GridPane {
         Button btnKlippekort = new Button("Klippekort");
         btnKlippekort.setOnAction(event -> Payment(EnumBetalingsmetode.KLIPPEKORT));
 
-        Button btnMobilpay = new Button("Mobilpay");
-        btnMobilpay.setOnAction(event -> Payment(EnumBetalingsmetode.MOBILEPAY));
+        Button btnMobilepay = new Button("Mobilepay");
+        btnMobilepay.setOnAction(event -> Payment(EnumBetalingsmetode.MOBILEPAY));
 
         Button btnRegning = new Button("Regning");
         btnRegning.setOnAction(event -> Payment(EnumBetalingsmetode.REGNING));
 
-        HBox hboxBetaling = new HBox(btnDankort,btnKontant,btnKlippekort,btnMobilpay,btnRegning);
+        HBox hboxBetaling = new HBox(btnDankort,btnKontant,btnKlippekort,btnMobilepay,btnRegning);
         this.add(hboxBetaling,3,6);
     }
 

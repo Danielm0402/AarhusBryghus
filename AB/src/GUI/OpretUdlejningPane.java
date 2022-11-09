@@ -84,13 +84,13 @@ public class OpretUdlejningPane extends GridPane {
         Button btnKlippekort = new Button("Klippekort");
         btnKlippekort.setOnAction(event -> Payment(EnumBetalingsmetode.KLIPPEKORT));
 
-        Button btnMobilpay = new Button("Mobilpay");
-        btnMobilpay.setOnAction(event -> Payment(EnumBetalingsmetode.MOBILEPAY));
+        Button btnMobilepay = new Button("Mobilepay");
+        btnMobilepay.setOnAction(event -> Payment(EnumBetalingsmetode.MOBILEPAY));
 
         Button btnRegning = new Button("Regning");
         btnRegning.setOnAction(event -> Payment(EnumBetalingsmetode.REGNING));
 
-        HBox hboxBetaling = new HBox(btnDankort,btnKontant,btnMobilpay,btnRegning);
+        HBox hboxBetaling = new HBox(btnDankort,btnKontant,btnMobilepay,btnRegning);
 //        -------------------------------------------------------------------------
         lblError = new Label();
 
