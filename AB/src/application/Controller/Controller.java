@@ -338,7 +338,7 @@ public class Controller implements GUI.ControllerInterface {
 
     @Override
     public double fraTrækRabatFraTotalPris(Salg salg, double totalPris, double rabat){
-        return salg.fraTrækRabatFraTotalPris(totalPris, rabat);
+        return salg.fratrækRabatFraTotalPris(totalPris, rabat);
     }
 
     @Override

@@ -91,7 +91,7 @@ class ControllerTest {
         alleproduktgrupper.add(produktgruppeMock);
         alleproduktgrupper.add(produktgruppeMock);
         alleproduktgrupper.add(produktgruppeMock);
-        when(produktgruppeMock.getVisning()).thenReturn(EnumArrangementVisning.RUNDVISNING, EnumArrangementVisning.RUNDVISNING, EnumArrangementVisning.RUNDVISNING);
+        when(produktgruppeMock.getVisning()).thenReturn(EnumArrangementVisning.UDLEJNING, EnumArrangementVisning.RUNDVISNING, EnumArrangementVisning.RUNDVISNING);
 
         int forventetProduktgrupperUnderSALG = 0;
 
