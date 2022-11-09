@@ -104,7 +104,7 @@ public class OpretUdlejningPane extends GridPane {
 
 //        ---------- oversigt over alle udlejede produkter--------------------
 
-        Label lblAlleUdlejedeProdukter = new Label("Oversigt over alle udlejede produkter:");
+        Label lblAlleUdlejedeProdukter = new Label("Oversigt over ALLE udlejede produkter:");
         lvwAlleUdlejedeProdukter = new ListView<>();
 //---------------------------------------
 

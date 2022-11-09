@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Udlejning extends Salg{
     private Kunde kunde;
-
     private boolean erAfleveret;
+
 
     public Udlejning(Kunde kunde){
         this.kunde = kunde;

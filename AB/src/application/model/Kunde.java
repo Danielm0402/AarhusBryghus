@@ -6,7 +6,6 @@ public class Kunde {
 
     private final ArrayList<Rundvisning> rundvisninger = new ArrayList<>();
     private final ArrayList<Udlejning> udlejninger = new ArrayList<>();
-
     private String navn;
     private String telefon;
     private String email;

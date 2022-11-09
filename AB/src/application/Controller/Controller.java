@@ -122,6 +122,8 @@ public class Controller implements GUI.ControllerInterface {
         return ProdukterIkkeAfleveret;
     }
 
+
+
     @Override
     public ArrayList<Kunde> getKunder() {return storage.getKunder();}
 

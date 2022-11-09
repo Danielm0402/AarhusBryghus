@@ -7,7 +7,6 @@ import java.util.Date;
 
 public class Rundvisning extends Salg{
     private Kunde kunde;
-
     private boolean erBetalt;
     private LocalTime modetidspunkt;
     private int antalDeltagere;
@@ -15,9 +14,6 @@ public class Rundvisning extends Salg{
 
     public Rundvisning(){
     }
-
-    public static int runvisningPrisID=78;
-
 
     public void setKunde(Kunde kunde) {
         this.kunde = kunde;
