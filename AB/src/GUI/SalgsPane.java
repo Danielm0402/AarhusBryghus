@@ -80,7 +80,6 @@ public class SalgsPane extends GridPane {
                         }
                     }
 
-//                total += produktpris.getEnhedspris();
                     totalPris = controller.udregnTotalPris(salg);
                     txfTotal.setText(String.valueOf(totalPris));
                     totalKlip = controller.udregnTotalKlip(salg);
