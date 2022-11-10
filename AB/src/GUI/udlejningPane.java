@@ -13,7 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class OpretUdlejningPane extends GridPane {
+public class udlejningPane extends GridPane {
 
     private final ControllerInterface controller;
     private ComboBox<Kunde> cbbKunder;
@@ -29,7 +29,7 @@ public class OpretUdlejningPane extends GridPane {
 
 
 
-    public OpretUdlejningPane(){
+    public udlejningPane(){
         controller = new Controller(Storage.getInstance());
 
         this.setPadding(new Insets(20));

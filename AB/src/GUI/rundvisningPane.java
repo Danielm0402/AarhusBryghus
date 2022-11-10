@@ -3,7 +3,6 @@ package GUI;
 import Storage.Storage;
 import application.Controller.Controller;
 import application.model.*;
-import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -11,11 +10,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
 
-public class OpretRundvisningPane extends GridPane{
+public class rundvisningPane extends GridPane{
 
     private final ControllerInterface controller;
     private Rundvisning rundvisning;
@@ -27,7 +24,7 @@ public class OpretRundvisningPane extends GridPane{
     private ListView<Rundvisning> lvwRundvisninger;
 
 
-    public OpretRundvisningPane(){
+    public rundvisningPane(){
         controller = new Controller(Storage.getInstance());
 
         this.setPadding(new Insets(20));

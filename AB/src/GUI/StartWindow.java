@@ -2,7 +2,6 @@ package GUI;
 
 import Storage.Storage;
 import application.Controller.Controller;
-import application.Controller.StorageInterface;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
@@ -75,20 +74,20 @@ public class StartWindow extends Application {
         tabArrangement.setOnSelectionChanged(event -> opretArrangementPane.updateControls());
         // --------------------------------------------------------------------------
 
-        Tab tabRundsvisning = new Tab("Opret Rundvisning");
+        Tab tabRundsvisning = new Tab("Rundvisning");
         tabPane.getTabs().add(tabRundsvisning);
 
-        OpretRundvisningPane opretRundvisningPane = new OpretRundvisningPane();
-        tabRundsvisning.setContent(opretRundvisningPane);
-        tabRundsvisning.setOnSelectionChanged(event -> opretRundvisningPane.updateControls());
+        rundvisningPane rundvisningPane = new rundvisningPane();
+        tabRundsvisning.setContent(rundvisningPane);
+        tabRundsvisning.setOnSelectionChanged(event -> rundvisningPane.updateControls());
 
         // --------------------------------------------------------------------------
-        Tab tabUdlejning = new Tab("Opret Udlejning");
+        Tab tabUdlejning = new Tab("Udlejning");
         tabPane.getTabs().add(tabUdlejning);
 
-        OpretUdlejningPane opretUdlejningPane = new OpretUdlejningPane();
-        tabUdlejning.setContent(opretUdlejningPane);
-        tabUdlejning.setOnSelectionChanged(event -> opretUdlejningPane.updateControls());
+        udlejningPane udlejningPane = new udlejningPane();
+        tabUdlejning.setContent(udlejningPane);
+        tabUdlejning.setOnSelectionChanged(event -> udlejningPane.updateControls());
 
         // --------------------------------------------------------------------------
         Tab tabOversigt = new Tab("Oversigt");
