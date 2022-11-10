@@ -1,16 +1,13 @@
 package application.Controller;
 
-import GUI.ControllerInterface;
 import application.model.EnumArrangementVisning;
 import application.model.Produktgruppe;
 import application.model.Rundvisning;
 import application.model.Udlejning;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
