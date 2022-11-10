@@ -143,7 +143,6 @@ public class OpretUdlejningPane extends GridPane {
             AfleverUdlejningWindow afleverUdlejningWindow = new AfleverUdlejningWindow("Aflever Udlejning",valgteUdlejning);
             afleverUdlejningWindow.showAndWait();
 
-//            controller.setUdlejningAfleveret(valgteUdlejning);
             lvwIgangværendeUdlejninger.getItems().clear();
             lvwIgangværendeUdlejninger.getItems().setAll(controller.getUdlejningerIkkeAfleveret());
             updateAlleUdlejedeProdukterOversigt();
@@ -205,6 +204,5 @@ public class OpretUdlejningPane extends GridPane {
         cbbProduktgruppe.getItems().clear();
         cbbProduktgruppe.getItems().addAll(controller.getProduktgrupper(EnumArrangementVisning.UDLEJNING));
         cbbProdukt.getItems().clear();
-
     }
 }

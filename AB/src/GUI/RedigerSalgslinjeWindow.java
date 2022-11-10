@@ -77,9 +77,4 @@ public class RedigerSalgslinjeWindow extends Stage {
         controller.removeSalgsLinje(salg,valgteSalgsLinje);
         this.hide();
     }
-
-
-    //Metoder:
-
-
 }

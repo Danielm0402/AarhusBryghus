@@ -50,9 +50,7 @@ public class AfleverUdlejningWindow extends Stage {
 
         Scene scene = new Scene(pane);
         this.setScene(scene);
-
     }
-
 
     public void initContent(GridPane pane){
         pane.setPadding(new Insets(20));
@@ -73,7 +71,6 @@ public class AfleverUdlejningWindow extends Stage {
         btnPant.setOnAction(event -> bntPant());
         btnRetur = new Button("Retur i ubrudt emballage ->");
         btnRetur.setOnAction(event -> bntRetur());
-
 
 
         VBox vBox = new VBox(47, lblError,btnRetur, lblError2,btnPant);
@@ -126,10 +123,7 @@ public class AfleverUdlejningWindow extends Stage {
                         totalPris -= pantværdi;
 
                         updateControls();
-
-
                 }
-
             }
         });
 
@@ -233,12 +227,10 @@ public class AfleverUdlejningWindow extends Stage {
         lvwprodukter.getItems().setAll(produkter);
         lvwPant.getItems().setAll(pantliste);
         lvwRetur.getItems().setAll(returliste);
-
     }
 
     public void afleverUdlejning() {
             valgteUdlejning.setErAfleveret(true);
             this.hide();
-
     }
 }

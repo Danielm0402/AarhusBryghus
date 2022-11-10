@@ -41,10 +41,6 @@ public class OversigtsPane extends GridPane {
 //        -------------- combobox over hvad der skal vises ---------------
         ComboBox<Object> cbbVisning = new ComboBox<>();
         this.add(cbbVisning, 1, 1);
-//        cbbVisning.getItems().addAll(controller.getArrangementer());
-//        cbbVisning.getSelectionModel().selectFirst();
-//        ChangeListener<Arrangement> listener = (ov, oldValue, newValue) -> selectedVisningChanged(newValue);
-//        cbbVisning.getSelectionModel().selectedItemProperty().addListener(listener);
 
         dpDatoFra = new DatePicker();
         lblDatoFra = new Label("Fra Dato:");

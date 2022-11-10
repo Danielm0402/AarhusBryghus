@@ -38,7 +38,7 @@ public interface ControllerInterface {
      */
     ArrayList<Rundvisning> getRundvisning(boolean erBetalt);
 
-    ArrayList<Udlejning> getUdlejning();
+    ArrayList<Udlejning> getUdlejninger();
 
     ArrayList<Kunde> getKunder();
 
@@ -126,6 +126,4 @@ public interface ControllerInterface {
     int getTotalPant(Udlejning udlejning);
 
     void setAftaltPris(Salgslinje valgteSalgsLinje, int indtastetPris);
-
-//    double getTotalPrisAfleverUdlejning(Udlejning valgteUdlejning);
 }

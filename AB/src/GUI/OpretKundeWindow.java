@@ -70,10 +70,6 @@ public class OpretKundeWindow extends Stage {
 
     }
 
-
-
-    //Metoder:
-
     public void OpretKunde() {
         String kundeNavn = txfNavn.getText().trim();
         String kundeTelefon = txfTelefon.getText().trim();

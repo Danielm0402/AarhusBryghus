@@ -97,12 +97,10 @@ public class OpretProduktPane extends GridPane {
 
     }
 
-
-
         public void updateControls() { // updateControls kaldes hver gange der klikkes til og fra fanen
             cbbProduktgruppe.getItems().clear(); //fjerner lige alle elementer i comboboxen, for at refreshe
             cbbProduktgruppe.getItems().addAll(controller.getProduktgrupper()); //tilføjer dem igen, for at refreshe
-            lblError.setText(""); // fjerner den grønne eller røde besked
+            lblError.setText(""); // fjerner den grønne eller røde labelerror
             txfProduktnavn.clear(); //fjerner det man har skrevet i tekstfeltet
 
         }

@@ -94,14 +94,11 @@ public class OpretArrangementPane extends GridPane {
         lvwProdukterMedPriser.setMaxHeight(200);
 
 
-
-
 //  -------------- error message -------
 
         lblError = new Label();
         this.add(lblError, 2, 4);
         lblError.setStyle("-fx-text-fill: red");
-
     }
 
     private void selectedArrangementChanged(Arrangement newValue) {
@@ -113,7 +110,6 @@ public class OpretArrangementPane extends GridPane {
         controller.removePris(selectedPris);
         updateControls();
     }
-
 
     private void opretArrangementPaneAction() {
         String ArrangementNavn = txfArrangementNavn.getText().trim();
@@ -151,13 +147,12 @@ public class OpretArrangementPane extends GridPane {
                 updateControls();
             }
         }
-
         }
 
 
 
     public void updateControls() {  // updateControls kaldes hver gange der klikkes til og fra fanen
-        lblError.setText(""); // fjerner den grønne eller røde besked
+        lblError.setText(""); // fjerner den grønne eller røde lblerror
         txfArrangementNavn.clear(); //fjerner det man har skrevet i tekstfeltet
 
 //        Opdaterer produkt Combobox:

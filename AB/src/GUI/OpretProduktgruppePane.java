@@ -48,10 +48,7 @@ public class OpretProduktgruppePane extends GridPane {
         lblError = new Label();
         this.add(lblError, 2, 6);
         lblError.setStyle("-fx-text-fill: red");
-
     }
-
-
 
     private void opretProduktgruppeAction() {
         String produktgruppenavn = txfProduktgruppenavn.getText().trim();
@@ -70,13 +67,11 @@ public class OpretProduktgruppePane extends GridPane {
             lblError.setStyle("-fx-text-fill: green");
             lblError.setText("Produktgruppe oprettet");
         }
-
-
     }
 
 
     public void updateControls() { // updateControls kaldes hver gange der klikkes til og fra fanen
-        lblError.setText(""); // fjerner den grønne eller røde besked
+        lblError.setText(""); // fjerner den grønne eller røde labelerror
         txfProduktgruppenavn.clear(); //fjerner det man har skrevet i tekstfeltet
     }
 }

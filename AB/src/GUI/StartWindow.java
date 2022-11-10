@@ -97,8 +97,5 @@ public class StartWindow extends Application {
         OversigtsPane oversigtsPane = new OversigtsPane();
         tabOversigt.setContent(oversigtsPane);
         tabOversigt.setOnSelectionChanged(event -> oversigtsPane.updateControls());
-
-
     }
-
 }

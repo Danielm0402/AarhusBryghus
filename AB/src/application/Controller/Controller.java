@@ -94,8 +94,6 @@ public class Controller implements GUI.ControllerInterface {
     }
 
     @Override
-    public ArrayList<Udlejning> getUdlejning() {return storage.getUdlejninger();}
-
     public ArrayList<Udlejning> getUdlejninger() {return storage.getUdlejninger();}
 
     @Override
@@ -118,11 +116,8 @@ public class Controller implements GUI.ControllerInterface {
         for (Udlejning u : UdlejningerIkkeAfleveret){
             ProdukterIkkeAfleveret.addAll(u.getSalgsLinjer());
         }
-
         return ProdukterIkkeAfleveret;
     }
-
-
 
     @Override
     public ArrayList<Kunde> getKunder() {return storage.getKunder();}
@@ -372,7 +367,6 @@ public class Controller implements GUI.ControllerInterface {
     Produktgruppe pg9 = createProduktgruppe("Glas");
     Produktgruppe pg10 = createProduktgruppe("Sampakninger");
     Produktgruppe pg11 = createProduktgruppe("Klippekort");
-//    Produktgruppe pg11 = createProduktgruppe("Rundvisning");
 
     // Betalingsmetoder
     Betalingsmetode dankort = createBetalingsmetode(EnumBetalingsmetode.DANKORT);
@@ -456,7 +450,6 @@ public class Controller implements GUI.ControllerInterface {
 //    Produkt p51 = createProdukt("Pant",pg4);
 
     Produkt p52 = createProdukt("6 kg",pg5);
-//    Produkt p53 = createProdukt("Pant",pg5);
     Produkt p54 = createProdukt("4 kg",pg5);
     Produkt p55 = createProdukt("10 kg",pg5);
 
@@ -484,12 +477,7 @@ public class Controller implements GUI.ControllerInterface {
 
     Produkt p73 = createProdukt("Klippekort", pg11);
 
-//    Produkt p73 = createProdukt("pr person dag",pg11);
-
-//    Produkt p74 = createProdukt("Rundvisning", pg11);
-
         //        priser
-
         Pris pris1 = createPris(2,70,p1,a1);
         Pris pris2 = createPris(2,65,p2,a1);
         Pris pris3 = createPris(2,70,p15,a1);
@@ -577,9 +565,7 @@ public class Controller implements GUI.ControllerInterface {
         Pris pr48 = createPris(775,p48,a2);
         Pris pr49 = createPris(775,p49,a2);
         Pris pr50 = createPris(775,p50,a2);
-//        Pris pr51 = createPris(75,p51,a2); det er pantprodukt. Vi udregner pant på attribut.
         Pris pr52 = createPris(400,p52,a2);
-//        Pris pr53 = createPris(75,p53,a2);  det er pantprodukt. Vi udregner pant på attribut.
         Pris pr54 = createPris(350,p54,a2);
         Pris pr55 = createPris(600,p55,a2);
         Pris pr56 = createPris(75,p56,a2);
@@ -599,16 +585,9 @@ public class Controller implements GUI.ControllerInterface {
         Pris pr70 = createPris(75,p70,a2);
         Pris pr71 = createPris(75,p71,a2);
         Pris pr72 = createPris(75,p72,a2);
-//        Pris pr73 = createPris(75,p73,a2);
-//        Pris pr74 = createPris(75,p74,a2);
-//
-//
-//        Pris pris10 = createPris(100,p74,a2);
 
         Pris pris75 = createPris(2,p72, a1);
-
         Pris pris76 = createPris(130,p73,a1);
-
 
         //Kunder
         Kunde k1 = createKunde("Hans","12345678", "hans112@gmail.com","Vejen 1");
@@ -634,7 +613,6 @@ public class Controller implements GUI.ControllerInterface {
         Salg salg3 = createSalg();
         Salg salg4 = createSalg();
         Salg salg5 = createSalg();
-
 
         salg1.createSalgslinje(2,pris1,2);
         salg1.createSalgslinje(2,pris5,2);
@@ -665,15 +643,9 @@ public class Controller implements GUI.ControllerInterface {
         LocalDate localDate3 = LocalDate.of(2022,11,6);
         LocalDate localDate4 = LocalDate.of(2022,11,3);
 
-
-
         salg1.setDato(localDate1);
         salg2.setDato(localDate2);
         salg3.setDato(localDate3);
         salg4.setDato(localDate4);
-
     }
-
-
-
 }
