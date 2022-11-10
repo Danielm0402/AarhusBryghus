@@ -111,7 +111,9 @@ public class Salg {
         public double fratrækRabatFraTotalPris(double totalPris, double rabat){
         if (rabat < 0){
             throw new IllegalArgumentException("Rabat må ikke være negativ");
-        }else {
+        }else if (rabat > 100) {
+                throw new IllegalArgumentException("Rabat må ikke være over 100%");
+            }else {
             this.rabatprocent = rabat;
             return totalPris * (1-(rabat/100));
         }

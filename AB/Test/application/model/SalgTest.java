@@ -433,7 +433,97 @@ class SalgTest {
     }
 
 
-    //
+    //fratrækRabatFraTotalPris()
+    @Test
+    void TC24_fratrækRabatFraTotalPris_100dkk_negativ1rabat(){
+        //Arrange
+        int rabatprocent = -1;
+        int totalpris = 100;
+
+        //Act
+        Exception faktiskException = assertThrows(IllegalArgumentException.class,() -> salg.fratrækRabatFraTotalPris(totalpris,rabatprocent));
+        String forventetException = "Rabat må ikke være negativ";
+
+        //Assert
+        assertEquals(forventetException,faktiskException.getMessage());
+    }
+
+    @Test
+    void TC25_fratrækRabatFraTotalPris_100dkk_101rabat(){
+        //Arrange
+        int rabatprocent = 101;
+        int totalpris = 100;
+
+        //double forventetPris = 99;
+
+        //Act
+        //double faktiskPris = salg.fratrækRabatFraTotalPris(totalpris,rabat);
+        Exception faktiskException = assertThrows(IllegalArgumentException.class,() -> salg.fratrækRabatFraTotalPris(totalpris,rabatprocent));
+        String forventetException = "Rabat må ikke være over 100%";
+
+        //Assert
+        assertEquals(forventetException, faktiskException.getMessage());
+    }
+
+    @Test
+    void TC26_fratrækRabatFraTotalPris_100dkk_10rabat(){
+        //Arrange
+        int rabatprocent = 10;
+        int totalpris = 100;
+
+        double forventetPris = 90;
+
+        //Act
+        double faktiskPris = salg.fratrækRabatFraTotalPris(totalpris,rabatprocent);
+
+        //Assert
+        assertEquals(forventetPris, faktiskPris);
+    }
+
+    @Test
+    void TC27_fratrækRabatFraTotalPris_100dkk_0rabat(){
+        //Arrange
+        int rabatprocent = 0;
+        int totalpris = 100;
+
+        double forventetPris = 100;
+
+        //Act
+        double faktiskPris = salg.fratrækRabatFraTotalPris(totalpris,rabatprocent);
+
+        //Assert
+        assertEquals(forventetPris, faktiskPris);
+    }
+
+    @Test
+    void TC28_fratrækRabatFraTotalPris_100dkk_100rabat(){
+        //Arrange
+        int rabatprocent = 100;
+        int totalpris = 100;
+
+        double forventetPris = 0;
+
+        //Act
+        double faktiskPris = salg.fratrækRabatFraTotalPris(totalpris,rabatprocent);
+
+        //Assert
+        assertEquals(forventetPris, faktiskPris);
+    }
+
+    @Test
+    void TC29_fratrækRabatFraTotalPris_100dkk_1rabat(){
+        //Arrange
+        int rabatprocent = 1;
+        int totalpris = 100;
+
+        double forventetPris = 99;
+
+        //Act
+        double faktiskPris = salg.fratrækRabatFraTotalPris(totalpris,rabatprocent);
+
+        //Assert
+        assertEquals(forventetPris, faktiskPris);
+    }
 
 
 
