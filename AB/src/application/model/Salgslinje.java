@@ -6,14 +6,14 @@ public class Salgslinje {
     private int aftaltPris;
     private int klip;
 
-    public Salgslinje(int antal, Pris pris){
+    Salgslinje(int antal, Pris pris){
         this.antal = antal;
         this.pris=pris;
         this.aftaltPris = pris.getEnhedspris();
 
     }
 
-    public Salgslinje(int antal, Pris pris,int klip){
+    Salgslinje(int antal, Pris pris,int klip){
         this.antal = antal;
         this.pris=pris;
         this.aftaltPris = pris.getEnhedspris();

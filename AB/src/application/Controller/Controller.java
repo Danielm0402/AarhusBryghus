@@ -327,6 +327,7 @@ public class Controller implements GUI.ControllerInterface {
     @Override
     public void setModetidspunkt(Rundvisning rundvisning, LocalTime modetidspunkt){rundvisning.setModetidspunkt(modetidspunkt);}
 
+    @Override
     public Pris getRundvisningsPris(){
         return Storage.getRundvisningPris();
     }

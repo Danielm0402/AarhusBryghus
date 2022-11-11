@@ -6,7 +6,7 @@ public class Produkt {
     private String navn;
     private int pant;
 
-    public Produkt(String navn) {
+    Produkt(String navn) {
         this.navn = navn;
     }
 

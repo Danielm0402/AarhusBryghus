@@ -11,9 +11,8 @@ public class Storage implements application.Controller.StorageInterface {
     //Rundvisnings pris-objekt til oprettelse af rundvisningssalgslinje i GUI
     private static Arrangement rundvisningsArrangement = new Arrangement("Rundvisning");
     private static Produktgruppe rundvisningsProduktgruppe = new Produktgruppe("Rundvisning");
-    private static Produkt rundvisningProdukt=new Produkt("Rundvisning");
-    private static Pris rundvisningPris=new Pris(100, rundvisningProdukt, rundvisningsArrangement);
-
+    private static Produkt rundvisningProdukt = rundvisningsProduktgruppe.createProdukt("Rundvisning");
+    private static Pris rundvisningPris= rundvisningsArrangement.createPris(100, rundvisningProdukt);
     private final ArrayList<Arrangement> arrangementer = new ArrayList<>();
     private final ArrayList<Produktgruppe> produktgrupper = new ArrayList<>();
     private final ArrayList<Produkt> produkter = new ArrayList<>();
@@ -146,7 +145,6 @@ public class Storage implements application.Controller.StorageInterface {
     public static Pris getRundvisningPris(){
         return rundvisningPris;
     }
-
 
     @Override
     public ArrayList<Udlejning> getUdlejninger() {

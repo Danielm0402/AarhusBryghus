@@ -7,13 +7,13 @@ public class Pris {
     private Arrangement arrangement;
     private int Klip;
 
-    public Pris(int enhedspris,Produkt produkt, Arrangement arrangement) {
+    Pris(int enhedspris,Produkt produkt, Arrangement arrangement) {
         this.enhedspris = enhedspris;
         this.produkt = produkt;
         this.arrangement = arrangement;
     }
 
-    public Pris(int enhedspris,Produkt produkt, Arrangement arrangement, int klip){
+    Pris(int enhedspris,Produkt produkt, Arrangement arrangement, int klip){
         this.enhedspris = enhedspris;
         this.produkt = produkt;
         this.arrangement = arrangement;
